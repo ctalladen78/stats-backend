@@ -5,3 +5,9 @@ export function call(action, params) {
 
   return dynamoDb[action](params).promise();
 }
+
+export function call2(action, params2) {
+    const dynamoDb = new AWS.DynamoDB.DocumentClient();
+
+    return dynamoDb[action](params2).promise();
+  }
