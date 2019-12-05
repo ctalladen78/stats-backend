@@ -1,0 +1,8 @@
+{
+    "body": "{\"player1\":\"Carlo Conner-Hill\"}",
+    "requestContext": {
+      "identity": {
+        "cognitoIdentityId": "USER-SUB-1234"
+      }
+    }
+  }

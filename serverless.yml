@@ -46,7 +46,7 @@ functions:
     handler: create.main
     events:
       - http:
-          path: game-history
+          path: player-pointer
           method: post
           cors: true
           authorizer: aws_iam
