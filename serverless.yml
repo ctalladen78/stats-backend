@@ -20,6 +20,8 @@ provider:
   environment:
     tableName: game-history
     tableName2: player-pointer
+    tableName3: faction-pointer
+    tableName4: commander-pointer
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
@@ -46,7 +48,7 @@ functions:
     handler: create.main
     events:
       - http:
-          path: player-pointer
+          path: game-history
           method: post
           cors: true
           authorizer: aws_iam
