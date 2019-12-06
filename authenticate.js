@@ -23,6 +23,12 @@ export async function main(event, context) {
     ReturnValues: "ALL_NEW"
   };
 
+  // It now has to trigger a full recalculation of rankings
+  // To achieve this it must; 
+    //reset all rankings
+    //call each result in the game history
+    //calculate the change of each result in order and apply the change before moving on to the next
+
   try {
     await dynamoDbLib.call("authenticate", params);
     return success({ status: true });
