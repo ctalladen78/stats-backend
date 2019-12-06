@@ -19,6 +19,9 @@ provider:
   # under process.env.
   environment:
     tableName: game-history
+    tableName2: player-pointer
+    tableName3: faction-pointer
+    tableName4: commander-pointer
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
