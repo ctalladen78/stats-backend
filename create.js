@@ -20,8 +20,8 @@ export async function main(event, context) {
       faction2: data.faction2,
       commander2: data.commander2,
       vp2: data.vp2,
+      authenticated: false,
       createdAt: Date.now(),
-
     }
   };
 
