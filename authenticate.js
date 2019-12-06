@@ -1,8 +1,21 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
+// in the future, you could put these in a utility file and import it like done above
+const calculatePlayerRankinging = (player1Ranking, player2Ranking, winner) => {
+  if(winner === 'player1') {
+    player1Ranking += 10;
+  } else {
+    player2Ranking += 10;
+  }
+
+  return [player1Ranking, player2Ranking];
+}
+
 export async function main(event, context) {
   const data = JSON.parse(event.body);
+  const playerRanksArray = calculatePlayerRankinging(data.player1Ranking, data.player2Ranking, data.winner);
+  // insert into databaes
   const params = {
     TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be updated
@@ -30,3 +43,4 @@ export async function main(event, context) {
     return failure({ status: false });
   }
 }
+#
