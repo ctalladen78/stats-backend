@@ -68,16 +68,40 @@ const calculatePlayerRankinging = (playerRanking1, playerRanking2, factionRankin
     return ([ranking1 , ranking2, winChance, ratingChange, factionChange])
 }
 
+const player1Ranking = (player1) => {
+  const params = {
+    TableName: process.env.tableProfile,
+    KeyConditionExpression: "playerId = :playerId",
+    ExpressionAttributeValues: {
+      ":playerId": player1
+    },
+
+    playerRanking1 = ranking,
+  }
+}
+
+const player2Ranking = (player2) => {
+  const params = {
+    TableName: process.env.tableProfile,
+    KeyConditionExpression: "playerId = :playerId",
+    ExpressionAttributeValues: {
+      ":playerId": player2
+    },
+
+    playerRanking2 = ranking,
+  }
+}
+
 export async function main(event, context) {
   const data = JSON.parse(event.body);
   try {
     const gameResult = calculateGameResult(data.vp1, data.vp2);
-    const player1Ranking = await dynamoDbLib.call("get", paramsForPlayer1Rank); // make this params query the right table
-    const player2Ranking = await dnamoDbLib.call("get", paramsForPlayer2Rank); // make this params query the right table
-    const faction1Ranking = await dynamoDbLib.call("get", paramsForFaction1Rank); // make this params query the right table
-    const faction2Ranking = await dnamoDbLib.call("get", paramsForFaction2Rank); // make this params query the right table
-    const playerRanksArray = calculatePlayerRankinging(player1Ranking, player2Ranking, faction1Ranking, faction2Ranking, gameResult);
-    // insert into databaes
+    const player1Ranking = await dynamoDbLib.call("get", playerRanking1); // make this params query the right table
+    const player2Ranking = await dnamoDbLib.call("get", playerRanking2); // make this params query the right table
+    const faction1Ranking = await dynamoDbLib.call("get", factionRanking1); // make this params query the right table
+    const faction2Ranking = await dnamoDbLib.call("get", factionRanking2); // make this params query the right table
+    const playerRanksArray = calculatePlayerRankinging(playerRanking1, playerRanking2, factionRanking1, factionRanking2, gameResult);
+    // insert into databases
     const params = {
       TableName: process.env.tableHistory,
       // 'Key' defines the partition key and sort key of the item to be updated
