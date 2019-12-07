@@ -1,2 +1,7 @@
 {
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "Carlo Conner-Hill"
+    }
   }
+}
