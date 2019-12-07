@@ -6,19 +6,19 @@ const calculateGameResult = (vp1, vp2) => {
   if (vp1-vp2 > 4) {
       gameResult = "player 1 crushing win";
   }
-  if (vp1-vp2 == 3 or 4) {
+  if (vp1-vp2 == 3 || 4) {
       gameResult = "player 1 major win";
   }
-  if (vp1-vp2 == 1 or 2) {
+  if (vp1-vp2 == 1 || 2) {
       gameResult = "player 1 minor win";
   }
   if (vp1-vp2 < (-4)) {
       gameResult = "player 2 crushing win";
   }
-  if (vp1-vp2 == -1 or -2) {
+  if (vp1-vp2 == -1 || -2) {
       gameResult = "player 2 minor win";
   }
-  if (vp1-vp2 == -3 or -4) {
+  if (vp1-vp2 == -3 || -4) {
       gameResult = "player 2 major win";
   }
   else {
