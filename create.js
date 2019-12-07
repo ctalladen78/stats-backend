@@ -9,7 +9,7 @@ export async function main(event, context) {
   const data = JSON.parse(event.body);
 
   const params = {
-    TableName: process.env.tableName,
+    TableName: process.env.tableHistory,
     Item: {
       gameId: unique,
       player1: data.player1,
@@ -26,7 +26,7 @@ export async function main(event, context) {
   };
 
   const params2 = {
-    TableName: process.env.tableName2,
+    TableName: process.env.tablePlayer,
     Item: {
       gameId: unique,
       playerId: data.player1,
@@ -34,7 +34,7 @@ export async function main(event, context) {
   };
 
   const params3 = {
-    TableName: process.env.tableName2,
+    TableName: process.env.tablePlayer,
     Item: {
       gameId: unique,
       playerId: data.player2,
@@ -42,7 +42,7 @@ export async function main(event, context) {
   };
 
   const params4 = {
-    TableName: process.env.tableName3,
+    TableName: process.env.tableFaction,
     Item: {
       gameId: unique,
       factionId: data.faction1,
@@ -50,7 +50,7 @@ export async function main(event, context) {
   };
 
   const params5 = {
-    TableName: process.env.tableName3,
+    TableName: process.env.tableFaction,
     Item: {
       gameId: unique,
       factionId: data.faction2,
@@ -58,7 +58,7 @@ export async function main(event, context) {
   };
 
   const params6 = {
-    TableName: process.env.tableName4,
+    TableName: process.env.tableCommander,
     Item: {
       gameId: unique,
       commanderId: data.commander1,
@@ -66,7 +66,7 @@ export async function main(event, context) {
   };
 
   const params7 = {
-    TableName: process.env.tableName4,
+    TableName: process.env.tableCommander,
     Item: {
       gameId: unique,
       commanderId: data.commander2,

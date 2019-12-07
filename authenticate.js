@@ -79,7 +79,7 @@ export async function main(event, context) {
     const playerRanksArray = calculatePlayerRankinging(player1Ranking, player2Ranking, faction1Ranking, faction2Ranking, gameResult);
     // insert into databaes
     const params = {
-      TableName: process.env.tableName,
+      TableName: process.env.tableHistory,
       // 'Key' defines the partition key and sort key of the item to be updated
       // - 'userId': Identity Pool identity id of the authenticated user
       // - 'noteId': path parameter
