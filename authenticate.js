@@ -91,6 +91,35 @@ const findFactionRank = (faction) => {
   return params;
 };
 
+const updatePlayerRanks = (player, ranking) => {
+  const params = {
+    TableName: process.env.tableProfile,
+    Key: {
+      playerId: player,
+    },
+    UpdateExpression: "SET ranking = :ranking",
+    ExpressionAttributeValues: {
+      ":ranking": ranking, //this needs to come from playerRanksArray
+    },
+    ReturnValues: "ALL_NEW"
+  };
+  return params;
+};
+const updateFactionRanks = (faction, ranking) => {
+  const params = {
+    TableName: process.env.tableFactions,
+    Key: {
+      playerId: faction,
+    },
+    UpdateExpression: "SET ranking = :ranking",
+    ExpressionAttributeValues: {
+      ":ranking": ranking,
+    },
+    ReturnValues: "ALL_NEW"
+  };
+  return params;
+};
+
 export async function main(event, context) {
   const data = JSON.parse(event.body);
   try {
@@ -113,59 +142,12 @@ export async function main(event, context) {
       ReturnValues: "ALL_NEW"
     };
 
-    const params2 = {
-      TableName: process.env.tableProfile,
-      Key: {
-        playerId: data.player1,
-      },
-      UpdateExpression: "SET ranking = :ranking",
-      ExpressionAttributeValues: {
-        ":ranking": player1Profile.Item.ranking + rankingChanges.rankingChange, //this needs to come from playerRanksArray
-      },
-      ReturnValues: "ALL_NEW"
-    };
+    await dynamoDbLib.call("put", params);
+    await dynamoDbLib.call("put", updatePlayerRanks(data.player1, player1Profile.Item.ranking + rankingChanges[0]));
+    await dynamoDbLib.call("put", updatePlayerRanks(data.player2, player2Profile.Item.ranking - rankingChanges[0]));
+    await dynamoDbLib.call("put", updateFactionRanks(data.player2, faction1Profile.Item.ranking + rankingChanges[1]));
+    await dynamoDbLib.call("put", updateFactionRanks(data.player2, faction2Profile.Item.ranking - rankingChanges[1]));
 
-    const params3 = {
-      TableName: process.env.tableProfile,
-      Key: {
-        playerId: data.player2,
-      },
-      UpdateExpression: "SET ranking = :ranking",
-      ExpressionAttributeValues: {
-        ":ranking": player2Profile.Item.ranking - rankingChanges.rankingChange,
-      },
-      ReturnValues: "ALL_NEW"
-    };
-
-    const params4 = {
-      TableName: process.env.tableFactions,
-      Key: {
-        playerId: data.faction1,
-      },
-      UpdateExpression: "SET ranking = :ranking",
-      ExpressionAttributeValues: {
-        ":ranking": faction1Profile.Item.ranking + rankingChanges.factionChange,
-      },
-      ReturnValues: "ALL_NEW"
-    };
-
-    const params5 = {
-      TableName: process.env.tableFactions,
-      Key: {
-        playerId: data.faction2,
-      },
-      UpdateExpression: "SET ranking = :ranking",
-      ExpressionAttributeValues: {
-        ":ranking": faction2Profile.Item.ranking - rankingChanges.factionChange,
-      },
-      ReturnValues: "ALL_NEW"
-    };
-
-    await dynamoDbLib.call("authenticate", params);
-    await dynamoDbLib.call("put", params2);
-    await dynamoDbLib.call("put", params3);
-    await dynamoDbLib.call("put", params4);
-    await dynamoDbLib.call("put", params5);
     return success({ status: true });
   } catch (e) {
     return failure({ status: false });
