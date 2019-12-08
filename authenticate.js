@@ -1,6 +1,7 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
+//calculates result from passed in vps
 const calculateGameResult = (vp1, vp2) => {
   const gameResult = "Not found";
   if (vp1-vp2 > 4) {
@@ -28,7 +29,7 @@ const calculateGameResult = (vp1, vp2) => {
 }
 
 // in the future, you could put these in a utility file and import it like done above
-const calculatePlayerRankinging = (playerRanking1, playerRanking2, factionRanking1, factionRanking2, gameResult) => {
+const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1, factionRanking2, gameResult) => {
     const ranking1 = Math.pow(10, (playerRanking1 + factionRanking1)/400);
     const ranking2 = Math.pow(10, (playerRanking2 + factionRanking2)/400);
 
@@ -68,39 +69,38 @@ const calculatePlayerRankinging = (playerRanking1, playerRanking2, factionRankin
     return ([ranking1 , ranking2, winChance, ratingChange, factionChange])
 }
 
-const player1Ranking = (player1) => {
+//Calls db based upon player Id passed in
+const findPlayerRank = (player) => {
   const params = {
     TableName: process.env.tableProfile,
     KeyConditionExpression: "playerId = :playerId",
     ExpressionAttributeValues: {
-      ":playerId": player1
-    },
-
-    playerRanking1 = ranking,
+      ":playerId": player
+    }
   }
+  return params
 }
 
-const player2Ranking = (player2) => {
+const findFactionRank = (faction) => {
   const params = {
     TableName: process.env.tableProfile,
-    KeyConditionExpression: "playerId = :playerId",
+    KeyConditionExpression: "factionId = :factionId",
     ExpressionAttributeValues: {
-      ":playerId": player2
-    },
-
-    playerRanking2 = ranking,
+      ":factionId": faction
+    }
   }
+  return params
 }
 
 export async function main(event, context) {
   const data = JSON.parse(event.body);
   try {
     const gameResult = calculateGameResult(data.vp1, data.vp2);
-    const player1Ranking = await dynamoDbLib.call("get", playerRanking1); // make this params query the right table
-    const player2Ranking = await dnamoDbLib.call("get", playerRanking2); // make this params query the right table
-    const faction1Ranking = await dynamoDbLib.call("get", factionRanking1); // make this params query the right table
-    const faction2Ranking = await dnamoDbLib.call("get", factionRanking2); // make this params query the right table
-    const playerRanksArray = calculatePlayerRankinging(playerRanking1, playerRanking2, factionRanking1, factionRanking2, gameResult);
+    const player1Profile = await dynamoDbLib.call("get", findPlayerRank(data.player1)); // call player 1 data from table
+    const player2Profile = await dynamoDbLib.call("get", findPlayerRank(data.player2)); // call player 2 data from table
+    const faction1Profile = await dynamoDbLib.call("get", findFactionRank(data.faction1));  // call faction 1 data from table
+    const faction2Profile = await dynamoDbLib.call("get", findFactionRank(data.faction2));  // call faction 2 data from table
+    const playerRanksArray = calculatePlayerRanking(player1Profile.Item.ranking, player2Profile.Item.ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
     // insert into databases
     const params = {
       TableName: process.env.tableHistory,

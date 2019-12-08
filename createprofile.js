@@ -2,8 +2,6 @@ import uuid from "uuid";
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
-const unique = uuid.v1();
-
 export async function main(event, context) {
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
@@ -11,7 +9,7 @@ export async function main(event, context) {
   const params = {
     TableName: process.env.tableProfile,
     Item: {
-      playerId: unique,
+      playerId: uuid.v1(),
       playerName: data.playerName,
       userName: data.userName,
       ranking: "1500",
