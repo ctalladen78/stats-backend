@@ -28,7 +28,7 @@ const calculateGameResult = (vp1, vp2) => {
   return (gameResult);
 }
 
-// in the future, you could put these in a utility file and import it like done above
+// calculate rankings changes and gives out an array
 const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1, factionRanking2, gameResult) => {
     const ranking1 = Math.pow(10, (playerRanking1 + factionRanking1)/400);
     const ranking2 = Math.pow(10, (playerRanking2 + factionRanking2)/400);
@@ -38,35 +38,35 @@ const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1,
     const kFactor = 50;
     const kFaction = 10;
   
-    const ratingChange = 0;
+    const rankingChange = 0;
     const factionChange = 0;
 
     if (gameResult == "player 1 minor win") {
-        ratingChange = kFactor*(1 - winChance)*0.5;
+        rankingChange = kFactor*(1 - winChance)*0.5;
         factionChange = kFaction*(1 - winChance)*0.5;
     }
     if (gameResult == "player 1 major win") {
-        ratingChange = kFactor*(1 - winChance)*0.75;
+        rankingChange = kFactor*(1 - winChance)*0.75;
         factionChange = kFaction*(1 - winChance)*0.75;
     }
     if (gameResult == "player 1 crushing win") {
-        ratingChange = kFactor*(1 - winChance);
+        rankingChange = kFactor*(1 - winChance);
         factionChange = kFaction*(1 - winChance);
     }
     if (gameResult == "player 2 minor win") {
-        ratingChange = kFactor*(winChance)*0.5;
+        rankingChange = kFactor*(winChance)*0.5;
         factionChange = kFaction*(winChance)*0.5;
     }
     if (gameResult == "player 2 major win") {
-        ratingChange = kFactor*(winChance)*0.75;
+        rankingChange = kFactor*(winChance)*0.75;
         factionChange = kFaction*(winChance)*0.75; 
     }
     if (gameResult == "player 2 crushing win") {
-        ratingChange = kFactor*(winChance);
+        rankingChange = kFactor*(winChance);
         factionChange = kFaction*(winChance);
     }
 
-    return ([ranking1 , ranking2, winChance, ratingChange, factionChange])
+    return ([rankingChange, factionChange])
 }
 
 //Calls db based upon player Id passed in
@@ -92,6 +92,8 @@ const findFactionRank = (faction) => {
   return params
 }
 
+
+
 export async function main(event, context) {
   const data = JSON.parse(event.body);
   try {
@@ -104,25 +106,69 @@ export async function main(event, context) {
     // insert into databases
     const params = {
       TableName: process.env.tableHistory,
-      // 'Key' defines the partition key and sort key of the item to be updated
-      // - 'userId': Identity Pool identity id of the authenticated user
-      // - 'noteId': path parameter
       Key: {
         gameId: event.pathParameters.id,
       },
-      // 'UpdateExpression' defines the attributes to be updated
-      // 'ExpressionAttributeValues' defines the value in the update expression
       UpdateExpression: "SET authenticated = :authenticated",
       ExpressionAttributeValues: {
         ":authenticated": data.authenticated,
       },
-      // 'ReturnValues' specifies if and how to return the item's attributes,
-      // where ALL_NEW returns all attributes of the item after the update; you
-      // can inspect 'result' below to see how it works with different settings
       ReturnValues: "ALL_NEW"
     };
 
+    const params2 = {
+      TableName: process.env.tableProfile,
+      Key: {
+        playerId: data.player1,
+      },
+      UpdateExpression: "SET ranking = :ranking",
+      ExpressionAttributeValues: {
+        ":ranking": player1Profile.Item.ranking + rankingChange, //this needs to come from playerRanksArray
+      },
+      ReturnValues: "ALL_NEW"
+    }
+
+    const params3 = {
+      TableName: process.env.tableProfile,
+      Key: {
+        playerId: data.player2,
+      },
+      UpdateExpression: "SET ranking = :ranking",
+      ExpressionAttributeValues: {
+        ":ranking": player2Profile.Item.ranking - rankingChange,
+      },
+      ReturnValues: "ALL_NEW"
+    }
+
+    const params4 = {
+      TableName: process.env.tableFactions,
+      Key: {
+        playerId: data.faction1,
+      },
+      UpdateExpression: "SET ranking = :ranking",
+      ExpressionAttributeValues: {
+        ":ranking": faction1Profile.Item.ranking + factionChange,
+      },
+      ReturnValues: "ALL_NEW"
+    }
+
+    const params5 = {
+      TableName: process.env.tableFactions,
+      Key: {
+        playerId: data.faction2,
+      },
+      UpdateExpression: "SET ranking = :ranking",
+      ExpressionAttributeValues: {
+        ":ranking": faction2Profile.Item.ranking - factionChange,
+      },
+      ReturnValues: "ALL_NEW"
+    }
+
     await dynamoDbLib.call("authenticate", params);
+    await dynamoDbLib.call("put", params2);
+    await dynamoDbLib.call("put", params3);
+    await dynamoDbLib.call("put", params4);
+    await dynamoDbLib.call("put", params5);
     return success({ status: true });
   } catch (e) {
     return failure({ status: false });
