@@ -12,7 +12,7 @@ export async function main(event, context) {
       playerId: uuid.v1(),
       playerName: data.playerName,
       userName: data.userName,
-      ranking: "1500",
+      ranking: 1500,
     }
   };
 
