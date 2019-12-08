@@ -13,6 +13,8 @@ export async function main(event, context) {
       playerName: data.playerName,
       userName: data.userName,
       ranking: 1500,
+      region: data.region,
+      country: data.country,
     }
   };
 

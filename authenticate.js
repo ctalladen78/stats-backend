@@ -3,7 +3,7 @@ import { success, failure } from "./libs/response-lib";
 
 //calculates result from passed in vps
 const calculateGameResult = (vp1, vp2) => {
-  const gameResult = "Not found";
+  var gameResult = "Not found";
   if (vp1-vp2 > 4) {
       gameResult = "player 1 crushing win";
   }
@@ -26,7 +26,7 @@ const calculateGameResult = (vp1, vp2) => {
       gameResult = "draw";
   }
   return (gameResult);
-}
+};
 
 // calculate rankings changes and gives out an array
 const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1, factionRanking2, gameResult) => {
@@ -37,9 +37,8 @@ const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1,
 
     const kFactor = 50;
     const kFaction = 10;
-  
-    const rankingChange = 0;
-    const factionChange = 0;
+    var rankingChange = 0;
+    var factionChange = 0;
 
     if (gameResult == "player 1 minor win") {
         rankingChange = kFactor*(1 - winChance)*0.5;
@@ -59,15 +58,15 @@ const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1,
     }
     if (gameResult == "player 2 major win") {
         rankingChange = kFactor*(winChance)*0.75;
-        factionChange = kFaction*(winChance)*0.75; 
+        factionChange = kFaction*(winChance)*0.75;
     }
     if (gameResult == "player 2 crushing win") {
         rankingChange = kFactor*(winChance);
         factionChange = kFaction*(winChance);
     }
 
-    return ([rankingChange, factionChange])
-}
+    return ([rankingChange, factionChange]);
+};
 
 //Calls db based upon player Id passed in
 const findPlayerRank = (player) => {
@@ -77,9 +76,9 @@ const findPlayerRank = (player) => {
     ExpressionAttributeValues: {
       ":playerId": player
     }
-  }
-  return params
-}
+  };
+  return params;
+};
 
 const findFactionRank = (faction) => {
   const params = {
@@ -88,11 +87,9 @@ const findFactionRank = (faction) => {
     ExpressionAttributeValues: {
       ":factionId": faction
     }
-  }
-  return params
-}
-
-
+  };
+  return params;
+};
 
 export async function main(event, context) {
   const data = JSON.parse(event.body);
@@ -102,7 +99,7 @@ export async function main(event, context) {
     const player2Profile = await dynamoDbLib.call("get", findPlayerRank(data.player2)); // call player 2 data from table
     const faction1Profile = await dynamoDbLib.call("get", findFactionRank(data.faction1));  // call faction 1 data from table
     const faction2Profile = await dynamoDbLib.call("get", findFactionRank(data.faction2));  // call faction 2 data from table
-    const playerRanksArray = calculatePlayerRanking(player1Profile.Item.ranking, player2Profile.Item.ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
+    const rankingChanges = calculatePlayerRanking(player1Profile.Item.ranking, player2Profile.Item.ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
     // insert into databases
     const params = {
       TableName: process.env.tableHistory,
@@ -123,10 +120,10 @@ export async function main(event, context) {
       },
       UpdateExpression: "SET ranking = :ranking",
       ExpressionAttributeValues: {
-        ":ranking": player1Profile.Item.ranking + rankingChange, //this needs to come from playerRanksArray
+        ":ranking": player1Profile.Item.ranking + rankingChanges.rankingChange, //this needs to come from playerRanksArray
       },
       ReturnValues: "ALL_NEW"
-    }
+    };
 
     const params3 = {
       TableName: process.env.tableProfile,
@@ -135,10 +132,10 @@ export async function main(event, context) {
       },
       UpdateExpression: "SET ranking = :ranking",
       ExpressionAttributeValues: {
-        ":ranking": player2Profile.Item.ranking - rankingChange,
+        ":ranking": player2Profile.Item.ranking - rankingChanges.rankingChange,
       },
       ReturnValues: "ALL_NEW"
-    }
+    };
 
     const params4 = {
       TableName: process.env.tableFactions,
@@ -147,10 +144,10 @@ export async function main(event, context) {
       },
       UpdateExpression: "SET ranking = :ranking",
       ExpressionAttributeValues: {
-        ":ranking": faction1Profile.Item.ranking + factionChange,
+        ":ranking": faction1Profile.Item.ranking + rankingChanges.factionChange,
       },
       ReturnValues: "ALL_NEW"
-    }
+    };
 
     const params5 = {
       TableName: process.env.tableFactions,
@@ -159,10 +156,10 @@ export async function main(event, context) {
       },
       UpdateExpression: "SET ranking = :ranking",
       ExpressionAttributeValues: {
-        ":ranking": faction2Profile.Item.ranking - factionChange,
+        ":ranking": faction2Profile.Item.ranking - rankingChanges.factionChange,
       },
       ReturnValues: "ALL_NEW"
-    }
+    };
 
     await dynamoDbLib.call("authenticate", params);
     await dynamoDbLib.call("put", params2);
