@@ -1,5 +1,5 @@
 {
-    "body": "{\"player1\":\"Carlo Conner-Hill\",\"faction1\":\"Lannister\",\"commander1\":\"Gregor\",\"vp1\":\"5\",\"player2\":\"Dan McDonald\",\"faction2\":\"Stark\",\"commander2\":\"Robb\",\"vp2\":\"8\"}",
+    "body": "{\"player1\":\"0baf20f0-190c-11ea-9c79-9387fc978400\",\"faction1\":\"Lannister\",\"commander1\":\"Gregor\",\"vp1\":\"5\",\"player2\":\"29013b70-190c-11ea-a479-5777ffbb4bc5\",\"faction2\":\"Stark\",\"commander2\":\"Robb\",\"vp2\":\"8\"}",
     "requestContext": {
       "identity": {
         "cognitoIdentityId": "USER-SUB-1234"

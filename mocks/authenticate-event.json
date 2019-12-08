@@ -1,6 +1,5 @@
 {
-  "body": "{\"authenticated\":\"true\",\"player1\":\"0baf20f0-190c-11ea-9c79-9387fc978400\",\"faction1\":\"Lannister\",\"vp1\":\"10\",\"player2\":\"29013b70-190c-11ea-a479-5777ffbb4bc5\",\"faction2\":\"Stark\",\"vp2\":\"5\"}",
-    "pathParameters": {
-      "id": "2db26110-1904-11ea-abfe-4bd1849a4a96"
-    }
+  "pathParameters": {
+    "id": "39821ea0-1a0c-11ea-8d37-bd04f282f705"
   }
+}

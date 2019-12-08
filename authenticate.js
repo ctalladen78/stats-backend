@@ -3,28 +3,27 @@ import { success, failure } from "./libs/response-lib";
 
 //calculates result from passed in vps
 const calculateGameResult = (vp1, vp2) => {
-  var gameResult = "Not found";
-  if (vp1-vp2 > 4) {
+  var gameResult = "draw";
+  const vpResult = vp1-vp2;
+  if (vpResult > 4) {
       gameResult = "player 1 crushing win";
   }
-  if (vp1-vp2 == 3 || 4) {
+  if (vpResult == 3 || vpResult == 4) {
       gameResult = "player 1 major win";
   }
-  if (vp1-vp2 == 1 || 2) {
+  if (vpResult == 1 || vpResult == 2) {
       gameResult = "player 1 minor win";
   }
-  if (vp1-vp2 < (-4)) {
+  if (vpResult < (-4)) {
       gameResult = "player 2 crushing win";
   }
-  if (vp1-vp2 == -1 || -2) {
+  if (vpResult == -1 || vpResult == -2) {
       gameResult = "player 2 minor win";
   }
-  if (vp1-vp2 == -3 || -4) {
+  if (vpResult == -3 || vpResult == -4) {
       gameResult = "player 2 major win";
   }
-  else {
-      gameResult = "draw";
-  }
+
   return (gameResult);
 };
 
@@ -53,28 +52,41 @@ const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1,
         factionChange = kFaction*(1 - winChance);
     }
     if (gameResult == "player 2 minor win") {
-        rankingChange = kFactor*(winChance)*0.5;
-        factionChange = kFaction*(winChance)*0.5;
+        rankingChange = kFactor*(winChance)*0.5*-1;
+        factionChange = kFaction*(winChance)*0.5*-1;
     }
     if (gameResult == "player 2 major win") {
-        rankingChange = kFactor*(winChance)*0.75;
-        factionChange = kFaction*(winChance)*0.75;
+        rankingChange = kFactor*(winChance)*0.75*-1;
+        factionChange = kFaction*(winChance)*0.75*-1;
     }
     if (gameResult == "player 2 crushing win") {
-        rankingChange = kFactor*(winChance);
-        factionChange = kFaction*(winChance);
+        rankingChange = kFactor*(winChance)*-1;
+        factionChange = kFaction*(winChance)*-1;
     }
 
+    console.log(rankingChange);
+    console.log(factionChange);
+    console.log(gameResult);
+
     return ([rankingChange, factionChange]);
+};
+
+const findGame = (gameId) => {
+  const params = {
+    TableName: process.env.tableHistory,
+    Key: {
+      gameId: gameId
+    }
+  };
+  return params;
 };
 
 //Calls db based upon player Id passed in
 const findPlayerRank = (player) => {
   const params = {
     TableName: process.env.tableProfile,
-    KeyConditionExpression: "playerId = :playerId",
-    ExpressionAttributeValues: {
-      ":playerId": player
+    Key: {
+      playerId: player
     }
   };
   return params;
@@ -82,16 +94,15 @@ const findPlayerRank = (player) => {
 
 const findFactionRank = (faction) => {
   const params = {
-    TableName: process.env.tableProfile,
-    KeyConditionExpression: "factionId = :factionId",
-    ExpressionAttributeValues: {
-      ":factionId": faction
+    TableName: process.env.tableFactions,
+    Key: {
+      factionId: faction
     }
   };
   return params;
 };
 
-const updatePlayerRanks = (player, ranking) => {
+ const updatePlayerRanks = (player, ranking) => {
   const params = {
     TableName: process.env.tableProfile,
     Key: {
@@ -109,7 +120,7 @@ const updateFactionRanks = (faction, ranking) => {
   const params = {
     TableName: process.env.tableFactions,
     Key: {
-      playerId: faction,
+      factionId: faction,
     },
     UpdateExpression: "SET ranking = :ranking",
     ExpressionAttributeValues: {
@@ -121,35 +132,39 @@ const updateFactionRanks = (faction, ranking) => {
 };
 
 export async function main(event, context) {
-  const data = JSON.parse(event.body);
   try {
-    const gameResult = calculateGameResult(data.vp1, data.vp2);
-    const player1Profile = await dynamoDbLib.call("get", findPlayerRank(data.player1)); // call player 1 data from table
-    const player2Profile = await dynamoDbLib.call("get", findPlayerRank(data.player2)); // call player 2 data from table
-    const faction1Profile = await dynamoDbLib.call("get", findFactionRank(data.faction1));  // call faction 1 data from table
-    const faction2Profile = await dynamoDbLib.call("get", findFactionRank(data.faction2));  // call faction 2 data from table
-    const rankingChanges = calculatePlayerRanking(player1Profile.Item.ranking, player2Profile.Item.ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
-    // insert into databases
-    const params = {
-      TableName: process.env.tableHistory,
-      Key: {
-        gameId: event.pathParameters.id,
-      },
-      UpdateExpression: "SET authenticated = :authenticated",
-      ExpressionAttributeValues: {
-        ":authenticated": data.authenticated,
-      },
-      ReturnValues: "ALL_NEW"
-    };
+    const gameData = await dynamoDbLib.call("get", findGame(event.pathParameters.id)); //call game data
+    if (gameData.Item.authenticaed == false) {
+      const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2);
+      const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
+      const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
+      const faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
+      const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
+      const rankingChanges = calculatePlayerRanking(player1Profile.Item.ranking, player2Profile.Item.ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
+      // insert into databases
+      const params = {
+        TableName: process.env.tableHistory,
+        Key: {
+          gameId: event.pathParameters.id,
+        },
+        UpdateExpression: "SET authenticated = :authenticated",
+        ExpressionAttributeValues: {
+          ":authenticated": true,
+        },
+        ReturnValues: "ALL_NEW"
+      };
 
-    await dynamoDbLib.call("put", params);
-    await dynamoDbLib.call("put", updatePlayerRanks(data.player1, player1Profile.Item.ranking + rankingChanges[0]));
-    await dynamoDbLib.call("put", updatePlayerRanks(data.player2, player2Profile.Item.ranking - rankingChanges[0]));
-    await dynamoDbLib.call("put", updateFactionRanks(data.player2, faction1Profile.Item.ranking + rankingChanges[1]));
-    await dynamoDbLib.call("put", updateFactionRanks(data.player2, faction2Profile.Item.ranking - rankingChanges[1]));
+      await dynamoDbLib.call("update", params);
+      await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + rankingChanges[0]));
+      await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - rankingChanges[0]));
+      await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, faction1Profile.Item.ranking + rankingChanges[1]));
+      await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, faction2Profile.Item.ranking - rankingChanges[1]));
 
-    return success({ status: true });
+      return success({ status: true });
+    } else {
+      return failure("already authenticated");
+    }
   } catch (e) {
-    return failure({ status: false });
+    return failure({ status: e });
   }
 }
