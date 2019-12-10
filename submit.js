@@ -20,6 +20,7 @@ export async function main(event, context) {
       faction2: data.faction2,
       commander2: data.commander2,
       vp2: data.vp2,
+      gameMode: data.gameMode,
       authenticated1: false,
       authenticated2: false,
       submittedBy: event.requestContext.identity.cognitoIdentityId,

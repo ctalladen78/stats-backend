@@ -134,7 +134,39 @@ const updateFactionRanks = (faction, ranking) => {
 export async function main(event, context) {
   try {
     const gameData = await dynamoDbLib.call("get", findGame(event.pathParameters.id)); //call game data
-    if (gameData.Item.authenticaed == false) {
+    if (gameData.Item.authenticated1 == false && gameData.Item.authenticated2 == false) {
+      if (gameData.Item.player1 === event.requestContext.identity.cognitoIdentityId) {
+      const params = {
+        TableName: process.env.tableHistory,
+        Key: {
+          gameId: event.pathParameters.id,
+        },
+        UpdateExpression: "SET authenticated1 = :authenticated1",
+        ExpressionAttributeValues: {
+          ":authenticated1": true,
+        },
+        ReturnValues: "ALL_NEW"
+      };
+
+      await dynamoDbLib.call("update", params);
+      } if (gameData.Item.player2 === event.requestContext.identity.cognitoIdentityId) {
+        const params = {
+          TableName: process.env.tableHistory,
+          Key: {
+            gameId: event.pathParameters.id,
+          },
+          UpdateExpression: "SET authenticated2 = :authenticated2",
+          ExpressionAttributeValues: {
+            ":authenticated2": true,
+          },
+          ReturnValues: "ALL_NEW"
+        };
+  
+        await dynamoDbLib.call("update", params);
+        }
+      return success({ status: true });
+      //code here to update 1 or the other authenticated flag
+    } if ((gameData.Item.authenticated1 == true && gameData.Item.authenticated2 == false) || (gameData.Item.authenticated1 == false && gameData.Item.authenticated2 == true)) {
       const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2);
       const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
       const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
@@ -142,14 +174,17 @@ export async function main(event, context) {
       const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
       const rankingChanges = calculatePlayerRanking(player1Profile.Item.ranking, player2Profile.Item.ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
       // insert into databases
+      // need code to choose which authenticate flag to change
       const params = {
         TableName: process.env.tableHistory,
         Key: {
           gameId: event.pathParameters.id,
         },
-        UpdateExpression: "SET authenticated = :authenticated",
+        UpdateExpression: "SET authenticated1 = :authenticated1",
+        UpdateExpression: "SET authenticated2 = :authenticated2",
         ExpressionAttributeValues: {
-          ":authenticated": true,
+          ":authenticated1": true,
+          ":authenticated2": true,
         },
         ReturnValues: "ALL_NEW"
       };
