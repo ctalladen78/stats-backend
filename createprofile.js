@@ -1,4 +1,3 @@
-import uuid from "uuid";
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
@@ -9,7 +8,7 @@ export async function main(event, context) {
   const params = {
     TableName: process.env.tableProfile,
     Item: {
-      playerId: uuid.v1(),
+      playerId: event.requestContext.identity.cognitoIdentityId,
       playerName: data.playerName,
       userName: data.userName,
       ranking: 1500,

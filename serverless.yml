@@ -83,7 +83,7 @@ functions:
     handler: playerlist.main
     events:
       - http:
-          path: get-player-history
+          path: get-player-profile
           method: get
           cors: true
           authorizer: aws_iam
@@ -95,11 +95,35 @@ functions:
     handler: listplayers.main
     events:
       - http:
-          path: get-players
+          path: get-all-players
           method: get
           cors: true
           authorizer: aws_iam
 
+  listgames:
+    # Defines an HTTP API endpoint that calls the main function in listplayers.js
+    # - path: url path is /notes
+    # - method: GET request
+    handler: listgames.main
+    events:
+      - http:
+          path: get-my-games
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  gamedata:
+    # Defines an HTTP API endpoint that calls the main function in listplayers.js
+    # - path: url path is /notes
+    # - method: GET request
+    handler: gamedata.main
+    events:
+      - http:
+          path: get-a-game
+          method: get
+          cors: true
+          authorizer: aws_iam  
+          
   factionlist:
     # Defines an HTTP API endpoint that calls the main function in factionlist.js
     # - path: url path is /notes
