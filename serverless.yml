@@ -119,7 +119,7 @@ functions:
     handler: commanderlist.main
     events:
       - http:
-          path: get-commander-history
+          path: get-commander-history 
           method: get
           cors: true
           authorizer: aws_iam
