@@ -161,7 +161,7 @@ export async function main(event, context) {
           },
           ReturnValues: "ALL_NEW"
         };
-  
+
         await dynamoDbLib.call("update", params);
         }
       return success({ status: true });
@@ -181,10 +181,10 @@ export async function main(event, context) {
           gameId: event.pathParameters.id,
         },
         UpdateExpression: "SET authenticated1 = :authenticated1",
-        UpdateExpression: "SET authenticated2 = :authenticated2",
+//        UpdateExpression: "SET authenticated2 = :authenticated2",
         ExpressionAttributeValues: {
           ":authenticated1": true,
-          ":authenticated2": true,
+//          ":authenticated2": true,
         },
         ReturnValues: "ALL_NEW"
       };

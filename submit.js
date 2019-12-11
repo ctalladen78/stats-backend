@@ -13,16 +13,16 @@ export async function main(event, context) {
     Item: {
       gameId: unique,
       player1: data.player1,
+      userName1: data.userName1,
       faction1: data.faction1,
       commander1: data.commander1,
       vp1: data.vp1,
       player2 : data.player2,
+      userName2: data.userName2,
       faction2: data.faction2,
       commander2: data.commander2,
       vp2: data.vp2,
       gameMode: data.gameMode,
-      authenticated1: false,
-      authenticated2: false,
       submittedBy: event.requestContext.identity.cognitoIdentityId,
       createdAt: Date.now(),
     }
@@ -84,7 +84,7 @@ export async function main(event, context) {
     await dynamoDbLib.call("put", params5);
     await dynamoDbLib.call("put", params6);
     await dynamoDbLib.call("put", params7);
-    return success(params.Item);
+    return success(unique);
   } catch (e) {
     return failure({ status: e });
   }
