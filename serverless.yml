@@ -44,7 +44,10 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:eu-west-2:*:*"
+      # Restrict our IAM role permissions to
+      # the specific table for the stage
+      Resource:
+        - "Fn::GetAtt": [ HistoryTable, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
@@ -197,3 +200,8 @@ resources:
   - ${file(resources/api-gateway-errors.yml)}
   # DynamoDB
   - ${file(resources/dynamodb-table.yml)}
+    # S3
+  - ${file(resources/s3-bucket.yml)}
+    # Cognito
+  - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/cognito-identity-pool.yml)}
