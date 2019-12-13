@@ -14,7 +14,12 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableHistory: ${self:custom.stage}-results
+  tableHistory: ${self:custom.stage}-game-history
+  tablePlayer: ${self:custom.stage}-player-history
+  tableFaction: ${self:custom.tableFaction}-faction-history
+  tableCommander: ${self:custom.tableCommander}-commander-history
+  tableProfile: ${self:custom.tableProfile}-player-profile
+  tableFactions: ${self:custom.tableFactions}-faction-profile
 
 provider:
   name: aws
@@ -26,11 +31,11 @@ provider:
   # under process.env.
   environment:
     tableHistory: ${self:custom.tableHistory}
-    tablePlayer: player-history2
-    tableFaction: faction-history
-    tableCommander: commander-history
-    tableProfile: player-profile
-    tableFactions: faction-profile
+    tablePlayer: ${self:custom.tablePlayer}
+    tableFaction: ${self:custom.tableFaction}
+    tableCommander: ${self:custom.tableCommander}
+    tableProfile: ${self:custom.tableProfile}
+    tableFactions: ${self:custom.tableFactions}
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
@@ -48,6 +53,11 @@ provider:
       # the specific table for the stage
       Resource:
         - "Fn::GetAtt": [ HistoryTable, Arn ]
+        - "Fn::GetAtt": [ PlayerTable, Arn ]
+        - "Fn::GetAtt": [ FactionTable, Arn ]
+        - "Fn::GetAtt": [ CommanderTable, Arn ]
+        - "Fn::GetAtt": [ ProfileTable, Arn ]
+        - "Fn::GetAtt": [ FactionsTable, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js

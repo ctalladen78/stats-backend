@@ -18,23 +18,75 @@ Resources:
     Properties:
       TableName: ${self:custom.tablePlayer}
       AttributeDefinitions:
+        - AttributeName: playerId
+          AttributeType: S
         - AttributeName: gameId
           AttributeType: S
       KeySchema:
+        - AttributeName: playerId
+          KeyType: HASH
         - AttributeName: gameId
           KeyType: HASH
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
-  HistoryTable:
+  FactionTable:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Retain
     Properties:
-      TableName: ${self:custom.tableHistory}
+      TableName: ${self:custom.tableFaction}
       AttributeDefinitions:
+        - AttributeName: factionId
+          AttributeType: S
         - AttributeName: gameId
           AttributeType: S
       KeySchema:
+        - AttributeName: factionId
+          KeyType: HASH
         - AttributeName: gameId
+          KeyType: RANGE
+      # Set the capacity to auto-scale
+      BillingMode: PAY_PER_REQUEST
+  CommanderTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      TableName: ${self:custom.tableCommander}
+      AttributeDefinitions:
+        - AttributeName: commanderId
+          AttributeType: S
+        - AttributeName: gameId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: commanderId
+          KeyType: HASH
+        - AttributeName: gameId
+          KeyType: RANGE
+      # Set the capacity to auto-scale
+      BillingMode: PAY_PER_REQUEST
+  ProfileTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      TableName: ${self:custom.tableProfile}
+      AttributeDefinitions:
+        - AttributeName: playerId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: playerId
           KeyType: HASH
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
+  FactionsTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      TableName: ${self:custom.tableFactions}
+      AttributeDefinitions:
+        - AttributeName: playerId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: playerId
+          KeyType: HASH
+      # Set the capacity to auto-scale
+      BillingMode: PAY_PER_REQUEST
+  
