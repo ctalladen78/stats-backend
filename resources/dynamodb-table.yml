@@ -80,7 +80,7 @@ Resources:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Retain
     Properties:
-      TableName: ${self:custom.tableFactions}
+      TableName: ${self:custom.tableFactionProfile}
       AttributeDefinitions:
         - AttributeName: playerId
           AttributeType: S
