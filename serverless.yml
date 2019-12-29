@@ -13,12 +13,12 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableHistory: ${self:custom.stage}-game-history
-  tablePlayer: ${self:custom.stage}-player-history
-  tableFaction: ${self:custom.tableFaction}-faction-history
-  tableCommander: ${self:custom.tableCommander}-commander-history
-  tableProfile: ${self:custom.tableProfile}-player-profile
-  tableFactionProfile: ${self:custom.tableFactionProfile}-faction-profile
+  tableHistory: ${self:custom.stage}-results-history
+  tablePlayer: ${self:custom.stage}-player-results
+  tableFaction: ${self:custom.stage}-faction-results
+  tableCommander: ${self:custom.stage}-commander-results
+  playerProfile: ${self:custom.stage}-player-profile
+  factionProfile: ${self:custom.stage}-faction-profile
 
 provider:
   name: aws
@@ -33,8 +33,8 @@ provider:
     tablePlayer: ${self:custom.tablePlayer}
     tableFaction: ${self:custom.tableFaction}
     tableCommander: ${self:custom.tableCommander}
-    tableProfile: ${self:custom.tableProfile}
-    tableFactionProfile: ${self:custom.tableFactionProfile}
+    playerProfile: ${self:custom.playerProfile}
+    tableFactions: ${self:custom.factionProfile}
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
@@ -107,7 +107,7 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [ ProfileTable, Arn ]
+        - "Fn::GetAtt": [ PlayerProfile, Arn ]
 
     - Effect: Allow
       Action:
@@ -121,7 +121,7 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [ FactionsTable, Arn ]
+        - "Fn::GetAtt": [ FactionProfile, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
