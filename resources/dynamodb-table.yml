@@ -26,7 +26,7 @@ Resources:
         - AttributeName: playerId
           KeyType: HASH
         - AttributeName: gameId
-          KeyType: HASH
+          KeyType: RANGE
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
   FactionTable:
@@ -63,11 +63,11 @@ Resources:
           KeyType: RANGE
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
-  ProfileTable:
+  PlayerProfile:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Retain
     Properties:
-      TableName: ${self:custom.tableProfile}
+      TableName: ${self:custom.playerProfile}
       AttributeDefinitions:
         - AttributeName: playerId
           AttributeType: S
@@ -76,17 +76,16 @@ Resources:
           KeyType: HASH
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
-  FactionsTable:
+  FactionProfile:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Retain
     Properties:
-      TableName: ${self:custom.tableFactionProfile}
+      TableName: ${self:custom.factionProfile}
       AttributeDefinitions:
-        - AttributeName: playerId
+        - AttributeName: factionId
           AttributeType: S
       KeySchema:
-        - AttributeName: playerId
+        - AttributeName: factionId
           KeyType: HASH
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
-  
