@@ -23,6 +23,7 @@ export async function main(event, context) {
       commander2: data.commander2,
       vp2: data.vp2,
       gameMode: data.gameMode,
+      ranked: "ranked",
       submittedBy: event.requestContext.identity.cognitoIdentityId,
       createdAt: Date.now(),
     }

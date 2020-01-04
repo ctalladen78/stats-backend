@@ -12,17 +12,14 @@ export async function main(event, context) {
     TableName: process.env.tableHistory,
     Item: {
       gameId: unique,
-      player1: data.player1,
-      userName1: data.userName1,
       faction1: data.faction1,
       commander1: data.commander1,
       vp1: data.vp1,
-      player2 : data.player2,
-      userName2: data.userName2,
       faction2: data.faction2,
       commander2: data.commander2,
       vp2: data.vp2,
       gameMode: data.gameMode,
+      ranked: "unranked",
       submittedBy: event.requestContext.identity.cognitoIdentityId,
       createdAt: Date.now(),
     }
