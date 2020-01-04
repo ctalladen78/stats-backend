@@ -139,6 +139,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  submit:
+    handler: submit-unranked.main
+    events:
+      - http:
+          path: game-unranked
+          method: post
+          cors: true
+          authorizer: aws_iam
+
   createprofile:
     handler: createprofile.main
     events:
