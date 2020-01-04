@@ -34,7 +34,7 @@ provider:
     tableFaction: ${self:custom.tableFaction}
     tableCommander: ${self:custom.tableCommander}
     playerProfile: ${self:custom.playerProfile}
-    tableFactions: ${self:custom.factionProfile}
+    factionProfile: ${self:custom.factionProfile}
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
