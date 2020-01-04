@@ -139,7 +139,7 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  submit:
+  submitunranked:
     handler: submit-unranked.main
     events:
       - http:
