@@ -84,7 +84,7 @@ const findGame = (gameId) => {
 //Calls db based upon player Id passed in
 const findPlayerRank = (player) => {
   const params = {
-    TableName: process.env.tableProfile,
+    TableName: process.env.playerProfile,
     Key: {
       playerId: player
     }
@@ -94,7 +94,7 @@ const findPlayerRank = (player) => {
 
 const findFactionRank = (faction) => {
   const params = {
-    TableName: process.env.tableFactions,
+    TableName: process.env.factionProfile,
     Key: {
       factionId: faction
     }
@@ -104,7 +104,7 @@ const findFactionRank = (faction) => {
 
  const updatePlayerRanks = (player, ranking) => {
   const params = {
-    TableName: process.env.tableProfile,
+    TableName: process.env.playerProfile,
     Key: {
       playerId: player,
     },
@@ -118,7 +118,7 @@ const findFactionRank = (faction) => {
 };
 const updateFactionRanks = (faction, ranking) => {
   const params = {
-    TableName: process.env.tableFactions,
+    TableName: process.env.factionProfile,
     Key: {
       factionId: faction,
     },
