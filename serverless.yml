@@ -19,6 +19,7 @@ custom:
   tableCommander: ${self:custom.stage}-commander-results
   playerProfile: ${self:custom.stage}-player-profile
   factionProfile: ${self:custom.stage}-faction-profile
+  commanderProfile: ${self:custom.stage}-commander-profile
 
 provider:
   name: aws
@@ -35,6 +36,7 @@ provider:
     tableCommander: ${self:custom.tableCommander}
     playerProfile: ${self:custom.playerProfile}
     factionProfile: ${self:custom.factionProfile}
+    commanderProfile: ${self:custom.commanderProfile}
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
@@ -122,6 +124,20 @@ provider:
       # the specific table for the stage
       Resource:
         - "Fn::GetAtt": [ FactionProfile, Arn ]
+
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      # Restrict our IAM role permissions to
+      # the specific table for the stage
+      Resource:
+        - "Fn::GetAtt": [ CommanderProfile, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
