@@ -6,7 +6,7 @@ export async function main(event, context) {
   const data = JSON.parse(event.body);
 
   const params = {
-    TableName: process.env.tableProfile,
+    TableName: process.env.playerProfile,
     Item: {
       playerId: event.requestContext.identity.cognitoIdentityId,
       playerName: data.playerName,
