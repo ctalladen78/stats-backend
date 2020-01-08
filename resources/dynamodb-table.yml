@@ -97,8 +97,12 @@ Resources:
       AttributeDefinitions:
         - AttributeName: commanderId
           AttributeType: S
+        - AttributeName: factionId
+          AttributeType: S
       KeySchema:
         - AttributeName: commanderId
           KeyType: HASH
+        - AttributeName: factionId
+          KeyType: RANGE
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
