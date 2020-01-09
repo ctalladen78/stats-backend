@@ -157,6 +157,7 @@ const updateCommanderRanks = (commander, ranking) => {
 };
 
 export async function main(event) {
+  console.log(event);
   try {
     const gameData = await dynamoDbLib.call("get", findGame(event.pathParameters.id)); //call game data
     console.log(gameData);
