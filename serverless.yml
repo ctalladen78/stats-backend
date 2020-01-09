@@ -19,7 +19,7 @@ custom:
   tableCommander: ${self:custom.stage}-commander-results
   playerProfile: ${self:custom.stage}-player-profile
   factionProfile: ${self:custom.stage}-faction-profile
-  commanderProfile: ${self:custom.stage}-commander-profile
+  commanderProfile: ${self:custom.stage}-commander-profile2
 
 provider:
   name: aws
