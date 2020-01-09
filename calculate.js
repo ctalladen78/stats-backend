@@ -142,11 +142,12 @@ const updateFactionRanks = (faction, ranking) => {
   return params;
 };
 
-const updateCommanderRanks = (commander, ranking) => {
+const updateCommanderRanks = (commander, faction, ranking) => {
   const params = {
     TableName: process.env.commanderProfile,
     Key: {
       commanderId: commander,
+      factionId: faction,
     },
     UpdateExpression: "SET ranking = :ranking",
     ExpressionAttributeValues: {
@@ -199,8 +200,8 @@ export async function main(event) {
         await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, faction2Profile.Item.ranking - rankingChanges[1]));
       }
       if (gameData.Item.commander1 != gameData.Item.commander2){
-        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, commander1Profile.Item.ranking + rankingChanges[1]));
-        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, commander2Profile.Item.ranking - rankingChanges[1]));
+        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + rankingChanges[1]));
+        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - rankingChanges[1]));
       }
     return success(true);
   } catch (e) {
