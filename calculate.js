@@ -102,11 +102,12 @@ const findFactionRank = (faction) => {
   return params;
 };
 
-const findCommanderRank = (commander) => {
+const findCommanderRank = (commander, faction) => {
   const params = {
     TableName: process.env.commanderProfile,
     Key: {
-      commanderId: commander
+      commanderId: commander,
+      factionId: faction
     }
   };
   return params;
@@ -171,9 +172,9 @@ export async function main(event) {
     console.log(faction1Profile);
     const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
     console.log(faction2Profile);
-    const commander1Profile = await dynamoDbLib.call("scan", findCommanderRank(gameData.Item.commander1));  // call faction 1 data from table
+    const commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander1, gameData.Item.faction1));  // call faction 1 data from table
     console.log(commander1Profile);
-    const commander2Profile = await dynamoDbLib.call("scan", findCommanderRank(gameData.Item.commander2));  // call faction 2 data from table
+    const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));  // call faction 2 data from table
     console.log(commander2Profile);
     const rankingChanges = calculatePlayerRanking(player1Profile.Item.ranking, player2Profile.Item.ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
     console.log(rankingChanges);
