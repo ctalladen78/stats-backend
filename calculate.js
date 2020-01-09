@@ -102,15 +102,15 @@ const findFactionRank = (faction) => {
   return params;
 };
 
-const findCommanderRank = (commander) => {
-  const params = {
-    TableName: process.env.commanderProfile,
-    Key: {
-      commanderId: commander
-    }
-  };
-  return params;
-};
+// const findCommanderRank = (commander) => {
+//   const params = {
+//     TableName: process.env.commanderProfile,
+//     Key: {
+//       commanderId: commander
+//     }
+//   };
+//   return params;
+// };
 
  const updatePlayerRanks = (player, ranking) => {
   const params = {
@@ -141,20 +141,20 @@ const updateFactionRanks = (faction, ranking) => {
   return params;
 };
 
-const updateCommanderRanks = (commander, ranking) => {
-  const params = {
-    TableName: process.env.commanderProfile,
-    Key: {
-      commanderId: commander,
-    },
-    UpdateExpression: "SET ranking = :ranking",
-    ExpressionAttributeValues: {
-      ":ranking": ranking,
-    },
-    ReturnValues: "ALL_NEW"
-  };
-  return params;
-};
+// const updateCommanderRanks = (commander, ranking) => {
+//   const params = {
+//     TableName: process.env.commanderProfile,
+//     Key: {
+//       commanderId: commander,
+//     },
+//     UpdateExpression: "SET ranking = :ranking",
+//     ExpressionAttributeValues: {
+//       ":ranking": ranking,
+//     },
+//     ReturnValues: "ALL_NEW"
+//   };
+//   return params;
+// };
 
 export async function main(event) {
   console.log(event);
