@@ -93,7 +93,7 @@ Resources:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Retain
     Properties:
-      TableName: ${self:custom.commanderProfile}
+      TableName: ${self:custom.commanderProfile2}
       AttributeDefinitions:
         - AttributeName: commanderId
           AttributeType: S
