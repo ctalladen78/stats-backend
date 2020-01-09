@@ -201,9 +201,9 @@ export async function main(event) {
         await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, commander1Profile.Item.ranking + rankingChanges[1]));
         await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, commander2Profile.Item.ranking - rankingChanges[1]));
       }
-    return success({ status: true });
+    return success(true);
   } catch (e) {
     console.log(e);
-    return failure({ status: e });
+    return failure(e);
   }
 }
