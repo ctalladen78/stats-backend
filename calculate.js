@@ -218,7 +218,7 @@ export async function main(event) {
         await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + rankingChanges[1]));
         await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - rankingChanges[1]));
       }
-      await dynamoDbLib.call("update", updateGameHistory(event.pathParameters.id, rankingChanges[0]))
+      await dynamoDbLib.call("update", updateGameHistory(event.pathParameters.id, rankingChanges[0]));
     return success(true);
   } catch (e) {
     console.log(e);
