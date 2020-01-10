@@ -20,6 +20,7 @@ export async function main(event, context) {
       vp2: data.vp2,
       gameMode: data.gameMode,
       ranked: "unranked",
+      version: "1.5",
       submittedBy: event.requestContext.identity.cognitoIdentityId,
       createdAt: Date.now(),
     }
