@@ -10,6 +10,7 @@ export async function main(event) {
         ":playerId": event.pathParameters.id
     },
   };
+  console.log(params);
 
   try {
     const result = await dynamoDbLib.call("get", params);
