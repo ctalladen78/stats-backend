@@ -233,6 +233,18 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  findplayergames:
+    # Defines an HTTP API endpoint that calls the main function in listplayers.js
+    # - path: url path is /notes
+    # - method: GET request
+    handler: findplayergames.main
+    events:
+      - http:
+          path: get-player-games/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   listgames2:
     # Defines an HTTP API endpoint that calls the main function in listplayers.js
     # - path: url path is /notes
