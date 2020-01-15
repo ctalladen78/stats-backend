@@ -209,11 +209,11 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  findplayer:
+  findfaction:
     # Defines an HTTP API endpoint that calls the main function in playerlist.js
     # - path: url path is /notes
     # - method: GET request
-    handler: findplayer.main
+    handler: findfaction.main
     events:
       - http:
           path: get-faction-profile/{id}
@@ -273,7 +273,7 @@ functions:
     # Defines an HTTP API endpoint that calls the main function in listplayers.js
     # - path: url path is /notes
     # - method: GET request
-    handler: findplayergames.main
+    handler: findfactiongames.main
     events:
       - http:
           path: get-faction-games/{id}
