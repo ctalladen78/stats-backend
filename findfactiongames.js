@@ -2,11 +2,12 @@ import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
 export async function main(event) {
+  event = event.pathParameters.id.replace("%20", " ");
   const params = {
     TableName: process.env.tableFaction,
     KeyConditionExpression: "factionId = :factionId",
     ExpressionAttributeValues: {
-      ":factionId": event.pathParameters.id
+      ":factionId": event
     },
   };
 
