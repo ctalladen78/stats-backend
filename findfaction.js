@@ -3,7 +3,7 @@ import { success, failure } from "./libs/response-lib";
 
 export async function main(event) {
   console.log(event);
-  event = event.replace("%20", " ");
+  var event = event.replace("%20", " ");
   console.log(event);
   const params = {
     TableName: process.env.factionProfile,
