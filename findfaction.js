@@ -9,7 +9,7 @@ export async function main(event) {
     TableName: process.env.factionProfile,
     KeyConditionExpression: "factionId = :factionId",
     ExpressionAttributeValues: {
-        ":factionId": event.pathParameters.id
+        ":factionId": event
     },
   };
   console.log(params);
