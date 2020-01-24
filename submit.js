@@ -8,6 +8,8 @@ export async function main(event, context) {
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
 
+  console.log(data);
+
   const params = {
     TableName: process.env.tableHistory,
     Item: {
@@ -29,6 +31,8 @@ export async function main(event, context) {
       createdAt: Date.now(),
     }
   };
+
+  console.log(params);
 
   const params2 = {
     TableName: process.env.tablePlayer,
