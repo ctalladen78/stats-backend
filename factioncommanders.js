@@ -12,7 +12,7 @@ export async function main(event) {
   };
 
   try {
-    const result = await dynamoDbLib.call("scan", params);
+    const result = await dynamoDbLib.call("query", params);
     // Return the matching list of items in response body
     return success(result.Items);
   } catch (e) {
