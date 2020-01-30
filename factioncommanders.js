@@ -5,7 +5,7 @@ export async function main(event) {
   event = event.pathParameters.id.replace("%20", " ");
   const params = {
     TableName: process.env.commanderProfile,
-    KeyConditionExpression: "factionId = :factionId",
+    FilterExpression: "factionId = :factionId",
     ExpressionAttributeValues: {
         ":factionId": event
     },
