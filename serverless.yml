@@ -281,6 +281,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  factioncommanders:
+    handler: factioncommanders.main
+    events:
+      - http:
+          path: get-faction-commanders/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   listgames2:
     # Defines an HTTP API endpoint that calls the main function in listplayers.js
     # - path: url path is /notes
