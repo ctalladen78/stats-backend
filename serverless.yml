@@ -362,6 +362,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  deleteresult:
+    handler: deleteresult.main
+    events:
+      - http:
+          path: deleteresult/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+
 # Create our resources with separate CloudFormation templates
 resources:
   # API Gateway Errors
