@@ -73,7 +73,7 @@ export async function main(event) {
     };
     return params;
   };
-  
+
   //Calls db based upon player Id passed in
   const findPlayerRank = (player) => {
     const params = {
@@ -84,7 +84,7 @@ export async function main(event) {
     };
     return params;
   };
-  
+
   const findFactionRank = (faction) => {
     const params = {
       TableName: process.env.factionProfile,
@@ -94,7 +94,7 @@ export async function main(event) {
     };
     return params;
   };
-  
+
   const findCommanderRank = (commander, faction) => {
     const params = {
       TableName: process.env.commanderProfile,
@@ -105,22 +105,7 @@ export async function main(event) {
     };
     return params;
   };
-  
-  const updateGameHistory = (gameId, ranking) => {
-    const params = {
-      TableName: process.env.tableHistory,
-      Key: {
-        gameId: gameId,
-      },
-      UpdateExpression: "SET ranking = :ranking",
-      ExpressionAttributeValues: {
-        ":ranking": ranking, //this needs to come from playerRanksArray
-      },
-      ReturnValues: "ALL_NEW"
-    };
-    return params;
-  };
-  
+
    const updatePlayerRanks = (player, ranking) => {
     const params = {
       TableName: process.env.playerProfile,
@@ -149,7 +134,7 @@ export async function main(event) {
     };
     return params;
   };
-  
+
   const updateCommanderRanks = (commander, faction, ranking) => {
     const params = {
       TableName: process.env.commanderProfile,
@@ -181,29 +166,17 @@ export async function main(event) {
     console.log(commander1Profile);
     const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));  // call faction 2 data from table
     console.log(commander2Profile);
-    // insert into databases
-    const params = {
-      TableName: process.env.tableHistory,
-      Key: {
-        gameId: event.pathParameters.id,
-      },
-      UpdateExpression: "SET gameResult = :gameResult",
-      ExpressionAttributeValues: {
-          ":gameResult": gameResult,
-        },
-        ReturnValues: "ALL_NEW"
-      };
 
       await dynamoDbLib.call("update", params);
-      await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + rankingChanges[0]));
-      await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - rankingChanges[0]));
+      await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + gameData.result));
+      await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - gameData.result));
       if (gameData.Item.faction1 != gameData.Item.faction2){
-        await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, faction1Profile.Item.ranking + rankingChanges[1]));
-        await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, faction2Profile.Item.ranking - rankingChanges[1]));
+        await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, faction1Profile.Item.ranking + gameData.result));
+        await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, faction2Profile.Item.ranking - gameData.result));
       }
       if (gameData.Item.commander1 != gameData.Item.commander2){
-        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + rankingChanges[1]));
-        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - rankingChanges[1]));
+        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + gameData.result));
+        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - gameData.result));
       }
     await dynamoDbLib.call("delete", params);
     await dynamoDbLib.call("delete", params2);
