@@ -64,6 +64,108 @@ export async function main(event) {
       }
   };
 
+  const findGame = (gameId) => {
+    const params = {
+      TableName: process.env.tableHistory,
+      Key: {
+        gameId: gameId
+      }
+    };
+    return params;
+  };
+  
+  //Calls db based upon player Id passed in
+  const findPlayerRank = (player) => {
+    const params = {
+      TableName: process.env.playerProfile,
+      Key: {
+        playerId: player
+      }
+    };
+    return params;
+  };
+  
+  const findFactionRank = (faction) => {
+    const params = {
+      TableName: process.env.factionProfile,
+      Key: {
+        factionId: faction
+      }
+    };
+    return params;
+  };
+  
+  const findCommanderRank = (commander, faction) => {
+    const params = {
+      TableName: process.env.commanderProfile,
+      Key: {
+        commanderId: commander,
+        factionId: faction
+      }
+    };
+    return params;
+  };
+  
+  const updateGameHistory = (gameId, ranking) => {
+    const params = {
+      TableName: process.env.tableHistory,
+      Key: {
+        gameId: gameId,
+      },
+      UpdateExpression: "SET ranking = :ranking",
+      ExpressionAttributeValues: {
+        ":ranking": ranking, //this needs to come from playerRanksArray
+      },
+      ReturnValues: "ALL_NEW"
+    };
+    return params;
+  };
+  
+   const updatePlayerRanks = (player, ranking) => {
+    const params = {
+      TableName: process.env.playerProfile,
+      Key: {
+        playerId: player,
+      },
+      UpdateExpression: "SET ranking = :ranking",
+      ExpressionAttributeValues: {
+        ":ranking": ranking, //this needs to come from playerRanksArray
+      },
+      ReturnValues: "ALL_NEW"
+    };
+    return params;
+  };
+  const updateFactionRanks = (faction, ranking) => {
+    const params = {
+      TableName: process.env.factionProfile,
+      Key: {
+        factionId: faction,
+      },
+      UpdateExpression: "SET ranking = :ranking",
+      ExpressionAttributeValues: {
+        ":ranking": ranking,
+      },
+      ReturnValues: "ALL_NEW"
+    };
+    return params;
+  };
+  
+  const updateCommanderRanks = (commander, faction, ranking) => {
+    const params = {
+      TableName: process.env.commanderProfile,
+      Key: {
+        commanderId: commander,
+        factionId: faction,
+      },
+      UpdateExpression: "SET ranking = :ranking",
+      ExpressionAttributeValues: {
+        ":ranking": ranking,
+      },
+      ReturnValues: "ALL_NEW"
+    };
+    return params;
+  };
+
   try {
     const gameData = await dynamoDbLib.call("get", findGame(event.pathParameters.id)); //call game data
     console.log(gameData);
@@ -103,13 +205,13 @@ export async function main(event) {
         await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + rankingChanges[1]));
         await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - rankingChanges[1]));
       }
-    // await dynamoDbLib.call("delete", params);
-    // await dynamoDbLib.call("delete", params2);
-    // await dynamoDbLib.call("delete", params3);
-    // await dynamoDbLib.call("delete", params4);
-    // await dynamoDbLib.call("delete", params5);
-    // await dynamoDbLib.call("delete", params6);
-    // await dynamoDbLib.call("delete", params7);
+    await dynamoDbLib.call("delete", params);
+    await dynamoDbLib.call("delete", params2);
+    await dynamoDbLib.call("delete", params3);
+    await dynamoDbLib.call("delete", params4);
+    await dynamoDbLib.call("delete", params5);
+    await dynamoDbLib.call("delete", params6);
+    await dynamoDbLib.call("delete", params7);
     return success(data.gameId);
   } catch (e) {
     return failure({ status: e });
