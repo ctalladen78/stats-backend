@@ -78,6 +78,7 @@ export async function main(event) {
 
   //Calls db based upon player Id passed in
   const findPlayerRank = (player) => {
+    console.log(player);
     const params = {
       TableName: process.env.playerProfile,
       Key: {
