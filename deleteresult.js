@@ -1,11 +1,9 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
-import { useState } from "react";
 
 
 export async function main(event) {
-  const [data, setData] = useState([]);
-  setData(event.pathParameters.id);
+  const data = event.pathParameters.id;
 
   console.log(data);
 
