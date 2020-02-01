@@ -67,6 +67,7 @@ export async function main(event) {
   };
 
   const findGame = (gameId) => {
+    console.log(gameId);
     const params = {
       TableName: process.env.tableHistory,
       Key: {
