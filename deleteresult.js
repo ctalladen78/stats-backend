@@ -4,7 +4,7 @@ import { success, failure } from "./libs/response-lib";
 
 export async function main(event) {
   const [data, setData] = useState([]);
-  setdata() = event.pathParameters.id;
+  setData() = event.pathParameters.id;
 
   console.log(data);
 
