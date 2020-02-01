@@ -47,7 +47,6 @@ export async function main(event) {
   } catch (e) {
     return failure({ status: e });
   }
-}
 
 const params = {
     TableName: process.env.tableHistory,
@@ -192,3 +191,4 @@ const params = {
     };
     return params;
   };
+}
