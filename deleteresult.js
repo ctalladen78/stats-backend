@@ -155,7 +155,7 @@ export async function main(event) {
   };
 
   try {
-    const gameData = await dynamoDbLib.call("get", findGame(data)); //call game data
+    const gameData = await dynamoDbLib.call("get", findGame(data.item)); //call game data
     console.log(gameData);
     const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.player1)); // call player 1 data from table
     console.log(player1Profile);
