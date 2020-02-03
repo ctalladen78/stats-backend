@@ -70,7 +70,7 @@ export async function main(event) {
         gameId: gameId
       }
     };
-    console.log(params)
+    console.log(params);
     return params;
   };
 
