@@ -7,60 +7,60 @@ export async function main(event) {
 
   console.log(data);
 
-  // const params = {
-  //   TableName: process.env.tableHistory,
-  //   Key: {
-  //     gameId: data.gameId,
-  //   }
-  // };
+  const params = {
+    TableName: process.env.tableHistory,
+    Key: {
+      gameId: data.gameId,
+    }
+  };
 
-  // const params2 = {
-  //   TableName: process.env.tablePlayer,
-  //   Key: {
-  //     gameId: data.gameId,
-  //     playerId: data.player1,
-  //     }
-  // };
+  const params2 = {
+    TableName: process.env.tablePlayer,
+    Key: {
+      gameId: data.gameId,
+      playerId: data.player1,
+      }
+  };
 
-  // const params3 = {
-  //   TableName: process.env.tablePlayer,
-  //   Key: {
-  //       gameId: data.gameId,
-  //     playerId: data.player2,
-  //     }
-  // };
+  const params3 = {
+    TableName: process.env.tablePlayer,
+    Key: {
+        gameId: data.gameId,
+      playerId: data.player2,
+      }
+  };
 
-  // const params4 = {
-  //   TableName: process.env.tableFaction,
-  //   Key: {
-  //       gameId: data.gameId,
-  //     factionId: data.faction1,
-  //     }
-  // };
+  const params4 = {
+    TableName: process.env.tableFaction,
+    Key: {
+        gameId: data.gameId,
+      factionId: data.faction1,
+      }
+  };
 
-  // const params5 = {
-  //   TableName: process.env.tableFaction,
-  //   Key: {
-  //       gameId: data.gameId,
-  //     factionId: data.faction2,
-  //     }
-  // };
+  const params5 = {
+    TableName: process.env.tableFaction,
+    Key: {
+        gameId: data.gameId,
+      factionId: data.faction2,
+      }
+  };
 
-  // const params6 = {
-  //   TableName: process.env.tableCommander,
-  //   Key: {
-  //       gameId: data.gameId,
-  //     commanderId: data.commander1,
-  //     }
-  // };
+  const params6 = {
+    TableName: process.env.tableCommander,
+    Key: {
+        gameId: data.gameId,
+      commanderId: data.commander1,
+      }
+  };
 
-  // const params7 = {
-  //   TableName: process.env.tableCommander,
-  //   Key: {
-  //       gameId: data.gameId,
-  //     commanderId: data.commander2,
-  //     }
-  // };
+  const params7 = {
+    TableName: process.env.tableCommander,
+    Key: {
+        gameId: data.gameId,
+      commanderId: data.commander2,
+      }
+  };
 
   const findGame = (gameId) => {
     console.log(gameId);
