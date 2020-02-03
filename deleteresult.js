@@ -158,18 +158,18 @@ export async function main(event) {
   try {
     const gameData = await dynamoDbLib.call("get", findGame(data)); //call game data
     console.log(gameData);
-    console.log(gameData.item.player1);
-    const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.item.player1)); // call player 1 data from table
+    console.log(gameData.Item.player1);
+    const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
     console.log(player1Profile);
-    const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.item.player2)); // call player 2 data from table
+    const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
     console.log(player2Profile);
-    const faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.item.faction1));  // call faction 1 data from table
+    const faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
     console.log(faction1Profile);
-    const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.item.faction2));  // call faction 2 data from table
+    const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
     console.log(faction2Profile);
-    const commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.item.commander1, gameData.item.faction1));  // call faction 1 data from table
+    const commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander1, gameData.item.faction1));  // call faction 1 data from table
     console.log(commander1Profile);
-    const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.item.commander2, gameData.item.faction2));  // call faction 2 data from table
+    const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.item.faction2));  // call faction 2 data from table
     console.log(commander2Profile);
 
       await dynamoDbLib.call("update", params);
@@ -192,6 +192,7 @@ export async function main(event) {
     await dynamoDbLib.call("delete", params7);
     return success(data.gameId);
   } catch (e) {
+    console.log(e);
     return failure({ status: e });
   }
 }
