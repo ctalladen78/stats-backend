@@ -7,62 +7,60 @@ export async function main(event) {
 
   console.log(data);
 
-  const params = {
-    TableName: process.env.tableHistory,
-    Key: {
-      gameId: data.gameId,
-    }
-  };
+  // const params = {
+  //   TableName: process.env.tableHistory,
+  //   Key: {
+  //     gameId: data.gameId,
+  //   }
+  // };
 
-  console.log(params);
+  // const params2 = {
+  //   TableName: process.env.tablePlayer,
+  //   Key: {
+  //     gameId: data.gameId,
+  //     playerId: data.player1,
+  //     }
+  // };
 
-  const params2 = {
-    TableName: process.env.tablePlayer,
-    Key: {
-      gameId: data.gameId,
-      playerId: data.player1,
-      }
-  };
+  // const params3 = {
+  //   TableName: process.env.tablePlayer,
+  //   Key: {
+  //       gameId: data.gameId,
+  //     playerId: data.player2,
+  //     }
+  // };
 
-  const params3 = {
-    TableName: process.env.tablePlayer,
-    Key: {
-        gameId: data.gameId,
-      playerId: data.player2,
-      }
-  };
+  // const params4 = {
+  //   TableName: process.env.tableFaction,
+  //   Key: {
+  //       gameId: data.gameId,
+  //     factionId: data.faction1,
+  //     }
+  // };
 
-  const params4 = {
-    TableName: process.env.tableFaction,
-    Key: {
-        gameId: data.gameId,
-      factionId: data.faction1,
-      }
-  };
+  // const params5 = {
+  //   TableName: process.env.tableFaction,
+  //   Key: {
+  //       gameId: data.gameId,
+  //     factionId: data.faction2,
+  //     }
+  // };
 
-  const params5 = {
-    TableName: process.env.tableFaction,
-    Key: {
-        gameId: data.gameId,
-      factionId: data.faction2,
-      }
-  };
+  // const params6 = {
+  //   TableName: process.env.tableCommander,
+  //   Key: {
+  //       gameId: data.gameId,
+  //     commanderId: data.commander1,
+  //     }
+  // };
 
-  const params6 = {
-    TableName: process.env.tableCommander,
-    Key: {
-        gameId: data.gameId,
-      commanderId: data.commander1,
-      }
-  };
-
-  const params7 = {
-    TableName: process.env.tableCommander,
-    Key: {
-        gameId: data.gameId,
-      commanderId: data.commander2,
-      }
-  };
+  // const params7 = {
+  //   TableName: process.env.tableCommander,
+  //   Key: {
+  //       gameId: data.gameId,
+  //     commanderId: data.commander2,
+  //     }
+  // };
 
   const findGame = (gameId) => {
     console.log(gameId);
@@ -156,18 +154,17 @@ export async function main(event) {
   try {
     const gameData = await dynamoDbLib.call("get", findGame(data)); //call game data
     console.log(gameData);
-    console.log(gameData.player1);
-    const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.player1)); // call player 1 data from table
+    const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.item.player1)); // call player 1 data from table
     console.log(player1Profile);
-    const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.player2)); // call player 2 data from table
+    const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.item.player2)); // call player 2 data from table
     console.log(player2Profile);
-    const faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.faction1));  // call faction 1 data from table
+    const faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.item.faction1));  // call faction 1 data from table
     console.log(faction1Profile);
-    const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.faction2));  // call faction 2 data from table
+    const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.item.faction2));  // call faction 2 data from table
     console.log(faction2Profile);
-    const commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.commander1, gameData.faction1));  // call faction 1 data from table
+    const commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.item.commander1, gameData.item.faction1));  // call faction 1 data from table
     console.log(commander1Profile);
-    const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.commander2, gameData.faction2));  // call faction 2 data from table
+    const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.item.commander2, gameData.item.faction2));  // call faction 2 data from table
     console.log(commander2Profile);
 
       await dynamoDbLib.call("update", params);
