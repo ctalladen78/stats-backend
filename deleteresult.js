@@ -70,6 +70,7 @@ export async function main(event) {
         gameId: gameId
       }
     };
+    console.log(params)
     return params;
   };
 
@@ -82,6 +83,7 @@ export async function main(event) {
         playerId: player
       }
     };
+    console.log(params);
     return params;
   };
 
@@ -92,6 +94,7 @@ export async function main(event) {
         factionId: faction
       }
     };
+    console.log(params);
     return params;
   };
 
@@ -103,6 +106,7 @@ export async function main(event) {
         factionId: faction
       }
     };
+    console.log(params);
     return params;
   };
 
