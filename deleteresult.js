@@ -56,6 +56,8 @@ export async function main(event) {
   };
 
    const updatePlayerRanks = (player, ranking) => {
+    console.log(player);
+    console.log(ranking);
     const params = {
       TableName: process.env.playerProfile,
       Key: {
@@ -116,6 +118,17 @@ export async function main(event) {
     console.log(commander1Profile);
     const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));  // call faction 2 data from table
     console.log(commander2Profile);
+
+    await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + gameData.Item.result));
+    await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - gameData.Item.result));
+    if (gameData.Item.faction1 != gameData.Item.faction2){
+      await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, faction1Profile.Item.ranking + (gameData.Item.result*0.2)));
+      await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, faction2Profile.Item.ranking - (gameData.Item.result*0.2)));
+    }
+    if (gameData.Item.commander1 != gameData.Item.commander2){
+      await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + (gameData.result*0.2)));
+      await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - (gameData.result*0.2)));
+    }
 
     const params = {
       TableName: process.env.tableHistory,
@@ -179,16 +192,6 @@ export async function main(event) {
     };
     console.log(params7);
 
-      await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + gameData.Item.result));
-      await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - gameData.Item.result));
-      if (gameData.Item.faction1 != gameData.Item.faction2){
-        await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, faction1Profile.Item.ranking + (gameData.Item.result*0.2)));
-        await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, faction2Profile.Item.ranking - (gameData.Item.result*0.2)));
-      }
-      if (gameData.commander1 != gameData.commander2){
-        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + (gameData.result*0.2)));
-        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - (gameData.result*0.2)));
-      }
     await dynamoDbLib.call("delete", params);
     await dynamoDbLib.call("delete", params2);
     await dynamoDbLib.call("delete", params3);
