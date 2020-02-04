@@ -134,8 +134,8 @@ export async function main(event) {
       await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, (faction2Profile.Item.ranking - (gameData.Item.ranking*0.2))));
     }
     if (gameData.Item.commander1 != gameData.Item.commander2){
-      await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, (commander1Profile.Item.ranking + (gameData.ranking*0.2))));
-      await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, (commander2Profile.Item.ranking - (gameData.ranking*0.2))));
+      await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, (commander1Profile.Item.ranking + (gameData.Item.ranking*0.2))));
+      await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, (commander2Profile.Item.ranking - (gameData.Item.ranking*0.2))));
     }
 
     const params = {
