@@ -120,7 +120,7 @@ export async function main(event) {
     console.log(commander2Profile);
 
     console.log(player1Profile.Item.ranking);
-    console.log(gameData.Item.result);    
+    console.log(gameData.Item.result);
     await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + gameData.Item.result));
     await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - gameData.Item.result));
     if (gameData.Item.faction1 != gameData.Item.faction2){
