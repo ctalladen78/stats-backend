@@ -119,6 +119,8 @@ export async function main(event) {
     const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));  // call faction 2 data from table
     console.log(commander2Profile);
 
+    console.log(player1Profile.Item.ranking);
+    console.log(gameData.Item.result);    
     await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + gameData.Item.result));
     await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - gameData.Item.result));
     if (gameData.Item.faction1 != gameData.Item.faction2){
