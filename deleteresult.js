@@ -72,6 +72,8 @@ export async function main(event) {
     return params;
   };
   const updateFactionRanks = (faction, ranking) => {
+    console.log(faction);
+    console.log(ranking);
     const params = {
       TableName: process.env.factionProfile,
       Key: {
@@ -87,6 +89,9 @@ export async function main(event) {
   };
 
   const updateCommanderRanks = (commander, faction, ranking) => {
+    console.log(commander);
+    console.log(faction);
+    console.log(ranking);
     const params = {
       TableName: process.env.commanderProfile,
       Key: {
@@ -123,6 +128,7 @@ export async function main(event) {
     console.log(gameData.Item.ranking);
     await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, (player1Profile.Item.ranking + gameData.Item.ranking)));
     await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, (player2Profile.Item.ranking - gameData.Item.ranking)));
+    console.log(faction1Profile.Item.ranking + (gameData.Item.ranking*0.2));
     if (gameData.Item.faction1 != gameData.Item.faction2){
       await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, (faction1Profile.Item.ranking + (gameData.Item.ranking*0.2))));
       await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, (faction2Profile.Item.ranking - (gameData.Item.ranking*0.2))));
