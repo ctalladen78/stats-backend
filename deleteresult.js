@@ -124,7 +124,7 @@ export async function main(event) {
       }
     };
     console.log(params);
-  
+
     const params2 = {
       TableName: process.env.tablePlayer,
       Key: {
@@ -133,7 +133,7 @@ export async function main(event) {
         }
     };
     console.log(params2);
-  
+
     const params3 = {
       TableName: process.env.tablePlayer,
       Key: {
@@ -142,7 +142,7 @@ export async function main(event) {
         }
     };
     console.log(params3);
-  
+
     const params4 = {
       TableName: process.env.tableFaction,
       Key: {
@@ -151,7 +151,7 @@ export async function main(event) {
         }
     };
     console.log(params4);
-  
+
     const params5 = {
       TableName: process.env.tableFaction,
       Key: {
@@ -169,7 +169,7 @@ export async function main(event) {
         }
     };
     console.log(params6);
-  
+
     const params7 = {
       TableName: process.env.tableCommander,
       Key: {
