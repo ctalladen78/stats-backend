@@ -23,7 +23,8 @@ export async function main(event, context) {
       TPs: 0,
       SPs: 0,
       VPs: 0,
-      PointsDestroyed: 0,
+      gamesPlayed: 0,
+      pointsDestroyed: 0,
     }
   };
 
