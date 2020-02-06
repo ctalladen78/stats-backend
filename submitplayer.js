@@ -25,6 +25,7 @@ export async function main(event, context) {
       VPs: 0,
       gamesPlayed: 0,
       pointsDestroyed: 0,
+      hadBye: false
     }
   };
 
