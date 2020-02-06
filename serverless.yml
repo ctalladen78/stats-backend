@@ -424,7 +424,7 @@ functions:
     events:
       - http:
           path: createtournament
-          method: put
+          method: post
           cors: true
           authorizer: aws_iam
 
