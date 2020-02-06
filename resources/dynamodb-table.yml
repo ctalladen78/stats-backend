@@ -106,3 +106,50 @@ Resources:
           KeyType: RANGE
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
+  TournamentInfo:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      TableName: ${self:custom.tournamentInfo}
+      AttributeDefinitions:
+        - AttributeName: tournamentId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: tournamentId
+          KeyType: HASH
+      # Set the capacity to auto-scale
+      BillingMode: PAY_PER_REQUEST
+  TournamentPlayers:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+  TableName: ${self:custom.tournamentPlayers}
+      AttributeDefinitions:
+        - AttributeName: playerId
+          AttributeType: S
+        - AttributeName: tournamentId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: playerId
+          KeyType: HASH
+        - AttributeName: tournamentId
+          KeyType: RANGE
+      # Set the capacity to auto-scale
+      BillingMode: PAY_PER_REQUEST
+  TournamentGames:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+  TableName: ${self:custom.tournamentGames}
+      AttributeDefinitions:
+        - AttributeName: gameId
+          AttributeType: S
+        - AttributeName: tournamentId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: gameId
+          KeyType: HASH
+        - AttributeName: tournamentId
+          KeyType: RANGE
+      # Set the capacity to auto-scale
+      BillingMode: PAY_PER_REQUEST
