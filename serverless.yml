@@ -423,7 +423,7 @@ functions:
     handler: createtournament.main
     events:
       - http:
-          path: tournament-create
+          path: createtournament
           method: put
           cors: true
           authorizer: aws_iam
