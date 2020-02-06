@@ -7,6 +7,8 @@ export async function main(event, context) {
   const data = JSON.parse(event.body);
   const unique = uuid.v1();
 
+  console.log(data);
+
   const params = {
     TableName: process.env.tournamentInfo,
     Item: {
@@ -18,6 +20,8 @@ export async function main(event, context) {
       country: data.country,
     }
   };
+
+  console.log(params);
 
   try {
     await dynamoDbLib.call("put", params);
