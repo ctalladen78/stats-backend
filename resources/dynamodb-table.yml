@@ -123,7 +123,7 @@ Resources:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Retain
     Properties:
-  TableName: ${self:custom.tournamentPlayers}
+      TableName: ${self:custom.tournamentPlayers}
       AttributeDefinitions:
         - AttributeName: playerId
           AttributeType: S
@@ -140,7 +140,7 @@ Resources:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Retain
     Properties:
-  TableName: ${self:custom.tournamentGames}
+      TableName: ${self:custom.tournamentGames}
       AttributeDefinitions:
         - AttributeName: gameId
           AttributeType: S
