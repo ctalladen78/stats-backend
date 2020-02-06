@@ -233,6 +233,18 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  gettournament:
+    # Defines an HTTP API endpoint that calls the main function in get.js
+    # - path: url path is /notes/{id}
+    # - method: GET request
+    handler: get.main
+    events:
+      - http:
+          path: tournament/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   playerlist:
     # Defines an HTTP API endpoint that calls the main function in playerlist.js
     # - path: url path is /notes
