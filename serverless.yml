@@ -338,6 +338,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  tournamentgames:
+    handler: tournamentgames.main
+    events:
+      - http:
+          path: get-tournament-games/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   # listgames2:
   #   handler: listgames2.main
   #   events:
