@@ -7,9 +7,9 @@ export async function main(event) {
   console.log(event);
   const data = JSON.parse(event.body);
   console.log(data);
-  const match = (body.game);
+  const match = (data.game);
   console.log(match);
-  const info = (body.data);
+  const info = (data.data);
   console.log(info);
 
   const unique = uuid.v1();
