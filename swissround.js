@@ -40,5 +40,5 @@ export async function main(event) {
         return failure({ status: e });
     }
     };
-    return;
+    return success();
 }
