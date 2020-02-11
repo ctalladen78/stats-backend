@@ -3,10 +3,11 @@ import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
 
-export async function main(matchups, event) {
+export async function main(event) {
+    console.log(event);
   const unique = uuid.v1();
   // Request body is passed in as a JSON encoded string in 'event.body'
-  const match = JSON.parse(matchups.body);
+  const match = JSON.parse(event.game);
   const data = JSON.parse(event.body);
 
   console.log(match);
