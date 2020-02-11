@@ -24,8 +24,8 @@ export async function main(event) {
         gameId: unique,
         tournamentId: data.tournamentId.tournamentId,
         round: data.data.round,
-        player1: data.game[0].home,
-        player2 : data.game[0].away,
+        player1: m.home,
+        player2 : m.away,
         gameMode: data.data.gameMode,
         resultSubmitted: "false",
         }
