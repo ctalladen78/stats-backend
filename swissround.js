@@ -4,14 +4,15 @@ import { success, failure } from "./libs/response-lib";
 
 
 export async function main(event) {
-    console.log(event);
-  const unique = uuid.v1();
-  // Request body is passed in as a JSON encoded string in 'event.body'
+  console.log(event);
+  const all = JSON.parse(event.body);
+  console.log(all);
   const match = JSON.parse(event.body.game);
-  const data = JSON.parse(event.body.event);
-
   console.log(match);
+  const data = JSON.parse(event.body.data);
   console.log(data);
+
+  const unique = uuid.v1();
 
   const params = {
     TableName: process.env.tournamentGames,
