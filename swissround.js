@@ -7,8 +7,8 @@ export async function main(event) {
     console.log(event);
   const unique = uuid.v1();
   // Request body is passed in as a JSON encoded string in 'event.body'
-  const match = JSON.parse(event.game);
-  const data = JSON.parse(event.body);
+  const match = JSON.parse(event.body.game);
+  const data = JSON.parse(event.body.event);
 
   console.log(match);
   console.log(data);
