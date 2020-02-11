@@ -11,7 +11,7 @@ export async function main(event) {
   console.log(match);
   const info = (data.data);
   console.log(info);
-  const id = (data.tournament);
+  const id = (data.tournamentId);
   console.log(id);
 
   const unique = uuid.v1();
@@ -20,7 +20,7 @@ export async function main(event) {
     TableName: process.env.tournamentGames,
     Item: {
       gameId: unique,
-      tournamentId: data.id.tournamentId,
+      tournamentId: data.tournamentId,
       round: data.data.round,
       player1: data.game.home,
       player2 : data.game.away,
