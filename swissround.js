@@ -35,10 +35,10 @@ export async function main(event) {
 
     try {
         await dynamoDbLib.call("put", params);
-        return success(unique);
     } catch (e) {
         console.log(e);
         return failure({ status: e });
     }
     };
+    return;
 }
