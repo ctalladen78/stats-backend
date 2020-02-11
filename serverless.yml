@@ -440,6 +440,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  tournamentresult:
+    handler: tournamentresult.main
+    events:
+      - http:
+          path: tournament-result/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+
 # Create our resources with separate CloudFormation templates
 resources:
   # API Gateway Errors
