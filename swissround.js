@@ -29,6 +29,8 @@ export async function main(event) {
     }
   };
 
+  console.log(params);
+
   try {
     await dynamoDbLib.call("put", params);
     return success(unique);
