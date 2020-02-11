@@ -222,9 +222,6 @@ functions:
           authorizer: aws_iam
 
   get:
-    # Defines an HTTP API endpoint that calls the main function in get.js
-    # - path: url path is /notes/{id}
-    # - method: GET request
     handler: get.main
     events:
       - http:
@@ -234,9 +231,6 @@ functions:
           authorizer: aws_iam
 
   gettournament:
-    # Defines an HTTP API endpoint that calls the main function in get.js
-    # - path: url path is /notes/{id}
-    # - method: GET request
     handler: gettournament.main
     events:
       - http:
@@ -246,9 +240,6 @@ functions:
           authorizer: aws_iam
 
   playerlist:
-    # Defines an HTTP API endpoint that calls the main function in playerlist.js
-    # - path: url path is /notes
-    # - method: GET request
     handler: playerlist.main
     events:
       - http:
@@ -258,9 +249,6 @@ functions:
           authorizer: aws_iam
 
   findplayer:
-    # Defines an HTTP API endpoint that calls the main function in playerlist.js
-    # - path: url path is /notes
-    # - method: GET request
     handler: findplayer.main
     events:
       - http:
@@ -270,9 +258,6 @@ functions:
           authorizer: aws_iam
 
   findfaction:
-    # Defines an HTTP API endpoint that calls the main function in playerlist.js
-    # - path: url path is /notes
-    # - method: GET request
     handler: findfaction.main
     events:
       - http:
@@ -282,9 +267,6 @@ functions:
           authorizer: aws_iam
 
   listplayers:
-    # Defines an HTTP API endpoint that calls the main function in listplayers.js
-    # - path: url path is /notes
-    # - method: GET request
     handler: listplayers.main
     events:
       - http:
@@ -294,9 +276,6 @@ functions:
           authorizer: aws_iam
 
   listfactions:
-    # Defines an HTTP API endpoint that calls the main function in listplayers.js
-    # - path: url path is /notes
-    # - method: GET request
     handler: listfactions.main
     events:
       - http:
@@ -306,9 +285,6 @@ functions:
           authorizer: aws_iam
 
   listtournaments:
-    # Defines an HTTP API endpoint that calls the main function in listplayers.js
-    # - path: url path is /notes
-    # - method: GET request
     handler: listtournaments.main
     events:
       - http:
@@ -317,22 +293,16 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  listgames:
-    # Defines an HTTP API endpoint that calls the main function in listplayers.js
-    # - path: url path is /notes
-    # - method: GET request
-    handler: listgames.main
-    events:
-      - http:
-          path: get-my-games
-          method: get
-          cors: true
-          authorizer: aws_iam
+  # listgames:
+  #   handler: listgames.main
+  #   events:
+  #     - http:
+  #         path: get-my-games
+  #         method: get
+  #         cors: true
+  #         authorizer: aws_iam
 
   findplayergames:
-    # Defines an HTTP API endpoint that calls the main function in listplayers.js
-    # - path: url path is /notes
-    # - method: GET request
     handler: findplayergames.main
     events:
       - http:
@@ -342,9 +312,6 @@ functions:
           authorizer: aws_iam
 
   findfactiongames:
-    # Defines an HTTP API endpoint that calls the main function in listplayers.js
-    # - path: url path is /notes
-    # - method: GET request
     handler: findfactiongames.main
     events:
       - http:
@@ -371,53 +338,41 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  listgames2:
-    # Defines an HTTP API endpoint that calls the main function in listplayers.js
-    # - path: url path is /notes
-    # - method: GET request
-    handler: listgames2.main
-    events:
-      - http:
-          path: get-my-game-data
-          method: get
-          cors: true
-          authorizer: aws_iam
+  # listgames2:
+  #   handler: listgames2.main
+  #   events:
+  #     - http:
+  #         path: get-my-game-data
+  #         method: get
+  #         cors: true
+  #         authorizer: aws_iam
 
-  gamedata:
-    # Defines an HTTP API endpoint that calls the main function in listplayers.js
-    # - path: url path is /notes
-    # - method: GET request
-    handler: gamedata.main
-    events:
-      - http:
-          path: get-a-game
-          method: get
-          cors: true
-          authorizer: aws_iam  
+  # gamedata:
+  #   handler: gamedata.main
+  #   events:
+  #     - http:
+  #         path: get-a-game
+  #         method: get
+  #         cors: true
+  #         authorizer: aws_iam  
           
-  factionlist:
-    # Defines an HTTP API endpoint that calls the main function in factionlist.js
-    # - path: url path is /notes
-    # - method: GET request
-    handler: factionlist.main
-    events:
-      - http:
-          path: get-faction-history
-          method: get
-          cors: true
-          authorizer: aws_iam
+  # factionlist:
+  #   handler: factionlist.main
+  #   events:
+  #     - http:
+  #         path: get-faction-history
+  #         method: get
+  #         cors: true
+  #         authorizer: aws_iam
 
-  commanderlist:
-    # Defines an HTTP API endpoint that calls the main function in commanderlist.js
-    # - path: url path is /notes
-    # - method: GET request
-    handler: commanderlist.main
-    events:
-      - http:
-          path: get-commander-history 
-          method: get
-          cors: true
-          authorizer: aws_iam
+  # commanderlist:
+  #   handler: commanderlist.main
+  #   events:
+  #     - http:
+  #         path: get-commander-history 
+  #         method: get
+  #         cors: true
+  #         authorizer: aws_iam
 
   # authenticate:
   #   # Defines an HTTP API endpoint that calls the main function in update.js
@@ -432,9 +387,6 @@ functions:
   #         authorizer: aws_iam
 
   calculate:
-    # Defines an HTTP API endpoint that calls the main function in update.js
-    # - path: url path is /notes/{id}
-    # - method: PUT request
     handler: calculate.main
     events:
       - http:
