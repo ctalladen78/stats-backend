@@ -5,12 +5,12 @@ import { success, failure } from "./libs/response-lib";
 
 export async function main(event) {
   console.log(event);
-  const all = JSON.parse(event.body);
-  console.log(all);
-  const match = JSON.parse(event.body.game);
-  console.log(match);
-  const data = JSON.parse(event.body.data);
+  const data = JSON.parse(event.body);
   console.log(data);
+  const match = (body.game);
+  console.log(match);
+  const info = (body.data);
+  console.log(info);
 
   const unique = uuid.v1();
 
@@ -18,11 +18,11 @@ export async function main(event) {
     TableName: process.env.tournamentGames,
     Item: {
       gameId: unique,
-      tournamentId: data.tournamentId,
-      round: data.round,
+      tournamentId: info.tournamentId,
+      round: info.round,
       player1: match.home,
       player2 : match.player2,
-      gameMode: data.gameMode,
+      gameMode: info.gameMode,
       resultSubmitted: "false",
     }
   };
