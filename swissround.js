@@ -20,10 +20,10 @@ export async function main(event) {
     TableName: process.env.tournamentGames,
     Item: {
       gameId: unique,
-      tournamentId: data.tournamentId,
+      tournamentId: data.tournamentId.tournamentId,
       round: data.data.round,
-      player1: data.game.home,
-      player2 : data.game.away,
+      player1: data.game[0].home,
+      player2 : data.game[0].away,
       gameMode: data.data.gameMode,
       resultSubmitted: "false",
     }
@@ -35,6 +35,7 @@ export async function main(event) {
     await dynamoDbLib.call("put", params);
     return success(unique);
   } catch (e) {
+    console.log(e);
     return failure({ status: e });
   }
 }
