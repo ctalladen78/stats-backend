@@ -5,7 +5,7 @@ export async function main(event) {
     console.log(event);
 
     const params = {
-      TableName: process.env.tableTournamentGames,
+      TableName: process.env.tournamentGames,
       Key: {
         gameId: event.pathParameters.id,
       },
