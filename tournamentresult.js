@@ -14,15 +14,17 @@ export async function main(event) {
         tournamentId: data.tournamentId,
       },
       UpdateExpression: "SET resultSubmitted = :true",
+      UpdateExpression: "SET vp1 = :vp1",
+      UpdateExpression: "SET vp2 = :vp2",
+      UpdateExpression: "SET ud1 = :ud1",
+      UpdateExpression: "SET ud2 = :ud2",
       ExpressionAttributeValues: {
         ":true": true,
+        ":vp1": data.vp1,
+        ":vp2": data.vp2,
+        ":ud1": data.ud1,
+        ":ud2": data.ud2,
       },
-      Item: {
-        vp1: data.vp1,
-        vp2: data.vp2,
-        ud1: data.ud1,
-        ud2: data.ud2
-      }
     };
 
     console.log(params);
