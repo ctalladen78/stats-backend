@@ -4,11 +4,14 @@ import { success, failure } from "./libs/response-lib";
 export async function main(event) {
     console.log(event);
 
+    const data = JSON.parse(event.body);
+
     const params = {
       TableName: process.env.tournamentGames,
-      Key: {
-        gameId: gameId,
-        tournamentId: tournamentId,
+      Item: {
+        gameId: data.gameId,
+        tournamentId: data.tournamentId,
+        resultSubmitted: true,
       }
     }
     console.log(params);
