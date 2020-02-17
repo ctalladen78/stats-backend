@@ -1,8 +1,9 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
-export async function main(event) {
+export async function main(event, result) {
     console.log(event);
+    console.log(result);
 
     const data = JSON.parse(event.body);
 
