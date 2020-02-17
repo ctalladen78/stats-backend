@@ -13,11 +13,7 @@ export async function main(event) {
         gameId: data.gameId,
         tournamentId: data.tournamentId,
       },
-      UpdateExpression: "SET resultSubmitted = :true",
-      UpdateExpression: "SET vp1 = :vp1",
-      UpdateExpression: "SET vp2 = :vp2",
-      UpdateExpression: "SET ud1 = :ud1",
-      UpdateExpression: "SET ud2 = :ud2",
+      UpdateExpression: "SET resultSubmitted = :true" , vp1 = ":vp1" , vp2 = ":vp2" , ud1 = ":ud1" , ud2 = ":ud2",
       ExpressionAttributeValues: {
         ":true": true,
         ":vp1": data.vp1,
