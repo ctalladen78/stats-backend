@@ -9,13 +9,8 @@ export async function main(event) {
       Key: {
         gameId: gameId,
         tournamentId: tournamentId,
-      },
-      UpdateExpression: "SET resultSubmitted = :resultSubmitted",
-      ExpressionAttributeValues: {
-          ":resultSubmitted": true,
-        },
-        ReturnValues: "ALL_NEW"
-      };
+      }
+    }
     console.log(params);
 
     try{
