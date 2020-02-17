@@ -445,7 +445,7 @@ functions:
     events:
       - http:
           path: tournament-result/{id}
-          method: put
+          method: post
           cors: true
           authorizer: aws_iam
 
