@@ -17,7 +17,7 @@ export async function main(event) {
     };
 
     try{
-      await dynamoDbLib.call("put", params);
+      await dynamoDbLib.call("update", params);
     return success(true);
   } catch (e) {
     console.log(e);
