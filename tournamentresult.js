@@ -1,11 +1,11 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
-export async function main(event, result) {
+export async function main(event) {
     console.log(event);
-    console.log(result);
 
     const data = JSON.parse(event.body);
+    console.log(data);
 
     const params = {
       TableName: process.env.tournamentGames,
