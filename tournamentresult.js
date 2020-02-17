@@ -17,8 +17,15 @@ export async function main(event) {
       ExpressionAttributeValues: {
         ":true": true,
       },
-      ReturnValues: "ALL_NEW"
+      Item: {
+        vp1: data.vp1,
+        vp2: data.vp2,
+        ud1: data.ud1,
+        ud2: data.ud2
+      }
     };
+
+    console.log(params);
 
     try{
       await dynamoDbLib.call("update", params);
