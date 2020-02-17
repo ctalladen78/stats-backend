@@ -9,11 +9,15 @@ export async function main(event) {
 
     const params = {
       TableName: process.env.tournamentGames,
-      Item: {
+      Key: {
         gameId: data.gameId,
         tournamentId: data.tournamentId,
-        resultSubmitted: true,
-      }
+      },
+      UpdateExpression: "SET resultSubmitted = :true",
+      ExpressionAttributeValues: {
+        ":true": true,
+      },
+      ReturnValues: "ALL_NEW"
     };
 
     try{
