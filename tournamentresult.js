@@ -7,7 +7,8 @@ export async function main(event) {
     const params = {
       TableName: process.env.tournamentGames,
       Key: {
-        gameId: event.pathParameters.id,
+        gameId: gameId,
+        tournamentId: tournamentId,
       },
       UpdateExpression: "SET resultSubmitted = :resultSubmitted",
       ExpressionAttributeValues: {
@@ -15,6 +16,7 @@ export async function main(event) {
         },
         ReturnValues: "ALL_NEW"
       };
+    console.log(params);
 
     try{
       await dynamoDbLib.call("update", params);
