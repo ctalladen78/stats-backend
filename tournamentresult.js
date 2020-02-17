@@ -13,7 +13,7 @@ export async function main(event) {
         tournamentId: data.tournamentId,
         resultSubmitted: true,
       }
-    }
+    };
     console.log(params);
 
     try{
