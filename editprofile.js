@@ -28,6 +28,7 @@ export async function main(event, context) {
     await dynamoDbLib.call("update", params);
     return success(params.Item);
   } catch (e) {
+    console.log(e);
     return failure(e);
   }
 }
