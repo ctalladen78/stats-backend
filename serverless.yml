@@ -226,7 +226,7 @@ functions:
     events:
       - http:
           path: profile-edit
-          method: put
+          method: post
           cors: true
           authorizer: aws_iam
 
@@ -302,15 +302,6 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  # listgames:
-  #   handler: listgames.main
-  #   events:
-  #     - http:
-  #         path: get-my-games
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam
-
   findplayergames:
     handler: findplayergames.main
     events:
@@ -355,42 +346,6 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
-
-  # listgames2:
-  #   handler: listgames2.main
-  #   events:
-  #     - http:
-  #         path: get-my-game-data
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam
-
-  # gamedata:
-  #   handler: gamedata.main
-  #   events:
-  #     - http:
-  #         path: get-a-game
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam  
-          
-  # factionlist:
-  #   handler: factionlist.main
-  #   events:
-  #     - http:
-  #         path: get-faction-history
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam
-
-  # commanderlist:
-  #   handler: commanderlist.main
-  #   events:
-  #     - http:
-  #         path: get-commander-history 
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam
 
   # authenticate:
   #   # Defines an HTTP API endpoint that calls the main function in update.js
