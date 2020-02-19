@@ -12,11 +12,11 @@ export async function main(event, context) {
     Key: {
       playerId: event.requestContext.identity.cognitoIdentityId,
     },
-    UpdateExpression: "SET playerName = :playerName, userName = :userName, region = :subregion, country = :country, version = :version",
+    UpdateExpression: "SET playerName = :playerName, userName = :userName, subregion = :region, country = :country, version = :version",
     ExpressionAttributeValues: {
       ":playerName": data.playerName,
       ":userName": data.userName,
-      ":subregion": data.region,
+      ":region": data.region,
       ":country": data.country,
       ":version": 2,
     },
