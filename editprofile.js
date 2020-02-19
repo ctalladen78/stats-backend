@@ -7,13 +7,17 @@ export async function main(event, context) {
 
   const params = {
     TableName: process.env.playerProfile,
-    Item: {
+    Key: {
       playerId: event.requestContext.identity.cognitoIdentityId,
-      playerName: data.playerName,
-      userName: data.userName,
-      region: data.region,
-      country: data.country,
-    }
+    },
+    UpdateExpression: "SET playerName = :playerName, userName = :userName, region = :region, country = :country, version = :version",
+    ExpressionAttributeValues: {
+      ":playerName": data.playerName,
+      ":userName": data.userName,
+      ":region": data.region,
+      ":country": data.country,
+      ":version": 2,
+    },
   };
 
   try {

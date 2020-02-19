@@ -221,6 +221,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  editprofile:
+    handler: editprofile.main
+    events:
+      - http:
+          path: profile-edit
+          method: put
+          cors: true
+          authorizer: aws_iam
+
   get:
     handler: get.main
     events:
