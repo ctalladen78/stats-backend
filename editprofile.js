@@ -5,6 +5,8 @@ export async function main(event, context) {
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
 
+  console.log(data);
+
   const params = {
     TableName: process.env.playerProfile,
     Key: {
@@ -20,10 +22,12 @@ export async function main(event, context) {
     },
   };
 
+  console.log(params);
+
   try {
     await dynamoDbLib.call("update", params);
     return success(params.Item);
   } catch (e) {
-    return failure({ status: false });
+    return failure(e);
   }
 }
