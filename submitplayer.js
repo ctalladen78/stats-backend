@@ -7,6 +7,7 @@ export async function main(event, context) {
   const unique = uuid.v1();
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
+  const random = (Math.ceil(Math.random()*100));
 
   console.log(data);
 
@@ -20,6 +21,7 @@ export async function main(event, context) {
       commander1: data.commander1,
       commander2: data.commander2,
       startingRank: data.ranking,
+      seed: random,
       TPs: 0,
       SPs: 0,
       VPs: 0,
