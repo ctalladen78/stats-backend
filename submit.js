@@ -19,7 +19,7 @@ export async function main(event, context) {
   const params = {
     TableName: process.env.tableHistory,
     Item: {
-      gameId: gameId,
+      gameId: data.gameId,
       player1: data.player1,
       userName1: data.userName1,
       faction1: data.faction1,
