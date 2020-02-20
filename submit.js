@@ -10,7 +10,7 @@ export async function main(event, context) {
 
   console.log(data);
 
-  if (data.gameId !== null) {
+  if (data.gameId != null) {
     console.log("Given a Game Id", data.gameId);
     const params = {
       TableName: process.env.tableHistory,
