@@ -10,10 +10,18 @@ export async function main(event, context) {
 
   console.log(data);
 
+  if (data.gameId !== null) {
+    console.log("Given a Game Id", data.gameId)
+    const gameId = data.gameId;
+  } else {
+    console.log("No Game Id")
+    const gameId = unique;
+  }
+
   const params = {
     TableName: process.env.tableHistory,
     Item: {
-      gameId: unique,
+      gameId: gameId,
       player1: data.player1,
       userName1: data.userName1,
       faction1: data.faction1,
