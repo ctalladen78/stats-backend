@@ -8,7 +8,7 @@ export async function main(event, context) {
   const params = {
     TableName: process.env.tournamentPlayers,
     Key: {
-      gameId: data.gameId,
+      playerId: data.playerId,
       tournamentId: data.tournamentId,
       }
   };

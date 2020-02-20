@@ -27,8 +27,34 @@ export async function main(event) {
       },
     };
 
+    const params2 = {
+      TableName: process.env.tournamentPlayers,
+      Key: {
+        playerId: data.player2,
+        tournamentId: data.tournamentId,
+      },
+      UpdateExpression: "VPs = :vp",
+      ExpressionAttributeValues: {
+        ":vp": data.vp1,
+      },
+    };
+
+    const params3 = {
+      TableName: process.env.tournamentPlayers,
+      Key: {
+        playerId: data.player1,
+        tournamentId: data.tournamentId,
+      },
+      UpdateExpression: "VPs = :vp",
+      ExpressionAttributeValues: {
+        ":vp": data.vp2,
+      },
+    };
+
     try{
       await dynamoDbLib.call("update", params);
+      await dynamoDbLib.call("update", params2);
+      await dynamoDbLib.call("update", params3);
     return success(true);
   } catch (e) {
     console.log(e);
