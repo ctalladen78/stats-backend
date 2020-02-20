@@ -33,9 +33,9 @@ export async function main(event, context) {
         createdAt: Date.now(),
       }
     };
-  
+
     console.log(params);
-  
+
     const params2 = {
       TableName: process.env.tablePlayer,
       Item: {
@@ -43,7 +43,7 @@ export async function main(event, context) {
         playerId: data.player1,
         }
     };
-  
+
     const params3 = {
       TableName: process.env.tablePlayer,
       Item: {
@@ -51,7 +51,7 @@ export async function main(event, context) {
         playerId: data.player2,
         }
     };
-  
+
     const params4 = {
       TableName: process.env.tableFaction,
       Item: {
@@ -59,7 +59,7 @@ export async function main(event, context) {
         factionId: data.faction1,
         }
     };
-  
+
     const params5 = {
       TableName: process.env.tableFaction,
       Item: {
@@ -67,7 +67,7 @@ export async function main(event, context) {
         factionId: data.faction2,
         }
     };
-  
+
     const params6 = {
       TableName: process.env.tableCommander,
       Item: {
@@ -75,7 +75,7 @@ export async function main(event, context) {
         commanderId: data.commander1,
         }
     };
-  
+
     const params7 = {
       TableName: process.env.tableCommander,
       Item: {
@@ -83,7 +83,7 @@ export async function main(event, context) {
         commanderId: data.commander2,
         }
     };
-  
+
     try {
       await dynamoDbLib.call("put", params);
       await dynamoDbLib.call("put", params2);
@@ -97,7 +97,7 @@ export async function main(event, context) {
       return failure({ status: e });
     }
   } 
-  
+
   else {
     console.log("No Game Id");
     const params = {
@@ -121,9 +121,9 @@ export async function main(event, context) {
         createdAt: Date.now(),
       }
     };
-  
+
     console.log(params);
-  
+
     const params2 = {
       TableName: process.env.tablePlayer,
       Item: {
@@ -131,7 +131,7 @@ export async function main(event, context) {
         playerId: data.player1,
         }
     };
-  
+
     const params3 = {
       TableName: process.env.tablePlayer,
       Item: {
@@ -139,7 +139,7 @@ export async function main(event, context) {
         playerId: data.player2,
         }
     };
-  
+
     const params4 = {
       TableName: process.env.tableFaction,
       Item: {
@@ -147,7 +147,7 @@ export async function main(event, context) {
         factionId: data.faction1,
         }
     };
-  
+
     const params5 = {
       TableName: process.env.tableFaction,
       Item: {
@@ -155,7 +155,7 @@ export async function main(event, context) {
         factionId: data.faction2,
         }
     };
-  
+
     const params6 = {
       TableName: process.env.tableCommander,
       Item: {
@@ -163,7 +163,7 @@ export async function main(event, context) {
         commanderId: data.commander1,
         }
     };
-  
+
     const params7 = {
       TableName: process.env.tableCommander,
       Item: {
@@ -171,7 +171,7 @@ export async function main(event, context) {
         commanderId: data.commander2,
         }
     };
-  
+
     try {
       await dynamoDbLib.call("put", params);
       await dynamoDbLib.call("put", params2);
