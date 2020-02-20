@@ -96,7 +96,7 @@ export async function main(event, context) {
     } catch (e) {
       return failure({ status: e });
     }
-  } 
+  }
 
   else {
     console.log("No Game Id");
