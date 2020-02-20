@@ -7,15 +7,16 @@ export async function main(event, context) {
   const unique = uuid.v1();
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
+  const gameId = "";
 
   console.log(data);
 
   if (data.gameId !== null) {
-    console.log("Given a Game Id", data.gameId)
-    const gameId = data.gameId;
+    console.log("Given a Game Id", data.gameId);
+    gameId = data.gameId;
   } else {
-    console.log("No Game Id")
-    const gameId = unique;
+    console.log("No Game Id");
+    gameId = unique;
   }
 
   const params = {
