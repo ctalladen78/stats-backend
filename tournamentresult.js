@@ -33,11 +33,13 @@ export async function main(event) {
         playerId: data.player2,
         tournamentId: data.tournamentId,
       },
-      UpdateExpression: "VPs = :vp",
+      UpdateExpression: "SET VPs = :vp",
       ExpressionAttributeValues: {
         ":vp": data.vp1,
       },
     };
+
+    console.log(params2);
 
     const params3 = {
       TableName: process.env.tournamentPlayers,
@@ -45,11 +47,13 @@ export async function main(event) {
         playerId: data.player1,
         tournamentId: data.tournamentId,
       },
-      UpdateExpression: "VPs = :vp",
+      UpdateExpression: "SET VPs = :vp",
       ExpressionAttributeValues: {
         ":vp": data.vp2,
       },
     };
+
+    console.log(params3);
 
     try{
       await dynamoDbLib.call("update", params);
