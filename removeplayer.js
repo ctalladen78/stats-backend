@@ -17,7 +17,7 @@ export async function main(event, context) {
 
   try {
     await dynamoDbLib.call("delete", params);
-    return success(unique);
+    return success(data.gameId);
   } catch (e) {
     return failure(e);
   }
