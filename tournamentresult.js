@@ -51,7 +51,7 @@ export async function main(event) {
         playerId: data.player1,
         tournamentId: data.tournamentId,
       },
-      UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud",
+      UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud, gamesPlayed = :gamesPlayed",
       ExpressionAttributeValues: {
         ":vp": data.vpTotal2,
         ":tp": data.tp2,
