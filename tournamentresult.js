@@ -33,12 +33,13 @@ export async function main(event) {
         playerId: data.player2,
         tournamentId: data.tournamentId,
       },
-      UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud",
+      UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud, gamesPlayed = :gamesPlayed",
       ExpressionAttributeValues: {
         ":vp": data.vpTotal1,
         ":tp": data.tp1,
         ":sp": data.sp1,
-        ":ud": data.udTotal1
+        ":ud": data.udTotal1,
+        ":gamesPlayed": data.gamesPlayed1
       },
     };
 
@@ -55,7 +56,8 @@ export async function main(event) {
         ":vp": data.vpTotal2,
         ":tp": data.tp2,
         ":sp": data.sp2,
-        ":ud": data.udTotal2
+        ":ud": data.udTotal2,
+        ":gamesPlayed": data.gamesPlayed2
       },
     };
 
