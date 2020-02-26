@@ -30,7 +30,7 @@ export async function main(event) {
     const params2 = {
       TableName: process.env.tournamentPlayers,
       Key: {
-        playerId: data.player2,
+        playerId: data.player1,
         tournamentId: data.tournamentId,
       },
       UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud, gamesPlayed = :gamesPlayed",
@@ -48,7 +48,7 @@ export async function main(event) {
     const params3 = {
       TableName: process.env.tournamentPlayers,
       Key: {
-        playerId: data.player1,
+        playerId: data.player2,
         tournamentId: data.tournamentId,
       },
       UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud, gamesPlayed = :gamesPlayed",
