@@ -35,10 +35,10 @@ export async function main(event) {
       },
       UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud",
       ExpressionAttributeValues: {
-        ":vp": data.vp1,
+        ":vp": data.vpTotal1,
         ":tp": data.tp1,
         ":sp": data.sp1,
-        ":ud": data.ud1
+        ":ud": data.udTotal1
       },
     };
 
@@ -52,10 +52,10 @@ export async function main(event) {
       },
       UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud",
       ExpressionAttributeValues: {
-        ":vp": data.vp2,
+        ":vp": data.vpTotal2,
         ":tp": data.tp2,
         ":sp": data.sp2,
-        ":ud": data.ud2
+        ":ud": data.udTotal2
       },
     };
 
