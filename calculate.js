@@ -5,22 +5,22 @@ import { success, failure } from "./libs/response-lib";
 const calculateGameResult = (vp1, vp2, destroyed1, destroyed2) => {
   var gameResult = "draw";
   const vpResult = vp1-vp2;
-  if (vpResult > 4 || destroyed1) {
+  if ((vpResult > 4 && !destroyed2) || destroyed1) {
       gameResult = "player 1 crushing win";
   }
-  if (vpResult == 3 || vpResult == 4) {
+  if ((vpResult == 3 || vpResult == 4) && !destroyed1 && !destroyed2) {
       gameResult = "player 1 major win";
   }
-  if (vpResult == 1 || vpResult == 2) {
+  if ((vpResult == 1 || vpResult == 2) && !destroyed1 && !destroyed2) {
       gameResult = "player 1 minor win";
   }
-  if (vpResult < (-4) || destroyed2) {
+  if ((vpResult < (-4) && !destroyed1) || destroyed2) {
       gameResult = "player 2 crushing win";
   }
-  if (vpResult == -1 || vpResult == -2) {
+  if ((vpResult == -1 || vpResult == -2) && !destroyed1 && !destroyed2) {
       gameResult = "player 2 minor win";
   }
-  if (vpResult == -3 || vpResult == -4) {
+  if ((vpResult == -3 || vpResult == -4) && !destroyed1 && !destroyed2) {
       gameResult = "player 2 major win";
   }
 
@@ -62,6 +62,10 @@ const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1,
     if (gameResult == "player 2 crushing win") {
         rankingChange = kFactor*(winChance)*-1;
         factionChange = kFaction*(winChance)*-1;
+    }
+    else {
+      rankingChange = 0;
+      factionChange = 0;
     }
 
     console.log(rankingChange);
