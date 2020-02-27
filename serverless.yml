@@ -390,7 +390,7 @@ functions:
     handler: removeround.main
     events:
       - http:
-          path: remove-round
+          path: remove-round/{id}
           method: put
           cors: true
           authorizer: aws_iam
