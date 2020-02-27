@@ -2,7 +2,7 @@ import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
 //calculates result from passed in vps
-const calculateGameResult = (vp1, vp2) => {
+const calculateGameResult = (vp1, vp2, destroyed1, destroyed2) => {
   var gameResult = "draw";
   const vpResult = vp1-vp2;
   if (vpResult > 4 || destroyed1) {
@@ -178,7 +178,7 @@ export async function main(event) {
   try {
     const gameData = await dynamoDbLib.call("get", findGame(event.pathParameters.id)); //call game data
     console.log(gameData);
-    const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2);
+    const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2, gameData.Item.destroyed1, gameData.Item.destroyed2);
     console.log(gameResult);
     const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
     console.log(player1Profile);
