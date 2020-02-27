@@ -5,7 +5,7 @@ import { success, failure } from "./libs/response-lib";
 const calculateGameResult = (vp1, vp2) => {
   var gameResult = "draw";
   const vpResult = vp1-vp2;
-  if (vpResult > 4) {
+  if (vpResult > 4 || destroyed1) {
       gameResult = "player 1 crushing win";
   }
   if (vpResult == 3 || vpResult == 4) {
@@ -14,7 +14,7 @@ const calculateGameResult = (vp1, vp2) => {
   if (vpResult == 1 || vpResult == 2) {
       gameResult = "player 1 minor win";
   }
-  if (vpResult < (-4)) {
+  if (vpResult < (-4) || destroyed2) {
       gameResult = "player 2 crushing win";
   }
   if (vpResult == -1 || vpResult == -2) {
