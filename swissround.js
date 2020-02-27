@@ -39,12 +39,13 @@ export async function main(event) {
         },
         UpdateExpression: "SET TPs = :tp, SPs = :sp, gamesPlayed = :gamesPlayed",
         ExpressionAttributeValues: {
-            ":tp": 3,
-            ":sp": 4,
-            ":gamesPlayed": 1
+            ":tp": (m.player1Info.TPs + 3),
+            ":sp": (m.player1Info.SPs + 4),
+            ":gamesPlayed": (m.player1Info.gamesPlayed + 1)
         },
     };
     console.log(params);
+    console.log(params2);
 
     try {
         await dynamoDbLib.call("put", params);
