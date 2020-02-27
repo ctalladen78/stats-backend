@@ -31,22 +31,19 @@ export async function main(event) {
         }
     };
 
-    if (m.away === null) {
-        const params2 = {
-            TableName: process.env.tournamentPlayers,
-            Key: {
-              playerId: m.home,
-              tournamentId: data.tournamentId.tournamentId,
-            },
-            UpdateExpression: "SET TPs = :tp, SPs = :sp, gamesPlayed = :gamesPlayed",
-            ExpressionAttributeValues: {
-              ":tp": 3,
-              ":sp": 4,
-              ":gamesPlayed": 1
-            },
-          };        
-    }
-
+    const params2 = {
+        TableName: process.env.tournamentPlayers,
+        Key: {
+            playerId: m.home,
+            tournamentId: data.tournamentId.tournamentId,
+        },
+        UpdateExpression: "SET TPs = :tp, SPs = :sp, gamesPlayed = :gamesPlayed",
+        ExpressionAttributeValues: {
+            ":tp": 3,
+            ":sp": 4,
+            ":gamesPlayed": 1
+        },
+    };
     console.log(params);
 
     try {
