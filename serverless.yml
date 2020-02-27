@@ -386,6 +386,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  removeround:
+    handler: removeround.main
+    events:
+      - http:
+          path: remove-round
+          method: put
+          cors: true
+          authorizer: aws_iam
+
   createtournament:
     handler: createtournament.main
     events:
