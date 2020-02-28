@@ -37,11 +37,12 @@ export async function main(event) {
             playerId: m.home,
             tournamentId: data.tournamentId.tournamentId,
         },
-        UpdateExpression: "SET TPs = :tp, SPs = :sp, gamesPlayed = :gamesPlayed",
+        UpdateExpression: "SET TPs = :tp, SPs = :sp, gamesPlayed = :gamesPlayed, hadBye = :hadBye",
         ExpressionAttributeValues: {
             ":tp": (m.player1Info.TPs + 3),
             ":sp": (m.player1Info.SPs + 4),
-            ":gamesPlayed": (m.player1Info.gamesPlayed + 1)
+            ":gamesPlayed": (m.player1Info.gamesPlayed + 1),
+            ":hadBye": true
         },
     };
     console.log(params);
