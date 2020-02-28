@@ -34,7 +34,7 @@ console.log(params2);
   try {
     await dynamoDbLib.call("delete", params);
     if (data.player2 === null) {
-      await dynamoDbLib.call("update", params2);      
+      await dynamoDbLib.call("update", params2);
     }
     return success(data.gameId);
   } catch (e) {
