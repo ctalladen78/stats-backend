@@ -17,6 +17,8 @@ export async function main(event, context) {
       tournamentId: data.tournamentId,
       playerId: data.playerId,
       userName: data.userName,
+      firstName: data.firstName,
+      secondName: data.secondName,
       faction: data.faction,
       commander1: data.commander1,
       commander2: data.commander2,
