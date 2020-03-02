@@ -46,7 +46,7 @@ const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1,
     if (gameResult == "player 1 major win") {
         rankingChange = kFactor*(1 - winChance)*0.75;
         factionChange = kFaction*(1 - winChance)*0.75;
-        console.log("player 1 major win")
+        console.log("player 1 major win");
     }
     if (gameResult == "player 1 crushing win") {
         rankingChange = kFactor*(1 - winChance);
@@ -67,7 +67,7 @@ const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1,
     else {
       rankingChange = 0;
       factionChange = 0;
-      console.log("its a draw?")
+      console.log("its a draw?");
     }
 
     console.log(rankingChange);
