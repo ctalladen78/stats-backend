@@ -38,8 +38,8 @@ export async function main(event) {
       UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud, gamesPlayed = :gamesPlayed",
       ExpressionAttributeValues: {
         ":vp": data.vpTotal1,
-        ":tp": data.tp1,
-        ":sp": data.sp1,
+        ":tp": data.totalTp1,
+        ":sp": data.totalSp1,
         ":ud": data.udTotal1,
         ":gamesPlayed": data.gamesPlayed1
       },
@@ -56,8 +56,8 @@ export async function main(event) {
       UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud, gamesPlayed = :gamesPlayed",
       ExpressionAttributeValues: {
         ":vp": data.vpTotal2,
-        ":tp": data.tp2,
-        ":sp": data.sp2,
+        ":tp": data.totalTp2,
+        ":sp": data.totalSp2,
         ":ud": data.udTotal2,
         ":gamesPlayed": data.gamesPlayed2
       },
