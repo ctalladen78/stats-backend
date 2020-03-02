@@ -18,6 +18,7 @@ export async function main(event, context) {
       location: data.location,
       date: data.date,
       country: data.country,
+      info: data.info,
     }
   };
 
