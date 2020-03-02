@@ -184,6 +184,9 @@ export async function main(event) {
   try {
     const gameData = await dynamoDbLib.call("get", findGame(event.pathParameters.id)); //call game data
     console.log(gameData);
+    if (gameData.Item.auth1 == false || gameData.Item.auth1 == false) {
+      return;
+    } else {
     const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2, gameData.Item.destroyed1, gameData.Item.destroyed2);
     console.log(gameResult);
     const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
@@ -226,6 +229,7 @@ export async function main(event) {
       }
       await dynamoDbLib.call("update", updateGameHistory(event.pathParameters.id, rankingChanges[0]));
     return success(true);
+    }
   } catch (e) {
     console.log(e);
     return failure(e);
