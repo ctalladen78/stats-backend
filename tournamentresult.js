@@ -13,7 +13,7 @@ export async function main(event) {
         gameId: data.gameId,
         tournamentId: data.tournamentId,
       },
-      UpdateExpression: "SET resultSubmitted = :set, vp1 = :vp1, vp2 = :vp2, ud1 = :ud1, ud2 = :ud2, commander1 = :commander1, commander2 = :commander2, tp1 = :tp1, tp2 = :tp2",
+      UpdateExpression: "SET resultSubmitted = :set, vp1 = :vp1, vp2 = :vp2, ud1 = :ud1, ud2 = :ud2, commander1 = :commander1, commander2 = :commander2, tp1 = :tp1, tp2 = :tp2, sp1 = :sp1, sp2 = :sp2",
       ExpressionAttributeValues: {
         ":set": data.set,
         ":vp1": data.vp1,
@@ -23,7 +23,9 @@ export async function main(event) {
         ":commander1": data.commander1,
         ":commander2": data.commander2,
         ":tp1": data.tp1,
-        ":tp2": data.tp2
+        ":tp2": data.tp2,
+        ":sp1": data.sp1,
+        ":sp2": data.sp2,
       },
     };
 
