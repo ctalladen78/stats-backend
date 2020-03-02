@@ -27,7 +27,7 @@ export async function main(event) {
         player1: m.home,
         player2 : m.away,
         gameMode: data.data.gameMode,
-        resultSubmitted: "false",
+        resultSubmitted: false,
         }
     };
 
