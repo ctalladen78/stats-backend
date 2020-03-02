@@ -43,24 +43,24 @@ const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1,
         rankingChange = kFactor*(1 - winChance)*0.5;
         factionChange = kFaction*(1 - winChance)*0.5;
     }
-    if (gameResult == "player 1 major win") {
+    else if (gameResult == "player 1 major win") {
         rankingChange = kFactor*(1 - winChance)*0.75;
         factionChange = kFaction*(1 - winChance)*0.75;
         console.log("player 1 major win");
     }
-    if (gameResult == "player 1 crushing win") {
+    else if (gameResult == "player 1 crushing win") {
         rankingChange = kFactor*(1 - winChance);
         factionChange = kFaction*(1 - winChance);
     }
-    if (gameResult == "player 2 minor win") {
+    else if (gameResult == "player 2 minor win") {
         rankingChange = kFactor*(winChance)*0.5*-1;
         factionChange = kFaction*(winChance)*0.5*-1;
     }
-    if (gameResult == "player 2 major win") {
+    else if (gameResult == "player 2 major win") {
         rankingChange = kFactor*(winChance)*0.75*-1;
         factionChange = kFaction*(winChance)*0.75*-1;
     }
-    if (gameResult == "player 2 crushing win") {
+    else if (gameResult == "player 2 crushing win") {
         rankingChange = kFactor*(winChance)*-1;
         factionChange = kFaction*(winChance)*-1;
     }
