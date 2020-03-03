@@ -35,6 +35,7 @@ export async function main(event, context) {
         version: "1.5",
         submittedBy: event.requestContext.identity.cognitoIdentityId,
         createdAt: Date.now(),
+        tournamentId: data.tournamentId,
       }
     };
 
