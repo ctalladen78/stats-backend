@@ -9,11 +9,13 @@ export async function main(event, context) {
     TableName: process.env.playerProfile,
     Item: {
       playerId: event.requestContext.identity.cognitoIdentityId,
-      playerName: data.playerName,
+      firstName: data.firstName,
+      secondName: data.secondName,
       userName: data.userName,
       ranking: 1500,
-      region: data.region,
+      newRegion: data.region,
       country: data.country,
+      version: 2,
     }
   };
 
