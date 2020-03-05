@@ -184,7 +184,7 @@ export async function main(event) {
   try {
     const gameData = await dynamoDbLib.call("get", findGame(event.pathParameters.id)); //call game data
     console.log(gameData);
-    if (gameData.Item.auth1 == false || gameData.Item.auth1 == false) {
+    if (gameData.Item.auth1 == false || gameData.Item.auth2 == false) {
       return;
     } else {
     const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2, gameData.Item.destroyed1, gameData.Item.destroyed2);
