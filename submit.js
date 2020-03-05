@@ -31,7 +31,7 @@ export async function main(event, context) {
         destroyed2: data.destroyed2,
         auth2: data.auth2,
         gameMode: data.gameMode,
-        ranked: "ranked",
+        ranked: "tournament",
         version: "1.5",
         submittedBy: event.requestContext.identity.cognitoIdentityId,
         createdAt: Date.now(),
