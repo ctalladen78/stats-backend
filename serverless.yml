@@ -347,18 +347,6 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  # authenticate:
-  #   # Defines an HTTP API endpoint that calls the main function in update.js
-  #   # - path: url path is /notes/{id}
-  #   # - method: PUT request
-  #   handler: authenticate.main
-  #   events:
-  #     - http:
-  #         path: game-history/{id}
-  #         method: put
-  #         cors: true
-  #         authorizer: aws_iam
-
   calculate:
     handler: calculate.main
     events:
@@ -427,6 +415,15 @@ functions:
     events:
       - http:
           path: tournament-result/{id}
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  verify:
+    handler: verify.main
+    events:
+      - http:
+          path: verify/{id}
           method: post
           cors: true
           authorizer: aws_iam
