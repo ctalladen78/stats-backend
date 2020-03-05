@@ -184,52 +184,51 @@ export async function main(event) {
   try {
     const gameData = await dynamoDbLib.call("get", findGame(event.pathParameters.id)); //call game data
     console.log(gameData);
-    if (gameData.Item.auth1 == false || gameData.Item.auth2 == false) {
-      return;
-    } else {
-    const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2, gameData.Item.destroyed1, gameData.Item.destroyed2);
-    console.log(gameResult);
-    const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
-    console.log(player1Profile);
-    const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
-    console.log(player2Profile);
-    const faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
-    console.log(faction1Profile);
-    const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
-    console.log(faction2Profile);
-    const commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander1, gameData.Item.faction1));  // call faction 1 data from table
-    console.log(commander1Profile);
-    const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));  // call faction 2 data from table
-    console.log(commander2Profile);
-    const rankingChanges = calculatePlayerRanking(player1Profile.Item.ranking, player2Profile.Item.ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
-    console.log(rankingChanges);
-    // insert into databases
-    const params = {
-      TableName: process.env.tableHistory,
-      Key: {
-        gameId: event.pathParameters.id,
-      },
-      UpdateExpression: "SET gameResult = :gameResult",
-      ExpressionAttributeValues: {
-          ":gameResult": gameResult,
+    if (gameData.Item.auth1 == true && gameData.Item.auth2 == true) {
+      const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2, gameData.Item.destroyed1, gameData.Item.destroyed2);
+      console.log(gameResult);
+      const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
+      console.log(player1Profile);
+      const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
+      console.log(player2Profile);
+      const faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
+      console.log(faction1Profile);
+      const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
+      console.log(faction2Profile);
+      const commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander1, gameData.Item.faction1));  // call faction 1 data from table
+      console.log(commander1Profile);
+      const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));  // call faction 2 data from table
+      console.log(commander2Profile);
+      const rankingChanges = calculatePlayerRanking(player1Profile.Item.ranking, player2Profile.Item.ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
+      console.log(rankingChanges);
+      // insert into databases
+      const params = {
+        TableName: process.env.tableHistory,
+        Key: {
+          gameId: event.pathParameters.id,
         },
-        ReturnValues: "ALL_NEW"
-      };
+        UpdateExpression: "SET gameResult = :gameResult",
+        ExpressionAttributeValues: {
+            ":gameResult": gameResult,
+          },
+          ReturnValues: "ALL_NEW"
+        };
+  
+        await dynamoDbLib.call("update", params);
+        await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + rankingChanges[0]));
+        await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - rankingChanges[0]));
+        if (gameData.Item.faction1 != gameData.Item.faction2){
+          await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, faction1Profile.Item.ranking + rankingChanges[1]));
+          await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, faction2Profile.Item.ranking - rankingChanges[1]));
+        }
+        if (gameData.Item.commander1 != gameData.Item.commander2){
+          await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + rankingChanges[1]));
+          await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - rankingChanges[1]));
+        }
+        await dynamoDbLib.call("update", updateGameHistory(event.pathParameters.id, rankingChanges[0]));
 
-      await dynamoDbLib.call("update", params);
-      await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + rankingChanges[0]));
-      await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - rankingChanges[0]));
-      if (gameData.Item.faction1 != gameData.Item.faction2){
-        await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, faction1Profile.Item.ranking + rankingChanges[1]));
-        await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, faction2Profile.Item.ranking - rankingChanges[1]));
-      }
-      if (gameData.Item.commander1 != gameData.Item.commander2){
-        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + rankingChanges[1]));
-        await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - rankingChanges[1]));
-      }
-      await dynamoDbLib.call("update", updateGameHistory(event.pathParameters.id, rankingChanges[0]));
-    return success(true);
     }
+    return success(true);
   } catch (e) {
     console.log(e);
     return failure(e);
