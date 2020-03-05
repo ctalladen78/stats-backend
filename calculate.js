@@ -213,7 +213,6 @@ export async function main(event) {
           },
           ReturnValues: "ALL_NEW"
         };
-  
         await dynamoDbLib.call("update", params);
         await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + rankingChanges[0]));
         await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - rankingChanges[0]));
