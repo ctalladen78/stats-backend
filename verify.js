@@ -10,7 +10,7 @@ export async function main(event) {
     const params = {
       TableName: process.env.tableHistory,
       Key: {
-        gameId: data.gameId,
+        gameId: event.pathParameters.id,
       },
       UpdateExpression: "SET auth1 = :auth1",
       ExpressionAttributeValues: {
