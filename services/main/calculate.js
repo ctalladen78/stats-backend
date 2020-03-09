@@ -1,5 +1,5 @@
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import * as dynamoDbLib from "../../libs/dynamodb-lib";
+import { success, failure } from "../../libs/response-lib";
 
 //calculates result from passed in vps
 const calculateGameResult = (vp1, vp2, destroyed1, destroyed2) => {
