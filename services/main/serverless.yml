@@ -212,14 +212,14 @@ functions:
   #         cors: true
   #         authorizer: aws_iam
 
-  createprofile:
-    handler: createprofile.main
-    events:
-      - http:
-          path: player-profile
-          method: post
-          cors: true
-          authorizer: aws_iam
+  # createprofile:
+  #   handler: createprofile.main
+  #   events:
+  #     - http:
+  #         path: player-profile
+  #         method: post
+  #         cors: true
+  #         authorizer: aws_iam
 
   editprofile:
     handler: editprofile.main
