@@ -442,10 +442,6 @@ resources:
 
   # Print out the Id of the Identity Pool that is created
   - Outputs:
-      IdentityPoolId:
-        Value:
-          Ref: CognitoIdentityPool
-
       ApiGatewayRestApiId:
         Value:
           Ref: ApiGatewayRestApi
