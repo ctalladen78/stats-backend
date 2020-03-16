@@ -158,7 +158,7 @@ Outputs:
   PlayerProfileArn:
     Value:
        Fn::GetAtt:
-        - NotesTable
+        - PlayerProfile
         - Arn
     Export:
       Name: ${self:custom.stage}-ExtPlayerProfileArn
