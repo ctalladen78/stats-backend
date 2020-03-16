@@ -439,3 +439,9 @@ resources:
     # Cognito
   - ${file(resources/cognito-user-pool.yml)}
   - ${file(resources/cognito-identity-pool.yml)}
+
+  # Print out the Id of the Identity Pool that is created
+  - Outputs:
+      IdentityPoolId:
+        Value:
+          Ref: CognitoIdentityPool
