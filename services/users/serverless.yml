@@ -33,7 +33,7 @@ provider:
     restApiId:
       'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId
     restApiRootResourceId:
-      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId  
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
 
   # These environment variables are made available to our functions
   # under process.env.
@@ -58,7 +58,3 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
-
-resources:
-  # API Gateway Errors
-  - ${file(resources/api-gateway-errors.yml)}
