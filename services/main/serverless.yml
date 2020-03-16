@@ -445,6 +445,10 @@ resources:
       IdentityPoolId:
         Value:
           Ref: CognitoIdentityPool
+
+      ApiGatewayRestApiId:
+        Value:
+          Ref: ApiGatewayRestApi
         Export:
           Name: ${self:custom.stage}-ExtApiGatewayRestApiId
     
