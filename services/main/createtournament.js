@@ -53,6 +53,6 @@ export async function main(event, context) {
     } catch (e) {
       console.log(e);
       return failure({ status: false });
-    }    
+    }
   }
 }
