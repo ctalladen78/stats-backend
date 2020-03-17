@@ -16,7 +16,7 @@ custom:
   tablePlayer: ${self:custom.stage}-player-results
   tableFaction: ${self:custom.stage}-faction-results
   tableCommander: ${self:custom.stage}-commander-results
-  playerProfile: ${self:custom.stage}-player-profile
+  playerProfile: ${self:custom.stage}-ExtPlayerProfileArn
   factionProfile: ${self:custom.stage}-faction-profile
   commanderProfile: ${self:custom.stage}-commander-profile2
   tournamentInfo: ${self:custom.stage}-tournament-info
