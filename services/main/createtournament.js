@@ -9,25 +9,50 @@ export async function main(event, context) {
 
   console.log(data);
 
-  const params = {
-    TableName: process.env.tournamentInfo,
-    Item: {
-      tournamentId: unique,
-      adminId: event.requestContext.identity.cognitoIdentityId,
-      tournamentName: data.tournamentName,
-      location: data.location,
-      date: data.date,
-      country: data.country,
-      info: data.info,
+  if (data.info == "") {
+    const params = {
+      TableName: process.env.tournamentInfo,
+      Item: {
+        tournamentId: unique,
+        adminId: event.requestContext.identity.cognitoIdentityId,
+        tournamentName: data.tournamentName,
+        location: data.location,
+        date: data.date,
+        country: data.country,
+      }
+    };
+
+    console.log(params);
+
+    try {
+      await dynamoDbLib.call("put", params);
+      return success(params.Item);
+    } catch (e) {
+      console.log(e);
+      return failure({ status: false });
     }
-  };
+  } else {
+    const params = {
+      TableName: process.env.tournamentInfo,
+      Item: {
+        tournamentId: unique,
+        adminId: event.requestContext.identity.cognitoIdentityId,
+        tournamentName: data.tournamentName,
+        location: data.location,
+        date: data.date,
+        country: data.country,
+        info: data.info,
+      }
+    };
 
-  console.log(params);
+    console.log(params);
 
-  try {
-    await dynamoDbLib.call("put", params);
-    return success(params.Item);
-  } catch (e) {
-    return failure({ status: false });
+    try {
+      await dynamoDbLib.call("put", params);
+      return success(params.Item);
+    } catch (e) {
+      console.log(e);
+      return failure({ status: false });
+    }    
   }
 }
