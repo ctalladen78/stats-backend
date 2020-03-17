@@ -22,6 +22,7 @@ export async function main(event, context) {
       faction: data.faction,
       commander1: data.commander1,
       commander2: data.commander2,
+      club: data.club,
       startingRank: data.ranking,
       seed: random,
       TPs: 0,
