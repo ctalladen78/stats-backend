@@ -9,8 +9,6 @@ export async function main(event, context) {
   const data = JSON.parse(event.body);
   const random = (Math.ceil(Math.random()*100));
 
-
-
   console.log(data);
 
   if (data.club == "") {
