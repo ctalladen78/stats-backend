@@ -7,21 +7,21 @@ plugins:
   - serverless-bundle # Package our functions with Webpack
   - serverless-offline
 
-custom:
-  # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
-  stage: ${opt:stage, self:provider.stage}
-  # Set the table name here so we can use it while testing locally
-  tableHistory: ${self:custom.stage}-results-history
-  tablePlayer: ${self:custom.stage}-player-results
-  tableFaction: ${self:custom.stage}-faction-results
-  tableCommander: ${self:custom.stage}-commander-results
-  playerProfile: ${self:custom.stage}-ExtPlayerProfileArn
-  factionProfile: ${self:custom.stage}-faction-profile
-  commanderProfile: ${self:custom.stage}-commander-profile2
-  tournamentInfo: ${self:custom.stage}-tournament-info
-  tournamentPlayers: ${self:custom.stage}-tournament-players
-  tournamentGames: ${self:custom.stage}-tournament-games
+# custom:
+#   # Our stage is based on what is passed in when running serverless
+#   # commands. Or fallsback to what we have set in the provider section.
+#   stage: ${opt:stage, self:provider.stage}
+#   # Set the table name here so we can use it while testing locally
+#   tableHistory: ${self:custom.stage}-results-history
+#   tablePlayer: ${self:custom.stage}-player-results
+#   tableFaction: ${self:custom.stage}-faction-results
+#   tableCommander: ${self:custom.stage}-commander-results
+#   playerProfile: ${self:custom.stage}-ExtPlayerProfileArn
+#   factionProfile: ${self:custom.stage}-faction-profile
+#   commanderProfile: ${self:custom.stage}-commander-profile2
+#   tournamentInfo: ${self:custom.stage}-tournament-info
+#   tournamentPlayers: ${self:custom.stage}-tournament-players
+#   tournamentGames: ${self:custom.stage}-tournament-games
 
 provider:
   name: aws
@@ -38,16 +38,16 @@ provider:
   # These environment variables are made available to our functions
   # under process.env.
   environment:
-    tableHistory: ${self:custom.tableHistory}
-    tablePlayer: ${self:custom.tablePlayer}
-    tableFaction: ${self:custom.tableFaction}
-    tableCommander: ${self:custom.tableCommander}
-    playerProfile: ${self:custom.playerProfile}
-    factionProfile: ${self:custom.factionProfile}
-    commanderProfile: ${self:custom.commanderProfile}
-    tournamentInfo: ${self:custom.tournamentInfo}
-    tournamentPlayers: ${self:custom.tournamentPlayers}
-    tournamentGames: ${self:custom.tournamentGames}
+    # tableHistory: ${self:custom.tableHistory}
+    # tablePlayer: ${self:custom.tablePlayer}
+    # tableFaction: ${self:custom.tableFaction}
+    # tableCommander: ${self:custom.tableCommander}
+    playerProfile: ${self:custom.stage}-ExtPlayerProfileArn
+    # factionProfile: ${self:custom.factionProfile}
+    # commanderProfile: ${self:custom.commanderProfile}
+    # tournamentInfo: ${self:custom.tournamentInfo}
+    # tournamentPlayers: ${self:custom.tournamentPlayers}
+    # tournamentGames: ${self:custom.tournamentGames}
 
 functions:
   createprofile:
