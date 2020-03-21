@@ -455,3 +455,11 @@ resources:
             - RootResourceId 
         Export:
           Name: ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+
+      PlayerProfileArn:
+        Value:
+          Fn::GetAtt:
+            - PlayerProfile
+            - Arn
+        Export:
+          Name: ${self:custom.stage}-ExtPlayerProfileArn

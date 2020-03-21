@@ -63,7 +63,8 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [ PlayerProfile, Arn ]
+        # - "Fn::GetAtt": [ PlayerProfile, Arn ]
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
 
 functions:
   createprofile:
