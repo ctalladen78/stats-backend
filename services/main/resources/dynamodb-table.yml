@@ -167,3 +167,16 @@ Outputs:
         - Arn
     Export:
       Name: ${self:custom.stage}-ExtPlayerProfileArn
+
+  PlayerTable:
+    Value:
+      Ref: PlayerTable
+    Export:
+      Name: PlayerTableName
+  PlayerTableArn:
+    Value:
+      Fn::GetAtt:
+        - PlayerTable
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-ExtPlayerTableArn

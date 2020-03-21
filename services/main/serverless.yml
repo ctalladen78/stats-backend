@@ -293,15 +293,6 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  findplayergames:
-    handler: findplayergames.main
-    events:
-      - http:
-          path: get-player-games/{id}
-          method: get
-          cors: true
-          authorizer: aws_iam
-
   findfactiongames:
     handler: findfactiongames.main
     events:

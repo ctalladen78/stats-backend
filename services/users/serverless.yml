@@ -39,7 +39,8 @@ provider:
   # under process.env.
   environment:
     # tableHistory: ${self:custom.tableHistory}
-    # tablePlayer: ${self:custom.tablePlayer}
+    tablePlayer: 
+      'Fn::ImportValue': PlayerTableName
     # tableFaction: ${self:custom.tableFaction}
     # tableCommander: ${self:custom.tableCommander}
     playerProfile: 
@@ -66,6 +67,7 @@ provider:
         # - "Fn::GetAtt": [ PlayerProfile, Arn ]
         # - 'Fn::GetAtt': [ 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn, Arn]
         - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerTableArn
 
 functions:
   createprofile:
@@ -83,5 +85,14 @@ functions:
       - http:
           path: profile-edit
           method: post
+          cors: true
+          authorizer: aws_iam
+
+  findplayergames:
+    handler: findplayergames.main
+    events:
+      - http:
+          path: get-player-games/{id}
+          method: get
           cors: true
           authorizer: aws_iam
