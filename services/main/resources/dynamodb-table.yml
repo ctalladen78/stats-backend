@@ -155,8 +155,15 @@ Resources:
       BillingMode: PAY_PER_REQUEST
 
 Outputs:
+  Value:
+    Ref: PlayerProfile
+  Export:
+    Name: PlayerProfileTableName
+    
   PlayerProfileArn:
     Value:
-      Ref: PlayerProfile
+      Fn::GetAtt:
+        - PlayerProfile
+        - Arn
     Export:
-      Name: PlayerProfileTableName
+      Name: ${self:custom.stage}-ExtPlayerProfileArn
