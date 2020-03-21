@@ -157,8 +157,6 @@ Resources:
 Outputs:
   PlayerProfileArn:
     Value:
-       Fn::GetAtt:
-        - PlayerProfile
-        - Arn
+      Ref: PlayerProfile
     Export:
-      Name: ${self:custom.stage}-ExtPlayerProfileArn
+      Name: PlayerProfileTableName

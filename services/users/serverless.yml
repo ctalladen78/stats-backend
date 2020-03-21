@@ -42,7 +42,8 @@ provider:
     # tablePlayer: ${self:custom.tablePlayer}
     # tableFaction: ${self:custom.tableFaction}
     # tableCommander: ${self:custom.tableCommander}
-    playerProfile: ${self:custom.stage}-ExtPlayerProfileArn
+    playerProfile: 
+      'Fn::ImportValue': PlayerProfileTableName
     # factionProfile: ${self:custom.factionProfile}
     # commanderProfile: ${self:custom.commanderProfile}
     # tournamentInfo: ${self:custom.tournamentInfo}
