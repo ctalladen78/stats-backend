@@ -44,8 +44,6 @@ provider:
     # tableCommander: ${self:custom.tableCommander}
     playerProfile: 
       'Fn::ImportValue': PlayerProfileTableName
-    playerProfileArn:
-      'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
     # factionProfile: ${self:custom.factionProfile}
     # commanderProfile: ${self:custom.commanderProfile}
     # tournamentInfo: ${self:custom.tournamentInfo}
@@ -67,10 +65,7 @@ provider:
       Resource:
         # - "Fn::GetAtt": [ PlayerProfile, Arn ]
         # - 'Fn::GetAtt': [ 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn, Arn]
-        - Fn::Join:
-          - ''
-          -
-            - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
 
 functions:
   createprofile:
