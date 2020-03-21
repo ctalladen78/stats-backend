@@ -66,7 +66,11 @@ provider:
       # the specific table for the stage
       Resource:
         # - "Fn::GetAtt": [ PlayerProfile, Arn ]
-        - 'Fn::GetAtt': [ 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn, Arn]
+        # - 'Fn::GetAtt': [ 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn, Arn]
+        - Fn::Join:
+          - ''
+          -
+            - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
 
 functions:
   createprofile:
