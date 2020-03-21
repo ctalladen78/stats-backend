@@ -155,11 +155,6 @@ Resources:
       BillingMode: PAY_PER_REQUEST
 
 Outputs:
-  Value:
-    Ref: PlayerProfile
-  Export:
-    Name: PlayerProfileTableName
-    
   PlayerProfileArn:
     Value:
       Fn::GetAtt:
