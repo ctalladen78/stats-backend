@@ -75,7 +75,7 @@ export async function main(event) {
         };
         return params;
       };
-    
+
       const updateCommanderRanks = (commander, faction, ranking) => {
         const params = {
           TableName: process.env.commanderProfile,
