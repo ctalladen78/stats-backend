@@ -159,7 +159,7 @@ Outputs:
     Value:
       Ref: PlayerProfile
     Export:
-      Name: PlayerProfileTableName
+      Name: ${self:custom.stage}-PlayerProfileTableName
   PlayerProfileArn:
     Value:
       Fn::GetAtt:
@@ -172,7 +172,7 @@ Outputs:
     Value:
       Ref: PlayerTable
     Export:
-      Name: PlayerTableName
+      Name: ${self:custom.stage}-PlayerTableName
   PlayerTableArn:
     Value:
       Fn::GetAtt:
