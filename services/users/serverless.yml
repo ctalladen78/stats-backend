@@ -39,12 +39,12 @@ provider:
   # under process.env.
   environment:
     # tableHistory: ${self:custom.tableHistory}
-    tablePlayer: 
-      'Fn::ImportValue': ${self:custom.stage}-PlayerTableName
+    # tablePlayer: 
+      # 'Fn::ImportValue': ${self:custom.stage}-PlayerTableName
     # tableFaction: ${self:custom.tableFaction}
     # tableCommander: ${self:custom.tableCommander}
-    playerProfile: 
-      'Fn::ImportValue': ${self:custom.stage}-PlayerProfileTableName
+    # playerProfile: 
+      # 'Fn::ImportValue': ${self:custom.stage}-PlayerProfileTableName
     # factionProfile: ${self:custom.factionProfile}
     # commanderProfile: ${self:custom.commanderProfile}
     # tournamentInfo: ${self:custom.tournamentInfo}
