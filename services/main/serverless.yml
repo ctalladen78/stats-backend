@@ -212,15 +212,6 @@ functions:
   #         cors: true
   #         authorizer: aws_iam
 
-  # createprofile:
-  #   handler: createprofile.main
-  #   events:
-  #     - http:
-  #         path: player-profile
-  #         method: post
-  #         cors: true
-  #         authorizer: aws_iam
-
   get:
     handler: get.main
     events:
@@ -339,7 +330,7 @@ functions:
           authorizer: aws_iam
 
   deleteresult:
-    handler: deleteresult.main
+    handler: deletetournamentresult.main
     events:
       - http:
           path: deleteresult/{id}
