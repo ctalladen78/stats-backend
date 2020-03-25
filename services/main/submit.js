@@ -197,7 +197,7 @@ export async function main(event, context) {
       }
       await dynamoDbLib.call("put", params4);
       await dynamoDbLib.call("put", params5);
-      if (data.commanderCheck == false) {      
+      if (data.commanderCheck == false) {
         await dynamoDbLib.call("put", params6);
         await dynamoDbLib.call("put", params7);
       }
