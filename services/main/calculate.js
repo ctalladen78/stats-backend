@@ -197,7 +197,7 @@ export async function main(event) {
       }
       console.log(player1Ranking);
       if (gameData.Item.player2 == "#N/A") {
-        var player2Ranking = 1500;
+        player2Ranking = 1500;
       } else {
         const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
         player2Ranking = player2Profile.Item.ranking;
