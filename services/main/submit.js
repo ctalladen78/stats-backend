@@ -104,6 +104,14 @@ export async function main(event, context) {
   }
 
   else {
+    if (data.playerCheck == true) {
+      data.player1 = "#N/A";
+      data.player2 = "#N/A";
+    }
+    if (data.commanderCheck == true) {
+      data.commander1 = "#N/A";
+      data.commander2 = "#N/A";
+    }
     console.log("No Game Id");
     const params = {
       TableName: process.env.tableHistory,
@@ -183,12 +191,16 @@ export async function main(event, context) {
 
     try {
       await dynamoDbLib.call("put", params);
-      await dynamoDbLib.call("put", params2);
-      await dynamoDbLib.call("put", params3);
+      if (data.playerCheck == false) {
+        await dynamoDbLib.call("put", params2);
+        await dynamoDbLib.call("put", params3);
+      }
       await dynamoDbLib.call("put", params4);
       await dynamoDbLib.call("put", params5);
-      await dynamoDbLib.call("put", params6);
-      await dynamoDbLib.call("put", params7);
+      if (data.commanderCheck == false) {      
+        await dynamoDbLib.call("put", params6);
+        await dynamoDbLib.call("put", params7);
+      }
       return success(unique);
     } catch (e) {
       return failure({ status: e });
