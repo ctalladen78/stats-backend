@@ -187,19 +187,33 @@ export async function main(event) {
     if (gameData.Item.auth1 == true && gameData.Item.auth2 == true) {
       const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2, gameData.Item.destroyed1, gameData.Item.destroyed2);
       console.log(gameResult);
-      const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
-      console.log(player1Profile);
-      const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
-      console.log(player2Profile);
+      if (gameData.Item.player1 == "#N/A") {
+        var player1Ranking = 1500;
+      } else {
+        const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
+        var player1Ranking = player1Profile.Item.ranking;
+      }
+      console.log(player1Ranking)
+      if (gameData.Item.player2 == "#N/A") {
+        var player2Ranking = 1500;
+      } else {
+        const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
+        var player2Ranking = player2Profile.Item.ranking;
+      }
+      console.log(player2Ranking)
       const faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
       console.log(faction1Profile);
       const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
       console.log(faction2Profile);
-      const commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander1, gameData.Item.faction1));  // call faction 1 data from table
-      console.log(commander1Profile);
-      const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));  // call faction 2 data from table
-      console.log(commander2Profile);
-      const rankingChanges = calculatePlayerRanking(player1Profile.Item.ranking, player2Profile.Item.ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
+      if (gameData.Item.commander1 !== "#N/A") {
+        const commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander1, gameData.Item.faction1));  // call faction 1 data from table
+        console.log(commander1Profile);
+      }
+      if (gameData.Item.commander2 !== "#N/A") {
+        const commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));  // call faction 2 data from table
+        console.log(commander2Profile);
+      }
+      const rankingChanges = calculatePlayerRanking(player1Ranking, player2Ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
       console.log(rankingChanges);
       // insert into databases
       const params = {
@@ -214,18 +228,25 @@ export async function main(event) {
           ReturnValues: "ALL_NEW"
         };
         await dynamoDbLib.call("update", params);
-        await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Profile.Item.ranking + rankingChanges[0]));
-        await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Profile.Item.ranking - rankingChanges[0]));
+        if (gameData.Item.player1 !== "#N/A") {
+        await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Ranking + rankingChanges[0]));
+        }
+        if (gameData.Item.player2 !== "#N/A") {
+        await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Ranking - rankingChanges[0]));
+        }
         if (gameData.Item.faction1 != gameData.Item.faction2){
           await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, faction1Profile.Item.ranking + rankingChanges[1]));
           await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, faction2Profile.Item.ranking - rankingChanges[1]));
         }
         if (gameData.Item.commander1 != gameData.Item.commander2){
-          await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + rankingChanges[1]));
-          await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - rankingChanges[1]));
+          if (gameData.Item.commander1 !== "#N/A") {
+            await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + rankingChanges[1]));
+          }
+          if (gameData.Item.commander2 !== "#N/A") {
+            await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - rankingChanges[1]));
+          }
         }
         await dynamoDbLib.call("update", updateGameHistory(event.pathParameters.id, rankingChanges[0]));
-
     }
     return success(true);
   } catch (e) {
