@@ -142,6 +142,7 @@ export async function main(event, context) {
         ranked: "ranked",
         version: "1.5",
         submittedBy: event.requestContext.identity.cognitoIdentityId,
+        region: data.region,
         createdAt: Date.now(),
       }
     };

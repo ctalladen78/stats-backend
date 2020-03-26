@@ -19,6 +19,7 @@ export async function main(event, context) {
         location: data.location,
         date: data.date,
         country: data.country,
+        region: data.region,
       }
     };
 
@@ -41,6 +42,7 @@ export async function main(event, context) {
         location: data.location,
         date: data.date,
         country: data.country,
+        region: data.region,
         info: data.info,
       }
     };
