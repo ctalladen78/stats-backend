@@ -116,6 +116,9 @@ export async function main(event, context) {
       data.commander1 = "#N/A";
       data.commander2 = "#N/A";
     }
+    if (data.gameModeCheck == true) {
+      data.gameMode = "#N/A";
+    }
     console.log("No Game Id");
     const params = {
       TableName: process.env.tableHistory,
