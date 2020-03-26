@@ -105,13 +105,9 @@ export async function main(event, context) {
   }
 
   else {
-    var auth1 = false;
-    var auth2 = false;
     if (data.playerCheck == true) {
       data.player1 = "#N/A";
       data.player2 = "#N/A";
-      auth1 = true;
-      auth2 = true;
     }
     if (data.commanderCheck == true) {
       data.commander1 = "#N/A";
@@ -131,14 +127,14 @@ export async function main(event, context) {
         commander1: data.commander1,
         vp1: data.vp1,
         destroyed1: data.destroyed1,
-        auth1: auth1,
+        auth1: false,
         player2 : data.player2,
         userName2: data.userName2,
         faction2: data.faction2,
         commander2: data.commander2,
         vp2: data.vp2,
         destroyed2: data.destroyed2,
-        auth2: auth2,
+        auth2: false,
         gameMode: data.gameMode,
         ranked: "ranked",
         version: "1.5",
