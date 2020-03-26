@@ -55,7 +55,7 @@ export async function main(event) {
         Key: {
             gameId: event.pathParameters.id,
         },
-        UpdateExpression: "SET auth2 = :auth2",
+        UpdateExpression: "SET auth1 = :auth1, auth2 = :auth2",
         ExpressionAttributeValues: {
             ":auth1": true,
             ":auth2": true,
