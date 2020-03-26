@@ -31,6 +31,7 @@ export async function main(event) {
         player2 : m.away,
         gameMode: data.data.gameMode,
         resultSubmitted: false,
+        region: data.region,
         }
     };
 
