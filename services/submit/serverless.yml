@@ -76,7 +76,7 @@ functions:
     handler: submit.main
     events:
       - http:
-          path: game-history
+          path: submit-result
           method: post
           cors: true
           authorizer: aws_iam
