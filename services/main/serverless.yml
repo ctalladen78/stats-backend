@@ -194,14 +194,14 @@ functions:
   # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
   #     domain api call
   # - authorizer: authenticate using the AWS IAM role
-  submit:
-    handler: submit.main
-    events:
-      - http:
-          path: game-history
-          method: post
-          cors: true
-          authorizer: aws_iam
+  # submit:
+  #   handler: submit.main
+  #   events:
+  #     - http:
+  #         path: game-history
+  #         method: post
+  #         cors: true
+  #         authorizer: aws_iam
 
   # submitunranked:
   #   handler: submit-unranked.main

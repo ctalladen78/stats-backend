@@ -155,18 +155,18 @@ Resources:
       BillingMode: PAY_PER_REQUEST
 
 Outputs:
-  PlayerProfile:
+  HistoryTable:
     Value:
-      Ref: PlayerProfile
+      Ref: HistoryTable
     Export:
-      Name: ${self:custom.stage}-PlayerProfileTableName
+      Name: ${self:custom.stage}-HistoryTableName
   PlayerProfileArn:
     Value:
       Fn::GetAtt:
-        - PlayerProfile
+        - HistoryTable
         - Arn
     Export:
-      Name: ${self:custom.stage}-ExtPlayerProfileArn
+      Name: ${self:custom.stage}-ExtHistoryTableArn
 
   PlayerTable:
     Value:
@@ -180,3 +180,43 @@ Outputs:
         - Arn
     Export:
       Name: ${self:custom.stage}-ExtPlayerTableArn
+
+  FactionTable:
+    Value:
+      Ref: FactionTable
+    Export:
+      Name: ${self:custom.stage}-FactionTableName
+  PlayerTableArn:
+    Value:
+      Fn::GetAtt:
+        - FactionTable
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-ExtFactionTableArn
+
+  CommanderTable:
+    Value:
+      Ref: CommanderTable
+    Export:
+      Name: ${self:custom.stage}-CommanderTableName
+  PlayerTableArn:
+    Value:
+      Fn::GetAtt:
+        - CommanderTable
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-ExtCommanderTableArn
+      
+  PlayerProfile:
+    Value:
+      Ref: PlayerProfile
+    Export:
+      Name: ${self:custom.stage}-PlayerProfileTableName
+  PlayerProfileArn:
+    Value:
+      Fn::GetAtt:
+        - PlayerProfile
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-ExtPlayerProfileArn
+

@@ -1,0 +1,91 @@
+service: stats-app-2-users
+
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+  - serverless-offline
+
+custom:
+  # Our stage is based on what is passed in when running serverless
+  # commands. Or fallsback to what we have set in the provider section.
+  stage: ${opt:stage, self:provider.stage}
+  # Set the table name here so we can use it while testing locally
+#   tableHistory: ${self:custom.stage}-results-history
+#   tablePlayer: ${self:custom.stage}-player-results
+#   tableFaction: ${self:custom.stage}-faction-results
+#   tableCommander: ${self:custom.stage}-commander-results
+#   playerProfile: ${self:custom.stage}-ExtPlayerProfileArn
+#   factionProfile: ${self:custom.stage}-faction-profile
+#   commanderProfile: ${self:custom.stage}-commander-profile2
+#   tournamentInfo: ${self:custom.stage}-tournament-info
+#   tournamentPlayers: ${self:custom.stage}-tournament-players
+#   tournamentGames: ${self:custom.stage}-tournament-games
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: eu-west-2
+
+  apiGateway:
+    restApiId:
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId
+    restApiRootResourceId:
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+
+  # These environment variables are made available to our functions
+  # under process.env.
+  environment:
+    tableHistory:
+      'Fn::ImportValue': ${self:custom.stage}-HistoryTableName
+    tablePlayer: 
+      'Fn::ImportValue': ${self:custom.stage}-PlayerTableName
+    tableFaction:
+      'Fn::ImportValue': ${self:custom.stage}-FactionTableName
+    tableCommander:
+      'Fn::ImportValue': ${self:custom.stage}-CommanderTableName
+    playerProfile: 
+      'Fn::ImportValue': ${self:custom.stage}-PlayerProfileTableName
+    # factionProfile: ${self:custom.factionProfile}
+    # commanderProfile: ${self:custom.commanderProfile}
+    # tournamentInfo: ${self:custom.tournamentInfo}
+    # tournamentPlayers: ${self:custom.tournamentPlayers}
+    # tournamentGames: ${self:custom.tournamentGames}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtHistoryTableArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerTableArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtFactionTableArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtCommanderTableArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
+
+functions:
+  submit:
+    handler: submit.main
+    events:
+      - http:
+          path: game-history
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  submitTTS:
+    handler: submitTTS.main
+    events:
+      - http:
+          path: submit-TTS
+          method: post
+          cors: true
+          authorizer: aws_iam
