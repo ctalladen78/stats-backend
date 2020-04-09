@@ -211,10 +211,12 @@ export async function main(event) {
       } else {
         const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
         if (gameData.Item.tts === true) {
-          console.log("its a TTS game");
-          player1Ranking = player1Profile.Item.ttsRanking;
+          if (player1Profile.Item.ttsRanking === undefined) {
+            player1Ranking = 1500;
+          } else {
+            player1Ranking = player1Profile.Item.ttsRanking;
+          }
         } else {
-          console.log("its a normal game");
           player1Ranking = player1Profile.Item.ranking;
         }
       }
@@ -224,7 +226,11 @@ export async function main(event) {
       } else {
         const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
         if (gameData.Item.tts === true) {
-          player2Ranking = player2Profile.Item.ttsRanking;
+          if (player2Profile.Item.ttsRanking === undefined) {
+            player2Ranking = 1500;
+          } else {
+            player2Ranking = player2Profile.Item.ttsRanking;
+          }
         } else {
           player2Ranking = player2Profile.Item.ranking;
         }
