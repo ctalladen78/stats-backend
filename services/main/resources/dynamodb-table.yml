@@ -186,7 +186,7 @@ Outputs:
       Ref: FactionTable
     Export:
       Name: ${self:custom.stage}-FactionTableName
-  PlayerTableArn:
+  FactionTableArn:
     Value:
       Fn::GetAtt:
         - FactionTable
@@ -199,7 +199,7 @@ Outputs:
       Ref: CommanderTable
     Export:
       Name: ${self:custom.stage}-CommanderTableName
-  PlayerTableArn:
+  CommanderTableArn:
     Value:
       Fn::GetAtt:
         - CommanderTable
