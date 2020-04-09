@@ -10,7 +10,7 @@ export async function main(event, context) {
   const params = {
     TableName: process.env.playerProfile,
     Key: {
-      playerId: data.playerId,
+      playerId: data,
     },
     UpdateExpression: "SET ttsRanking= :ttsRanking",
     ExpressionAttributeValues: {
