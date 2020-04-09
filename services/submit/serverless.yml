@@ -1,4 +1,4 @@
-service: stats-app-2-users
+service: stats-app-2-submit
 
 package:
   individually: true
