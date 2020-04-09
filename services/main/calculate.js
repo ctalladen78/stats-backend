@@ -215,7 +215,7 @@ export async function main(event) {
           player1Ranking = player1Profile.Item.ttsRanking;
         } else {
           console.log("its a normal game");
-          player1Ranking = player1Profile.Item.ranking;          
+          player1Ranking = player1Profile.Item.ranking;
         }
       }
       console.log(player1Ranking);
@@ -226,7 +226,7 @@ export async function main(event) {
         if (gameData.Item.tts === true) {
           player2Ranking = player2Profile.Item.ttsRanking;
         } else {
-          player2Ranking = player2Profile.Item.ranking;          
+          player2Ranking = player2Profile.Item.ranking;
         }
       }
       console.log(player2Ranking);
