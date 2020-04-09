@@ -17,6 +17,7 @@ export async function main(event, context) {
           tournamentId: unique,
           adminId: event.requestContext.identity.cognitoIdentityId,
           tournamentName: data.tournamentName,
+          date: data.date,
           ttsTournament: true,
         }
       };
@@ -37,6 +38,7 @@ export async function main(event, context) {
           tournamentId: unique,
           adminId: event.requestContext.identity.cognitoIdentityId,
           tournamentName: data.tournamentName,
+          date: data.date,
           ttsTournament: true,
           info: data.info,
         }
@@ -52,9 +54,7 @@ export async function main(event, context) {
         return failure({ status: false });
       }
     }
-  }
-
-  else {
+  } else {
     if (data.info == "") {
       const params = {
         TableName: process.env.tournamentInfo,
