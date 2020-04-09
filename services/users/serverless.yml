@@ -105,3 +105,12 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+
+  setttsranking:
+    handler: setttsranking.main
+    events:
+      - http:
+          path: set-tts
+          method: post
+          cors: true
+          authorizer: aws_iam
