@@ -134,19 +134,36 @@ const updateGameHistory = (gameId, ranking) => {
   return params;
 };
 
- const updatePlayerRanks = (player, ranking) => {
-  const params = {
-    TableName: process.env.playerProfile,
-    Key: {
-      playerId: player,
-    },
-    UpdateExpression: "SET ranking = :ranking",
-    ExpressionAttributeValues: {
-      ":ranking": ranking, //this needs to come from playerRanksArray
-    },
-    ReturnValues: "ALL_NEW"
-  };
-  return params;
+ const updatePlayerRanks = (player, ranking, gameData) => {
+  if (gameData.item.tts === true) {
+    console.log("Use TTS rankings");
+    const params = {
+      TableName: process.env.playerProfile,
+      Key: {
+        playerId: player,
+      },
+      UpdateExpression: "SET ttsRanking = :ttsRanking",
+      ExpressionAttributeValues: {
+        ":ttsRanking": ranking, //this needs to come from playerRanksArray
+      },
+      ReturnValues: "ALL_NEW"
+    };
+    return params;
+  } else {
+    console.log("Use normal Rankings");
+    const params = {
+      TableName: process.env.playerProfile,
+      Key: {
+        playerId: player,
+      },
+      UpdateExpression: "SET ranking = :ranking",
+      ExpressionAttributeValues: {
+        ":ranking": ranking, //this needs to come from playerRanksArray
+      },
+      ReturnValues: "ALL_NEW"
+    };
+    return params;
+  }
 };
 const updateFactionRanks = (faction, ranking) => {
   const params = {
@@ -193,14 +210,24 @@ export async function main(event) {
         player1Ranking = 1500;
       } else {
         const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
-        player1Ranking = player1Profile.Item.ranking;
+        if (gameData.Item.tts === true) {
+          console.log("its a TTS game");
+          player1Ranking = player1Profile.Item.ttsRanking;
+        } else {
+          console.log("its a normal game");
+          player1Ranking = player1Profile.Item.ranking;          
+        }
       }
       console.log(player1Ranking);
       if (gameData.Item.player2 == "#N/A") {
         player2Ranking = 1500;
       } else {
         const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
-        player2Ranking = player2Profile.Item.ranking;
+        if (gameData.Item.tts === true) {
+          player2Ranking = player2Profile.Item.ttsRanking;
+        } else {
+          player2Ranking = player2Profile.Item.ranking;          
+        }
       }
       console.log(player2Ranking);
       const faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
@@ -229,10 +256,10 @@ export async function main(event) {
         };
         await dynamoDbLib.call("update", params);
         if (gameData.Item.player1 !== "#N/A") {
-        await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Ranking + rankingChanges[0]));
+          await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Ranking + rankingChanges[0], gameData));
         }
         if (gameData.Item.player2 !== "#N/A") {
-        await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Ranking - rankingChanges[0]));
+          await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Ranking - rankingChanges[0], gameData));
         }
         if (gameData.Item.faction1 != gameData.Item.faction2){
           await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, faction1Profile.Item.ranking + rankingChanges[1]));
