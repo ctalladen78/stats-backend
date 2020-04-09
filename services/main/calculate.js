@@ -135,7 +135,7 @@ const updateGameHistory = (gameId, ranking) => {
 };
 
  const updatePlayerRanks = (player, ranking, gameData) => {
-  if (gameData.item.tts === true) {
+  if (gameData.Item.tts === true) {
     console.log("Use TTS rankings");
     const params = {
       TableName: process.env.playerProfile,
