@@ -338,6 +338,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  deletettsresult:
+    handler: deletetournamentttsresult.main
+    events:
+      - http:
+          path: deletettsresult/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+
   removeplayer:
     handler: removeplayer.main
     events:
