@@ -4,11 +4,12 @@ import { success, failure } from "../../libs/response-lib";
 
 export async function main(event, context) {
   const data = JSON.parse(event.body);
+  console.log(data);
 
     const params = {
         TableName: process.env.tournamentPlayers,
         Key: {
-          playerId: event.requestContext.identity.cognitoIdentityId,
+          playerId: data.playerId,
           tournamentId: data.tournamentId,
         },
         UpdateExpression: "SET list1 = :list1, list2 = :list2",
