@@ -419,6 +419,24 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  tournamentlock:
+    handler: tournamentlock.main
+    events:
+      - http:
+          path: lock-tournament
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  tournamentunlock:
+    handler: tournamentunlock.main
+    events:
+      - http:
+          path: unlock-tournament
+          method: post
+          cors: true
+          authorizer: aws_iam
+
 # Create our resources with separate CloudFormation templates
 resources:
   # API Gateway Errors
