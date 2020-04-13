@@ -1,0 +1,84 @@
+service: stats-app-2-tournament
+
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+  - serverless-offline
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: eu-west-2
+
+  apiGateway:
+    restApiId:
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId
+    restApiRootResourceId:
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+
+  # These environment variables are made available to our functions
+  # under process.env.
+  environment:
+    tableHistory:
+      'Fn::ImportValue': ${self:custom.stage}-HistoryTableName
+    tablePlayer: 
+      'Fn::ImportValue': ${self:custom.stage}-PlayerTableName
+    tableFaction:
+      'Fn::ImportValue': ${self:custom.stage}-FactionTableName
+    tableCommander:
+      'Fn::ImportValue': ${self:custom.stage}-CommanderTableName
+    playerProfile: 
+      'Fn::ImportValue': ${self:custom.stage}-PlayerProfileTableName
+    factionProfile: 
+      'Fn::ImportValue': ${self:custom.stage}-FactionProfileTableName
+    commanderProfile: 
+      'Fn::ImportValue': ${self:custom.stage}-CommanderProfileTableName
+    tournamentInfo: 
+      'Fn::ImportValue': ${self:custom.stage}-TournamentInfoTableName
+    # factionProfile: ${self:custom.factionProfile}
+    # commanderProfile: ${self:custom.commanderProfile}
+    # tournamentInfo: ${self:custom.tournamentInfo}
+    # tournamentPlayers: ${self:custom.tournamentPlayers}
+    # tournamentGames: ${self:custom.tournamentGames}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtHistoryTableArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerTableArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtFactionTableArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtCommanderTableArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
+
+functions:
+  tournamentlock:
+    handler: tournamentlock.main
+    events:
+      - http:
+          path: lock-tournament
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  tournamentunlock:
+    handler: tournamentunlock.main
+    events:
+      - http:
+          path: unlock-tournament
+          method: post
+          cors: true
+          authorizer: aws_iam

@@ -219,3 +219,42 @@ Outputs:
         - Arn
     Export:
       Name: ${self:custom.stage}-ExtPlayerProfileArn
+
+  FactionProfile:
+    Value:
+      Ref: FactionProfile
+    Export:
+      Name: ${self:custom.stage}-FactionProfileTableName
+  FactionProfileArn:
+    Value:
+      Fn::GetAtt:
+        - FactionProfile
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-ExtFactionProfileArn
+
+  CommmanderProfile:
+    Value:
+      Ref: CommanderProfile
+    Export:
+      Name: ${self:custom.stage}-CommanderProfileTableName
+  CommanderProfileArn:
+    Value:
+      Fn::GetAtt:
+        - CommanderProfile
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-ExtCommanderProfileArn
+
+  TournamentInfo:
+    Value:
+      Ref: TournamentInfo
+    Export:
+      Name: ${self:custom.stage}-TournamentInfoTableName
+  TournamentInfoArn:
+    Value:
+      Fn::GetAtt:
+        - TournamentInfo
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-ExtTournamentInfoArn
