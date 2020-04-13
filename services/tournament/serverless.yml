@@ -63,6 +63,9 @@ provider:
         - 'Fn::ImportValue': ${self:custom.stage}-ExtFactionTableArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtCommanderTableArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtFactionProfileArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtCommanderProfileArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtTournamentInfoArn
 
 functions:
   tournamentlock:
