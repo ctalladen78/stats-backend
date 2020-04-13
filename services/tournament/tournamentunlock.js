@@ -10,7 +10,7 @@ export async function main(event, context) {
   const params = {
     TableName: process.env.tournamentInfo,
     Key: {
-      tournamentId: data.tournamentId,
+      tournamentId: data,
     },
     UpdateExpression: "SET locked = :locked",
     ExpressionAttributeValues: {
