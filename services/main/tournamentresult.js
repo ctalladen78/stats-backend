@@ -69,8 +69,10 @@ export async function main(event) {
 
     try{
       await dynamoDbLib.call("update", params);
+      if (data.auth1 === true && data.auth2 === true) {
       await dynamoDbLib.call("update", params2);
       await dynamoDbLib.call("update", params3);
+      }
     return success(true);
   } catch (e) {
     console.log(e);
