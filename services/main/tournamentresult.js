@@ -13,7 +13,7 @@ export async function main(event) {
         gameId: data.gameId,
         tournamentId: data.tournamentId,
       },
-      UpdateExpression: "SET resultSubmitted = :set, vp1 = :vp1, vp2 = :vp2, ud1 = :ud1, ud2 = :ud2, commander1 = :commander1, commander2 = :commander2, tp1 = :tp1, tp2 = :tp2, sp1 = :sp1, sp2 = :sp2, destroyed1 = :destroyed1, destroyed2 = :destroyed2",
+      UpdateExpression: "SET resultSubmitted = :set, vp1 = :vp1, vp2 = :vp2, ud1 = :ud1, ud2 = :ud2, commander1 = :commander1, commander2 = :commander2, tp1 = :tp1, tp2 = :tp2, sp1 = :sp1, sp2 = :sp2, destroyed1 = :destroyed1, destroyed2 = :destroyed2, auth1 = :auth1, auth2 = auth2",
       ExpressionAttributeValues: {
         ":set": data.set,
         ":vp1": data.vp1,
@@ -28,44 +28,44 @@ export async function main(event) {
         ":sp2": data.sp2,
         ":destroyed1": data.destroyed1,
         ":destroyed2": data.destroyed2,
+        ":auth1": data.auth1,
+        ":auth2": data.auth2,
       },
     };
 
-    const params2 = {
-      TableName: process.env.tournamentPlayers,
-      Key: {
-        playerId: data.player1,
-        tournamentId: data.tournamentId,
-      },
-      UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud, gamesPlayed = :gamesPlayed",
-      ExpressionAttributeValues: {
-        ":vp": data.vpTotal1,
-        ":tp": data.totalTp1,
-        ":sp": data.totalSp1,
-        ":ud": data.udTotal1,
-        ":gamesPlayed": data.gamesPlayed1
-      },
-    };
+    if (data.auth1 === true && data.auth2 === true) {
+      var params2 = {
+        TableName: process.env.tournamentPlayers,
+        Key: {
+          playerId: data.player1,
+          tournamentId: data.tournamentId,
+        },
+        UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud, gamesPlayed = :gamesPlayed",
+        ExpressionAttributeValues: {
+          ":vp": data.vpTotal1,
+          ":tp": data.totalTp1,
+          ":sp": data.totalSp1,
+          ":ud": data.udTotal1,
+          ":gamesPlayed": data.gamesPlayed1
+        },
+      };
 
-    console.log(params2);
-
-    const params3 = {
-      TableName: process.env.tournamentPlayers,
-      Key: {
-        playerId: data.player2,
-        tournamentId: data.tournamentId,
-      },
-      UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud, gamesPlayed = :gamesPlayed",
-      ExpressionAttributeValues: {
-        ":vp": data.vpTotal2,
-        ":tp": data.totalTp2,
-        ":sp": data.totalSp2,
-        ":ud": data.udTotal2,
-        ":gamesPlayed": data.gamesPlayed2
-      },
-    };
-
-    console.log(params3);
+      var params3 = {
+        TableName: process.env.tournamentPlayers,
+        Key: {
+          playerId: data.player2,
+          tournamentId: data.tournamentId,
+        },
+        UpdateExpression: "SET VPs = :vp, TPs = :tp, SPs = :sp, pointsDestroyed = :ud, gamesPlayed = :gamesPlayed",
+        ExpressionAttributeValues: {
+          ":vp": data.vpTotal2,
+          ":tp": data.totalTp2,
+          ":sp": data.totalSp2,
+          ":ud": data.udTotal2,
+          ":gamesPlayed": data.gamesPlayed2
+        },
+      };
+    }
 
     try{
       await dynamoDbLib.call("update", params);
