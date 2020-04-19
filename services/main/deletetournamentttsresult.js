@@ -4,6 +4,7 @@ import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
   const data = event.pathParameters.id;
+  console.log(data);
 
   const findGame = (gameId) => {
     const params = {
