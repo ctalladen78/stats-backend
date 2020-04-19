@@ -85,3 +85,21 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
+  tournamentlistlock:
+    handler: tournamentlistlock.main
+    events:
+      - http:
+          path: lock-lists
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  tournamentlistunlock:
+    handler: tournamentlistunlock.main
+    events:
+      - http:
+          path: unlock-lists
+          method: post
+          cors: true
+          authorizer: aws_iam
