@@ -49,8 +49,9 @@ export async function main(event) {
     };
 
     const updatePlayerRanks = (player, ranking) => {
-      console.log(player);
-      console.log(ranking);
+      if (isNaN(ranking)){
+        ranking = 1500;
+      }
         const params = {
           TableName: process.env.playerProfile,
           Key: {
@@ -99,7 +100,6 @@ export async function main(event) {
     const gameData = await dynamoDbLib.call("get", findGame(data)); //call game data
     console.log(gameData);
     const player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
-    console.log(player1Profile);
     const player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
     const faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
     const faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
