@@ -49,8 +49,8 @@ export async function main(event) {
     };
 
     const updatePlayerRanks = (player, ranking) => {
-      console.log(player)
-      console.log(ranking)
+      console.log(player);
+      console.log(ranking);
         const params = {
           TableName: process.env.playerProfile,
           Key: {
