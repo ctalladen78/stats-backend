@@ -99,15 +99,15 @@ export async function main(event) {
   try {
     var gameData = await dynamoDbLib.call("get", findGame(data)); //call game data
     console.log(gameData);
+    console.log(gameData.item.ranking);
+    console.log(isNaN(gameData.item.ranking));
+    console.log(!isNaN(gameData.item.ranking));
     var player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
     var player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
     var faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
     var faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
     var commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander1, gameData.Item.faction1));
     var commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));
-    console.log(gameData.item.ranking);
-    console.log(isNaN(gameData.item.ranking));
-    console.log(!isNaN(gameData.item.ranking));
     if (!isNaN(gameData.item.ranking)){
       console.log("HERE");
       await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, (player1Profile.Item.ttsRanking - gameData.Item.ranking)));
