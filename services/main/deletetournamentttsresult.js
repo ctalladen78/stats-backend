@@ -49,9 +49,6 @@ export async function main(event) {
     };
 
     const updatePlayerRanks = (player, ranking) => {
-      if (isNaN(ranking)){
-        ranking = 1500;
-      }
         const params = {
           TableName: process.env.playerProfile,
           Key: {
