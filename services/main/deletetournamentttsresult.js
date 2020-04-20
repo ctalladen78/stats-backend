@@ -4,7 +4,7 @@ import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
   const data = event.pathParameters.id;
-  console.log(data);
+  // console.log(data);
 
   const findGame = (gameId) => {
     const params = {
@@ -98,7 +98,7 @@ export async function main(event) {
 
   try {
     var gameData = await dynamoDbLib.call("get", findGame(data)); //call game data
-    console.log(gameData);
+    console.log("THIS", gameData);
     var player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
     var player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
     var faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
