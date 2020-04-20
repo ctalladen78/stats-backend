@@ -99,7 +99,6 @@ export async function main(event) {
   try {
     var gameData = await dynamoDbLib.call("get", findGame(data)); //call game data
     console.log(gameData);
-    console.log(gameData.item.ranking);
     console.log(isNaN(gameData.item.ranking));
     console.log(!isNaN(gameData.item.ranking));
     var player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
