@@ -258,3 +258,16 @@ Outputs:
         - Arn
     Export:
       Name: ${self:custom.stage}-ExtTournamentInfoArn
+
+  TournamentGames:
+    Value:
+      Ref: TournamentGames
+    Export:
+      Name: ${self:custom.stage}-TournamentGamesTableName
+  TournamentGamesArn:
+    Value:
+      Fn::GetAtt:
+        - TournamentGames
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-ExtTournamentGamesArn
