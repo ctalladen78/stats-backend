@@ -41,10 +41,8 @@ provider:
       'Fn::ImportValue': ${self:custom.stage}-CommanderProfileTableName
     tournamentInfo: 
       'Fn::ImportValue': ${self:custom.stage}-TournamentInfoTableName
-    # factionProfile: ${self:custom.factionProfile}
-    # commanderProfile: ${self:custom.commanderProfile}
-    # tournamentInfo: ${self:custom.tournamentInfo}
-    # tournamentPlayers: ${self:custom.tournamentPlayers}
+    tournamentPlayers: 
+      'Fn::ImportValue': ${self:custom.stage}-TournamentPlayersTableName
     tournamentGames: 
       'Fn::ImportValue': ${self:custom.stage}-TournamentGamesTableName
 
@@ -67,6 +65,7 @@ provider:
         - 'Fn::ImportValue': ${self:custom.stage}-ExtFactionProfileArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtCommanderProfileArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtTournamentInfoArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtTournamentPlayersArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtTournamentGamesArn
 
 functions:
