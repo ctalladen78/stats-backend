@@ -311,24 +311,6 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  tournamentplayers:
-    handler: tournamentplayers.main
-    events:
-      - http:
-          path: get-tournament-players/{id}
-          method: get
-          cors: true
-          authorizer: aws_iam
-
-  tournamentgames:
-    handler: tournamentgames.main
-    events:
-      - http:
-          path: get-tournament-games/{id}
-          method: get
-          cors: true
-          authorizer: aws_iam
-
   calculate:
     handler: calculate.main
     events:
@@ -397,15 +379,6 @@ functions:
     events:
       - http:
           path: swiss-round
-          method: post
-          cors: true
-          authorizer: aws_iam
-
-  tournamentresult:
-    handler: tournamentresult.main
-    events:
-      - http:
-          path: tournament-result/{id}
           method: post
           cors: true
           authorizer: aws_iam
