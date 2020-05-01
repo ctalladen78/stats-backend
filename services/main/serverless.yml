@@ -275,6 +275,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  listcommanders:
+    handler: listcommanders.main
+    events:
+      - http:
+          path: get-all-commanders
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   listtournaments:
     handler: listtournaments.main
     events:
