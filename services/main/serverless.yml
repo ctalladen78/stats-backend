@@ -257,6 +257,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  findcommander:
+    handler: findcommander.main
+    events:
+      - http:
+          path: get-commander-profile/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   listplayers:
     handler: listplayers.main
     events:
@@ -298,6 +307,15 @@ functions:
     events:
       - http:
           path: get-faction-games/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  findcommandergames:
+    handler: findcommandergames.main
+    events:
+      - http:
+          path: get-commander-games/{id}
           method: get
           cors: true
           authorizer: aws_iam
