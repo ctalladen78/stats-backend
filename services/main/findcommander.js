@@ -7,10 +7,9 @@ export async function main(event) {
   console.log(event);
   const params = {
     TableName: process.env.commanderProfile,
-    KeyConditionExpression: "commanderId = :commanderId, factionId = :factionId ",
+    KeyConditionExpression: "commanderId = :commanderId",
     ExpressionAttributeValues: {
-        ":commanderId": event[1],
-        ":factionId": event[0],
+        ":commanderId": event,
     },
   };
 
