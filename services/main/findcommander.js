@@ -6,13 +6,19 @@ export async function main(event) {
   event = event.pathParameters.id.replace("%20", " ").replace("%28", "(").replace("%29", ")").replace("%20", " ");
   event = event.split("-");
   let commanderId = event[1];
-  console.log(commanderId);
+  let factionId = event[0];
+  console.log(commanderId, factionId);
+
   const params = {
     TableName: process.env.commanderProfile,
-    KeyConditionExpression: "commanderId = :commanderId",
-    ExpressionAttributeValues: {
-        ":commanderId": commanderId,
-    },
+    // KeyConditionExpression: "commanderId = :commanderId",
+    // ExpressionAttributeValues: {
+    //     ":commanderId": commanderId,
+    // },
+    Key: {
+      commanderId: commanderId,
+      factionId: factionId
+    }
   };
 
   try {
