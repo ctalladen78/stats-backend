@@ -11,7 +11,7 @@ export async function main(event) {
 
   const params = {
     TableName: process.env.commanderProfile,
-    KeyConditionExpression: "commanderId = :commanderId, factionId = : factionId",
+    KeyConditionExpression: "commanderId = :commanderId",
     // FilterExpression: "factionId = :factionId",
     ExpressionAttributeValues: {
         ":commanderId": commanderId,
