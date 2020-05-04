@@ -8,7 +8,7 @@ export async function main(event) {
   let commanderId = event[1];
   let factionId = event[0];
   console.log(commanderId, factionId);
-  
+
   const params = {
     TableName: process.env.commanderProfile,
     KeyConditionExpression: "commanderId = :commanderId",
