@@ -3,7 +3,7 @@ import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
   console.log(event);
-  event = event.pathParameters.id.replace("%20"/g, " ").replace("%28", "(").replace("%29", ")");
+  event = event.pathParameters.id.replace("%20/g", " ").replace("%28", "(").replace("%29", ")");
   event = event.split("-");
   let commanderId = event[1];
   let factionId = event[0];
