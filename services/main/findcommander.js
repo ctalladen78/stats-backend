@@ -8,17 +8,15 @@ export async function main(event) {
   let commanderId = event[1];
   let factionId = event[0];
   console.log(commanderId, factionId);
-
+  
   const params = {
     TableName: process.env.commanderProfile,
-    // KeyConditionExpression: "commanderId = :commanderId",
-    // ExpressionAttributeValues: {
-    //     ":commanderId": commanderId,
-    // },
-    Key: {
-      commanderId: commanderId,
-      factionId: factionId
-    }
+    KeyConditionExpression: "commanderId = :commanderId",
+    FilterExpression: "factionId = :factionId",
+    ExpressionAttributeValues: {
+        ":commanderId": commanderId,
+        ":factionId": factionId,
+    },
   };
 
   try {
