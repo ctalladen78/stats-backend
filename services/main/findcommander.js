@@ -4,12 +4,14 @@ import { success, failure } from "../../libs/response-lib";
 export async function main(event) {
   console.log(event);
   event = event.pathParameters.id.replace("%20", " ").replace("%28", "(").replace("%29", ")").replace("%20", " ");
-  console.log(event);
+  event = event.split("-");
+  let commanderId = event[1];
+  console.log(commanderId);
   const params = {
     TableName: process.env.commanderProfile,
     KeyConditionExpression: "commanderId = :commanderId",
     ExpressionAttributeValues: {
-        ":commanderId": event,
+        ":commanderId": commanderId,
     },
   };
 
