@@ -101,7 +101,7 @@ export async function main(event) {
     }
     var faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
     var faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
-    if (gameData.Item.commander1 !== undefined && gameData.Item.commander2 !== undefined); {
+    if (gameData.Item.commander1 !== undefined && gameData.Item.commander2 !== undefined) {
       var commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander1, gameData.Item.faction1));
       var commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));
     }
