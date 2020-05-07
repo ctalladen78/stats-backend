@@ -96,7 +96,7 @@ export async function main(event) {
   try {
     var gameData = await dynamoDbLib.call("get", findGame(data)); //call game data
     console.log(gameData);
-    if (gameData.Item.player1 !== undefined && gameData.Item.player2 !== undefined){
+    if (gameData.Item.player1 !== "#N/A" && gameData.Item.player2 !== "#N/A"){
       console.log("Have player 1 and player2");
       var player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
       var player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
@@ -104,7 +104,7 @@ export async function main(event) {
     }
     var faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
     var faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
-    if (gameData.Item.commander1 !== undefined && gameData.Item.commander2 !== undefined){
+    if (gameData.Item.commander1 !== "#N/A" && gameData.Item.commander2 !== "#N/A"){
       var commander1Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander1, gameData.Item.faction1));
       var commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));
     }
@@ -179,13 +179,13 @@ export async function main(event) {
     };
 
     await dynamoDbLib.call("delete", params);
-    if (gameData.Item.player1 !== undefined && gameData.Item.player2 !== undefined){
+    if (gameData.Item.player1 !== "#N/A" && gameData.Item.player2 !== "#N/A"){
       await dynamoDbLib.call("delete", params2);
       await dynamoDbLib.call("delete", params3);
     }
     await dynamoDbLib.call("delete", params4);
     await dynamoDbLib.call("delete", params5);
-    if (gameData.Item.commander1 !== undefined && gameData.Item.commander2 !== undefined){
+    if (gameData.Item.commander1 !== "#N/A" && gameData.Item.commander2 !== "#N/A"){
       await dynamoDbLib.call("delete", params6);
       await dynamoDbLib.call("delete", params7);
     }
