@@ -95,9 +95,12 @@ export async function main(event) {
 
   try {
     var gameData = await dynamoDbLib.call("get", findGame(data)); //call game data
-    if (gameData.Item.player1!== undefined && gameData.Item.player2 !== undefined){
+    console.log(gameData);
+    if (gameData.Item.player1 !== undefined && gameData.Item.player2 !== undefined){
+      console.log("Have player 1 and player2");
       var player1Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player1)); // call player 1 data from table
       var player2Profile = await dynamoDbLib.call("get", findPlayerRank(gameData.Item.player2)); // call player 2 data from table
+      console.log(player1Profile, player2Profile);
     }
     var faction1Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction1));  // call faction 1 data from table
     var faction2Profile = await dynamoDbLib.call("get", findFactionRank(gameData.Item.faction2));  // call faction 2 data from table
@@ -106,15 +109,15 @@ export async function main(event) {
       var commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));
     }
     if (gameData.Item.ranking !== undefined){
-      if (gameData.Item.player1!== undefined && gameData.Item.player2 !== undefined) {
+      if (player1Profile !== undefined && player2Profile !== undefined) {
         await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, (player1Profile.Item.ttsRanking - gameData.Item.ranking)));
         await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, (player2Profile.Item.ttsRanking + gameData.Item.ranking)));
       }
-      if (gameData.Item.faction1 != gameData.Item.faction2){
+      if (gameData.Item.faction1 !== gameData.Item.faction2){
         await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, (faction1Profile.Item.ranking - (gameData.Item.ranking*0.2))));
         await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, (faction2Profile.Item.ranking + (gameData.Item.ranking*0.2))));
       }
-      if (gameData.Item.commander1 != gameData.Item.commander2 && gameData.Item.commander1 !== undefined && gameData.Item.commander2 !== undefined){
+      if (gameData.Item.commander1 !== gameData.Item.commander2 && commander1Profile !== undefined && commander2Profile !== undefined){
         await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, (commander1Profile.Item.ranking - (gameData.Item.ranking*0.2))));
         await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, (commander2Profile.Item.ranking + (gameData.Item.ranking*0.2))));
       }
@@ -176,12 +179,16 @@ export async function main(event) {
     };
 
     await dynamoDbLib.call("delete", params);
-    await dynamoDbLib.call("delete", params2);
-    await dynamoDbLib.call("delete", params3);
+    if (gameData.Item.player1 !== undefined && gameData.Item.player2 !== undefined){
+      await dynamoDbLib.call("delete", params2);
+      await dynamoDbLib.call("delete", params3);
+    }
     await dynamoDbLib.call("delete", params4);
     await dynamoDbLib.call("delete", params5);
-    await dynamoDbLib.call("delete", params6);
-    await dynamoDbLib.call("delete", params7);
+    if (gameData.Item.commander1 !== undefined && gameData.Item.commander2 !== undefined){
+      await dynamoDbLib.call("delete", params6);
+      await dynamoDbLib.call("delete", params7);
+    }
     return success(data.gameId);
   } catch (e) {
     console.log(e);
