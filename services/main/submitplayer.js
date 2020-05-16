@@ -30,7 +30,8 @@ export async function main(event, context) {
         VPs: 0,
         gamesPlayed: 0,
         pointsDestroyed: 0,
-        hadBye: false
+        hadBye: false,
+        retired: false
       }
     };
 
@@ -63,7 +64,8 @@ export async function main(event, context) {
         VPs: 0,
         gamesPlayed: 0,
         pointsDestroyed: 0,
-        hadBye: false
+        hadBye: false,
+        retired: false
       }
     };
 
