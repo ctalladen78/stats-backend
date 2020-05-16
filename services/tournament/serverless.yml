@@ -159,7 +159,7 @@ functions:
           cors: true
           authorizer: aws_iam
 
-returnplayer:
+  returnplayer:
     handler: returnplayer.main
     events:
       - http:
