@@ -155,6 +155,15 @@ functions:
     events:
       - http:
           path: retire-player
-          method: put
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+returnplayer:
+    handler: returnplayer.main
+    events:
+      - http:
+          path: return-player
+          method: post
           cors: true
           authorizer: aws_iam
