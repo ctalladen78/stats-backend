@@ -140,3 +140,21 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+
+  removeplayer:
+    handler: removeplayer.main
+    events:
+      - http:
+          path: remove-player
+          method: put
+          cors: true
+          authorizer: aws_iam
+
+  retireplayer:
+    handler: retireplayer.main
+    events:
+      - http:
+          path: retire-player
+          method: put
+          cors: true
+          authorizer: aws_iam
