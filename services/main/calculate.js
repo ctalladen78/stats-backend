@@ -5,6 +5,7 @@ import { success, failure } from "../../libs/response-lib";
 const calculateGameResult = (vp1, vp2, destroyed1, destroyed2, pointsLeft1, pointsLeft2) => {
   var gameResult = "draw";
   var pointsDif = 0;
+  console.log(pointsLeft1, pointsLeft2);
   if (pointsLeft1 !== undefined && pointsLeft2 !== undefined) {
     pointsDif = pointsLeft1 - pointsLeft2;
   }
