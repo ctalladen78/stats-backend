@@ -37,6 +37,8 @@ export async function main(event, context) {
         tts: true,
         createdAt: Date.now(),
         tournamentId: data.tournamentId,
+        pointsLeft1: data.pointsLeft1,
+        pointsLeft2: data.pointsLeft2,
       }
     };
 
@@ -141,6 +143,8 @@ export async function main(event, context) {
         submittedBy: event.requestContext.identity.cognitoIdentityId,
         tts: true,
         createdAt: Date.now(),
+        pointsLeft1: data.pointsLeft1,
+        pointsLeft2: data.pointsLeft2,
       }
     };
 
