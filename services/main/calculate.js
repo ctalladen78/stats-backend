@@ -9,10 +9,10 @@ const calculateGameResult = (vp1, vp2, destroyed1, destroyed2, pointsLeft1, poin
     pointsDif = pointsLeft1 - pointsLeft2;
   }
   if (pointsDif > 0 && vp1 === vp2) {
-    gameResult = "player 1 minor win"
-  } 
+    gameResult = "player 1 minor win";
+  }
   if (pointsDif < 0 && vp1 === vp2) {
-    gameResult = "player 2 minor win"
+    gameResult = "player 2 minor win";
   } else {
     const vpResult = vp1-vp2;
     if ((vpResult > 4 && !destroyed2) || destroyed1) {
