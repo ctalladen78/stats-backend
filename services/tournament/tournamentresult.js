@@ -62,7 +62,7 @@ export async function main(event) {
           ":auth1": data.auth1,
           ":auth2": data.auth2,
         },
-      };      
+      };
     }
 
     if (data.auth1 === true && data.auth2 === true) {
