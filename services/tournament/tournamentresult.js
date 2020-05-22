@@ -7,31 +7,63 @@ export async function main(event) {
     const data = JSON.parse(event.body);
     console.log(data);
 
-    const params = {
-      TableName: process.env.tournamentGames,
-      Key: {
-        gameId: data.gameId,
-        tournamentId: data.tournamentId,
-      },
-      UpdateExpression: "SET resultSubmitted = :set, vp1 = :vp1, vp2 = :vp2, ud1 = :ud1, ud2 = :ud2, commander1 = :commander1, commander2 = :commander2, tp1 = :tp1, tp2 = :tp2, sp1 = :sp1, sp2 = :sp2, destroyed1 = :destroyed1, destroyed2 = :destroyed2, auth1 = :auth1, auth2 = :auth2",
-      ExpressionAttributeValues: {
-        ":set": data.set,
-        ":vp1": data.vp1,
-        ":vp2": data.vp2,
-        ":ud1": data.ud1,
-        ":ud2": data.ud2,
-        ":commander1": data.commander1,
-        ":commander2": data.commander2,
-        ":tp1": data.tp1,
-        ":tp2": data.tp2,
-        ":sp1": data.sp1,
-        ":sp2": data.sp2,
-        ":destroyed1": data.destroyed1,
-        ":destroyed2": data.destroyed2,
-        ":auth1": data.auth1,
-        ":auth2": data.auth2,
-      },
-    };
+    var params;
+
+    if (data.pointsLeft1 !== undefined && data.pointsLeft2 !== undefined) {
+      params = {
+        TableName: process.env.tournamentGames,
+        Key: {
+          gameId: data.gameId,
+          tournamentId: data.tournamentId,
+        },
+        UpdateExpression: "SET resultSubmitted = :set, vp1 = :vp1, vp2 = :vp2, ud1 = :ud1, ud2 = :ud2, commander1 = :commander1, commander2 = :commander2, tp1 = :tp1, tp2 = :tp2, sp1 = :sp1, sp2 = :sp2, destroyed1 = :destroyed1, destroyed2 = :destroyed2, auth1 = :auth1, auth2 = :auth2",
+        ExpressionAttributeValues: {
+          ":set": data.set,
+          ":vp1": data.vp1,
+          ":vp2": data.vp2,
+          ":ud1": data.ud1,
+          ":ud2": data.ud2,
+          ":commander1": data.commander1,
+          ":commander2": data.commander2,
+          ":tp1": data.tp1,
+          ":tp2": data.tp2,
+          ":sp1": data.sp1,
+          ":sp2": data.sp2,
+          ":destroyed1": data.destroyed1,
+          ":destroyed2": data.destroyed2,
+          ":auth1": data.auth1,
+          ":auth2": data.auth2,
+          ":pointsLeft1": data.pointsLeft1,
+          ":pointsLeft2": data.pointsLeft2,
+        },
+      };
+    } else {
+      params = {
+        TableName: process.env.tournamentGames,
+        Key: {
+          gameId: data.gameId,
+          tournamentId: data.tournamentId,
+        },
+        UpdateExpression: "SET resultSubmitted = :set, vp1 = :vp1, vp2 = :vp2, ud1 = :ud1, ud2 = :ud2, commander1 = :commander1, commander2 = :commander2, tp1 = :tp1, tp2 = :tp2, sp1 = :sp1, sp2 = :sp2, destroyed1 = :destroyed1, destroyed2 = :destroyed2, auth1 = :auth1, auth2 = :auth2",
+        ExpressionAttributeValues: {
+          ":set": data.set,
+          ":vp1": data.vp1,
+          ":vp2": data.vp2,
+          ":ud1": data.ud1,
+          ":ud2": data.ud2,
+          ":commander1": data.commander1,
+          ":commander2": data.commander2,
+          ":tp1": data.tp1,
+          ":tp2": data.tp2,
+          ":sp1": data.sp1,
+          ":sp2": data.sp2,
+          ":destroyed1": data.destroyed1,
+          ":destroyed2": data.destroyed2,
+          ":auth1": data.auth1,
+          ":auth2": data.auth2,
+        },
+      };      
+    }
 
     if (data.auth1 === true && data.auth2 === true) {
       var params2 = {
@@ -70,8 +102,8 @@ export async function main(event) {
     try{
       await dynamoDbLib.call("update", params);
       if (data.auth1 === true && data.auth2 === true) {
-      await dynamoDbLib.call("update", params2);
-      await dynamoDbLib.call("update", params3);
+        await dynamoDbLib.call("update", params2);
+        await dynamoDbLib.call("update", params3);
       }
     return success(true);
   } catch (e) {
