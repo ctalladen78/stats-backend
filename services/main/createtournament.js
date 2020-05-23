@@ -22,6 +22,7 @@ export async function main(event, context) {
           allowSignup: data.allowSignup,
           maxPlayers: data.maxPlayers,
           ttsTournament: true,
+          pairing: data.pairing,
         }
       };
 
@@ -47,6 +48,7 @@ export async function main(event, context) {
           maxPlayers: data.maxPlayers,
           ttsTournament: true,
           info: data.info,
+          pairing: data.pairing,
         }
       };
 
@@ -76,6 +78,7 @@ export async function main(event, context) {
           country: data.country,
           region: data.region,
           ttsTournament: false,
+          pairing: data.pairing,
         }
       };
 
@@ -104,6 +107,7 @@ export async function main(event, context) {
           region: data.region,
           info: data.info,
           ttsTournament: false,
+          pairing: data.pairing,
         }
       };
 
