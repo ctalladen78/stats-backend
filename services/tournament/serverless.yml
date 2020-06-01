@@ -167,3 +167,12 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
+  tournamentedit:
+    handler: tournamentedit.main
+    events:
+      - http:
+          path: tournament-edit
+          method: post
+          cors: true
+          authorizer: aws_iam
