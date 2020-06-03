@@ -25,6 +25,9 @@ export async function main(event, context) {
         ":ttsTournament": data.ttsTournament,
         ":pairing": data.pairing,
     },
+    ExpressionAttributeNames: {
+        "newLocation": "location"
+    },
   };
 
     try {
