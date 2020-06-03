@@ -5,8 +5,6 @@ import { success, failure } from "../../libs/response-lib";
 export async function main(event) {
   const data = JSON.parse(event.body);
   const match = (data.game);
-  const info = (data.data);
-  const id = (data.tournamentId);
   var i = 0;
 
   for(const m of match) {
