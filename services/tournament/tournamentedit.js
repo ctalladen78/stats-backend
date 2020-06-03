@@ -12,34 +12,34 @@ export async function main(event, context) {
     params = {
       TableName: process.env.tournamentInfo,
       Key: {
-        tournamentId: data.tournamentId,
+        tournamentId: data.tournamentId.tournamentId,
       },
       UpdateExpression: "SET tournamentName = :tournamentName",
       ExpressionAttributeValues: {
           ":tournamentName": data.tournamentName,
-          // ":newLocation": data.location,
-          // ":newDate": data.date,
-          // ":newEnd": data.end,
-          // ":allowSignup": data.allowSignup,
-          // ":maxPlayers": data.maxPlayers,
-          // ":country": data.country,
-          // ":newRegion": data.region,
-          // ":ttsTournament": data.tts,
-          // ":pairing": data.pairing,
+          ":newLocation": data.location,
+          ":newDate": data.date,
+          ":newEnd": data.end,
+          ":allowSignup": data.allowSignup,
+          ":maxPlayers": data.maxPlayers,
+          ":country": data.country,
+          ":newRegion": data.region,
+          ":ttsTournament": data.tts,
+          ":pairing": data.pairing,
       },
-      // ExpressionAttributeNames: {
-      //     "#loc": "location",
-      //     "#date": "date",
-      //     "#end": "end",
-      //     "#region": "region",
-      // },
+      ExpressionAttributeNames: {
+          "#loc": "location",
+          "#date": "date",
+          "#end": "end",
+          "#region": "region",
+      },
     };
   } else {
     console.log("Have info");
     params = {
       TableName: process.env.tournamentInfo,
       Key: {
-        tournamentId: data.tournamentId,
+        tournamentId: data.tournamentId.tournamentId,
       },
       UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, maxPlayers = :maxPlayers, country = :country, #region = :newRegion, info = :info, ttsTournament = :ttsTournament, pairing = :pairing",
       ExpressionAttributeValues: {
