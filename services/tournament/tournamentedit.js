@@ -14,7 +14,7 @@ export async function main(event, context) {
       Key: {
         tournamentId: data.tournamentId.tournamentId,
       },
-      UpdateExpression: "SET tournamentName = :tournamentName",
+      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, maxPlayers = :maxPlayers, country = :country, #region = :newRegion, ttsTournament = :ttsTournament, pairing = :pairing",
       ExpressionAttributeValues: {
           ":tournamentName": data.tournamentName,
           ":newLocation": data.location,
