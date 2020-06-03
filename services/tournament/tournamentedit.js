@@ -2,7 +2,17 @@ import * as dynamoDbLib from "../../libs/dynamodb-lib";
 import { success, failure } from "../../libs/response-lib";
 
 export async function main(event, context) {
-  const data = JSON.parse(event.body);
+  var data = JSON.parse(event.body);
+
+  if (data.country === undefined) {
+    data.country = "";
+  }
+  if (data.region === undefined) {
+    data.region = "";
+  }
+  if (data.location === undefined) {
+    data.region = "";
+  }
 
   console.log(data);
   var params;
