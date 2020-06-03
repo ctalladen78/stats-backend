@@ -176,3 +176,12 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
+  manualround:
+    handler: manualround.main
+    events:
+      - http:
+          path: manual-round
+          method: post
+          cors: true
+          authorizer: aws_iam
