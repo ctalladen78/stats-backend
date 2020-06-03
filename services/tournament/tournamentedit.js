@@ -27,12 +27,12 @@ export async function main(event, context) {
           // ":ttsTournament": data.tts,
           // ":pairing": data.pairing,
       },
-      ExpressionAttributeNames: {
-          // "#loc": "location",
-          // "#date": "date",
-          // "#end": "end",
-          // "#region": "region",
-      },
+      // ExpressionAttributeNames: {
+      //     "#loc": "location",
+      //     "#date": "date",
+      //     "#end": "end",
+      //     "#region": "region",
+      // },
     };
   } else {
     console.log("Have info");
