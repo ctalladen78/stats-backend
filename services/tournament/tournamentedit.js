@@ -22,7 +22,7 @@ export async function main(event, context) {
         ":country": data.country,
         ":newRegion": data.region,
         ":info": data.info,
-        ":ttsTournament": data.ttsTournament,
+        ":ttsTournament": data.tts,
         ":pairing": data.pairing,
     },
     ExpressionAttributeNames: {
