@@ -64,6 +64,8 @@ export async function main(event, context) {
     };
   }
 
+  console.log(params);
+
     try {
         await dynamoDbLib.call("update", params);
         return success(params.Item);
