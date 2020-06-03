@@ -7,7 +7,8 @@ export async function main(event, context) {
   console.log(data);
   var params;
 
-  if (data.info == "" || undefined) {
+  if (data.info === "" || undefined) {
+    console.log("No info");
     params = {
       TableName: process.env.tournamentInfo,
       Key: {
@@ -34,6 +35,7 @@ export async function main(event, context) {
       },
     };
   } else {
+    console.log("Have info");
     params = {
       TableName: process.env.tournamentInfo,
       Key: {
