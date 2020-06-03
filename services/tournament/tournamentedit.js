@@ -11,7 +11,7 @@ export async function main(event, context) {
     data.region = "";
   }
   if (data.location === undefined) {
-    data.region = "";
+    data.location = "";
   }
 
   console.log(data);
