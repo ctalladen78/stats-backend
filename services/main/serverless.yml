@@ -273,7 +273,7 @@ functions:
           path: get-all-players
           method: get
           cors: true
-          authorizer: aws_iam
+          # authorizer: aws_iam
 
   listfactions:
     handler: listfactions.main
@@ -282,7 +282,7 @@ functions:
           path: get-all-factions
           method: get
           cors: true
-          authorizer: aws_iam
+          # authorizer: aws_iam
 
   listcommanders:
     handler: listcommanders.main
@@ -300,7 +300,7 @@ functions:
           path: get-tournaments
           method: get
           cors: true
-          authorizer: aws_iam
+          # authorizer: aws_iam
 
   findfactiongames:
     handler: findfactiongames.main
