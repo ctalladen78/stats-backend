@@ -291,7 +291,7 @@ functions:
           path: get-all-commanders
           method: get
           cors: true
-          authorizer: aws_iam
+          # authorizer: aws_iam
 
   listtournaments:
     handler: listtournaments.main
