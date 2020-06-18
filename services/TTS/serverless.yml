@@ -1,0 +1,51 @@
+service: stats-app-2-TTS
+
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle
+  - serverless-offline
+
+custom:
+  stage: dev
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: eu-west-2
+
+  apiGateway:
+    restApiId:
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiId
+    restApiRootResourceId:
+      'Fn::ImportValue': ${self:custom.stage}-ExtApiGatewayRestApiRootResourceId
+
+  # These environment variables are made available to our functions
+  # under process.env.
+  environment:
+    tableHistory:
+      'Fn::ImportValue': ${self:custom.stage}-HistoryTableName
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtHistoryTableArn
+
+functions:
+  TTSresult:
+    handler: TTSresult.main
+    events:
+      - http:
+          path: tts-result
+          method: post
+          cors: true
