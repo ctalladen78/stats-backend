@@ -313,4 +313,4 @@ Outputs:
         - MaestersChain
         - Arn
     Export:
-      Name: ${self:custom.stage}-ExtMaestersChainArn2
+      Name: ${self:custom.stage}-ExtMaestersChainArn
