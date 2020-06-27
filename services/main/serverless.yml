@@ -201,7 +201,7 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [ MaestersChain, Arn ]
+        - "Fn::GetAtt": [ MaestersChain2, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
