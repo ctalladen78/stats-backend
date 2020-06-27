@@ -23,7 +23,7 @@ custom:
   tournamentInfo: ${self:custom.stage}-tournament-info
   tournamentPlayers: ${self:custom.stage}-tournament-players
   tournamentGames: ${self:custom.stage}-tournament-games
-  maestersChain: ${self:custom.stage}-maesters-chain2
+  maestersChain: ${self:custom.stage}-maesters-chain
 
 provider:
   name: aws
