@@ -159,12 +159,12 @@ Resources:
     Properties:
       TableName: ${self:custom.maestersChain}
       AttributeDefinitions:
-        - AttributeName: gameId
+        - AttributeName: playerId
           AttributeType: S
         - AttributeName: chain
           AttributeType: N
       KeySchema:
-        - AttributeName: gameId
+        - AttributeName: playerId
           KeyType: HASH
         - AttributeName: chain
           KeyType: RANGE
