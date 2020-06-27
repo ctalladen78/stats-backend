@@ -48,6 +48,8 @@ export async function main(event, context) {
         }
     };
 
+    console.log(params2);
+
     const params3 = {
       TableName: process.env.tablePlayer,
       Item: {
@@ -55,6 +57,8 @@ export async function main(event, context) {
         playerId: data.player2,
         }
     };
+
+    console.log(params3);
 
     const params4 = {
       TableName: process.env.tableFaction,
@@ -64,23 +68,29 @@ export async function main(event, context) {
         }
     };
 
+    console.log(params4);
+
     const params8 = {
-        TableName: process.env.maestersChain,
-        Item: {
-          gameId: unique,
-          chain: data.chain,
-          playerId: data.player1,
-          }
-      };
+      TableName: process.env.maestersChain,
+      Item: {
+        gameId: unique,
+        chain: data.chain,
+        playerId: data.player1,
+        }
+    };
+
+    console.log(params8);
 
     const params9 = {
-        TableName: process.env.maestersChain,
-        Item: {
-          gameId: unique,
-          chain: data.chain,
-          playerId: data.player2,
-          }
-      };
+      TableName: process.env.maestersChain,
+      Item: {
+        gameId: unique,
+        chain: data.chain,
+        playerId: data.player2,
+        }
+    };
+
+    console.log(params9);
 
     const params5 = {
       TableName: process.env.tableFaction,
@@ -90,6 +100,8 @@ export async function main(event, context) {
         }
     };
 
+    console.log(params5);
+
     const params6 = {
       TableName: process.env.tableCommander,
       Item: {
@@ -98,6 +110,8 @@ export async function main(event, context) {
         }
     };
 
+    console.log(params6);
+
     const params7 = {
       TableName: process.env.tableCommander,
       Item: {
@@ -105,6 +119,8 @@ export async function main(event, context) {
         commanderId: data.commander2,
         }
     };
+
+    console.log(params7);
 
     try {
         await dynamoDbLib.call("put", params);
@@ -116,6 +132,7 @@ export async function main(event, context) {
         await dynamoDbLib.call("put", params7);
         await dynamoDbLib.call("put", params8);
         await dynamoDbLib.call("put", params9);
+        console.log("ALL PUTS");
         return success(unique);
     } catch (e) {
         return failure({ status: e });
