@@ -11,17 +11,6 @@ custom:
   # Our stage is based on what is passed in when running serverless
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
-  # Set the table name here so we can use it while testing locally
-#   tableHistory: ${self:custom.stage}-results-history
-#   tablePlayer: ${self:custom.stage}-player-results
-#   tableFaction: ${self:custom.stage}-faction-results
-#   tableCommander: ${self:custom.stage}-commander-results
-#   playerProfile: ${self:custom.stage}-ExtPlayerProfileArn
-#   factionProfile: ${self:custom.stage}-faction-profile
-#   commanderProfile: ${self:custom.stage}-commander-profile2
-#   tournamentInfo: ${self:custom.stage}-tournament-info
-#   tournamentPlayers: ${self:custom.stage}-tournament-players
-#   tournamentGames: ${self:custom.stage}-tournament-games
 
 provider:
   name: aws
@@ -48,11 +37,8 @@ provider:
       'Fn::ImportValue': ${self:custom.stage}-CommanderTableName
     playerProfile: 
       'Fn::ImportValue': ${self:custom.stage}-PlayerProfileTableName
-    # factionProfile: ${self:custom.factionProfile}
-    # commanderProfile: ${self:custom.commanderProfile}
-    # tournamentInfo: ${self:custom.tournamentInfo}
-    # tournamentPlayers: ${self:custom.tournamentPlayers}
-    # tournamentGames: ${self:custom.tournamentGames}
+    maestersChain: 
+      'Fn::ImportValue': ${self:custom.stage}-MaestersChainTableName
 
   iamRoleStatements:
     - Effect: Allow
@@ -70,6 +56,7 @@ provider:
         - 'Fn::ImportValue': ${self:custom.stage}-ExtFactionTableArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtCommanderTableArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtMaestersChainArn
 
 functions:
   submit:
@@ -86,6 +73,24 @@ functions:
     events:
       - http:
           path: submit-TTS
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  maester:
+    handler: maester.main
+    events:
+      - http:
+          path: maester-result
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  maesterTTS:
+    handler: maesterTTS.main
+    events:
+      - http:
+          path: maester-TTS
           method: post
           cors: true
           authorizer: aws_iam
