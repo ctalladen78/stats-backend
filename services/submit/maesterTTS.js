@@ -72,7 +72,7 @@ export async function main(event, context) {
           playerId: data.player1,
           }
       };
-  
+
     const params9 = {
         TableName: process.env.maestersChain,
         Item: {
