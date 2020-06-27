@@ -28,7 +28,7 @@ export async function main(event, context) {
         destroyed2: data.destroyed2,
         auth2: false,
         gameMode: data.gameMode,
-        ranked: "ranked",
+        ranked: "Maesters Chain",
         version: "1.5",
         submittedBy: event.requestContext.identity.cognitoIdentityId,
         tts: true,
