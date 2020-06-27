@@ -73,7 +73,6 @@ export async function main(event, context) {
     const params8 = {
       TableName: process.env.maestersChain,
       Item: {
-        gameId: unique,
         chain: data.chain,
         playerId: data.player1,
         }
@@ -84,7 +83,6 @@ export async function main(event, context) {
     const params9 = {
       TableName: process.env.maestersChain,
       Item: {
-        gameId: unique,
         chain: data.chain,
         playerId: data.player2,
         }

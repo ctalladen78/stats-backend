@@ -153,7 +153,7 @@ Resources:
           KeyType: RANGE
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
-  MaestersChain:
+  MaestersChain2:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Retain
     Properties:
@@ -302,7 +302,7 @@ Outputs:
     Export:
       Name: ${self:custom.stage}-ExtTournamentGamesArn
 
-  MaestersChain:
+  MaestersChain2:
     Value:
       Ref: MaestersChain
     Export:
