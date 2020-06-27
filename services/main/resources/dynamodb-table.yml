@@ -307,7 +307,7 @@ Outputs:
       Ref: MaestersChain
     Export:
       Name: ${self:custom.stage}-MaestersChainTableName
-  TournamentGamesArn:
+  MaestersChainArn:
     Value:
       Fn::GetAtt:
         - MaestersChain
