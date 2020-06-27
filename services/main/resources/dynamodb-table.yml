@@ -306,7 +306,7 @@ Outputs:
     Value:
       Ref: MaestersChain
     Export:
-      Name: ${self:custom.stage}-MaestersChainTableName2
+      Name: ${self:custom.stage}-MaestersChainTableName
   MaestersChainArn:
     Value:
       Fn::GetAtt:

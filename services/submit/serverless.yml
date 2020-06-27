@@ -37,8 +37,8 @@ provider:
       'Fn::ImportValue': ${self:custom.stage}-CommanderTableName
     playerProfile: 
       'Fn::ImportValue': ${self:custom.stage}-PlayerProfileTableName
-    # maestersChain: 
-    #   'Fn::ImportValue': ${self:custom.stage}-MaestersChainTableName
+    maestersChain: 
+      'Fn::ImportValue': ${self:custom.stage}-MaestersChainTableName
 
   iamRoleStatements:
     - Effect: Allow
@@ -56,7 +56,7 @@ provider:
         - 'Fn::ImportValue': ${self:custom.stage}-ExtFactionTableArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtCommanderTableArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
-        # - 'Fn::ImportValue': ${self:custom.stage}-ExtMaestersChainArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtMaestersChainArn
 
 functions:
   submit:
