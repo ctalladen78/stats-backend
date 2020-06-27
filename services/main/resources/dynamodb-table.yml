@@ -310,7 +310,7 @@ Outputs:
   MaestersChainArn:
     Value:
       Fn::GetAtt:
-        - MaestersChain
+        - MaestersChain2
         - Arn
     Export:
       Name: ${self:custom.stage}-ExtMaestersChainArn
