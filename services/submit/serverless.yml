@@ -87,7 +87,7 @@ functions:
           authorizer: aws_iam
 
   maesterTTS:
-    handler: maesterNewName.main
+    handler: maesterTTS.main
     events:
       - http:
           path: maester-TTS
