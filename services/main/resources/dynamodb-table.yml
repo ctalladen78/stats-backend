@@ -304,7 +304,7 @@ Outputs:
 
   MaestersChain2:
     Value:
-      Ref: MaestersChain
+      Ref: MaestersChain2
     Export:
       Name: ${self:custom.stage}-MaestersChainTableName
   MaestersChainArn:
