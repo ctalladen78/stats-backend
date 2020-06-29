@@ -26,6 +26,7 @@ export async function main(event, context) {
       playerInfo: data.player,
       tournamentRating: data.rating,
       tournamentSize: data.size,
+      tournamentRounds: data.rounds,
       }
   };
 
