@@ -185,3 +185,12 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
+  tournamentclose:
+    handler: tournamentclose.main
+    events:
+      - http:
+          path: tournament-close
+          method: post
+          cors: true
+          authorizer: aws_iam

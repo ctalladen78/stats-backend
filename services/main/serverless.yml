@@ -24,6 +24,7 @@ custom:
   tournamentPlayers: ${self:custom.stage}-tournament-players
   tournamentGames: ${self:custom.stage}-tournament-games
   maestersChain: ${self:custom.stage}-maesters-chain
+  tournamentWinners: ${self:custom.stage}-tournamentWinners-chain
 
 provider:
   name: aws
@@ -45,6 +46,7 @@ provider:
     tournamentPlayers: ${self:custom.tournamentPlayers}
     tournamentGames: ${self:custom.tournamentGames} 
     maestersChain: ${self:custom.maestersChain}
+    tournamentWinners: ${self:custom.tournamentWinners}
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
@@ -202,6 +204,20 @@ provider:
       # the specific table for the stage
       Resource:
         - "Fn::GetAtt": [ MaestersChain, Arn ]
+
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      # Restrict our IAM role permissions to
+      # the specific table for the stage
+      Resource:
+        - "Fn::GetAtt": [ TournamentWinners, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
