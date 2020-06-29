@@ -179,7 +179,7 @@ Resources:
         - AttributeName: tournamentId
           AttributeType: S
       KeySchema:
-        - AttributeName: playerId
+        - AttributeName: tournamentId
           KeyType: HASH
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
