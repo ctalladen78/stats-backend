@@ -20,7 +20,7 @@ export async function main(event, context) {
 
   const params2 = {
     TableName: process.env.tournamentWinners,
-    Item: {
+    Key: {
       tournamentId: data,
       }
   };
