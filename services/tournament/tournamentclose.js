@@ -32,7 +32,7 @@ export async function main(event, context) {
 
   try {
     await dynamoDbLib.call("update", params);
-    await dynamoDbLib.call("put", params2);    
+    await dynamoDbLib.call("put", params2);
     return success(params.Item);
   } catch (e) {
     console.log(e);
