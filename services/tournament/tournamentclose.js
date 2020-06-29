@@ -22,11 +22,10 @@ export async function main(event, context) {
     TableName: process.env.tournamentWinners,
     Item: {
       tournamentId: data.tournament.tournamentId,
-      playerId: data.player.playerId,
       tournamentInfo: data.tournament,
+      playerInfo: data.player,
       tournamentRating: data.rating,
       tournamentSize: data.size,
-      playerInfo: data.player,
       }
   };
 
