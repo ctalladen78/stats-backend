@@ -45,8 +45,8 @@ provider:
       'Fn::ImportValue': ${self:custom.stage}-TournamentPlayersTableName
     tournamentGames: 
       'Fn::ImportValue': ${self:custom.stage}-TournamentGamesTableName
-    tournamentWinners: 
-      'Fn::ImportValue': ${self:custom.stage}-TournamentWinnersTableName
+    # tournamentWinners: 
+    #   'Fn::ImportValue': ${self:custom.stage}-TournamentWinnersTableName
 
   iamRoleStatements:
     - Effect: Allow
@@ -69,7 +69,7 @@ provider:
         - 'Fn::ImportValue': ${self:custom.stage}-ExtTournamentInfoArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtTournamentPlayersArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtTournamentGamesArn
-        - 'Fn::ImportValue': ${self:custom.stage}-ExtTournamentWinnersArn
+        # - 'Fn::ImportValue': ${self:custom.stage}-ExtTournamentWinnersArn
 
 functions:
   tournamentlock:
