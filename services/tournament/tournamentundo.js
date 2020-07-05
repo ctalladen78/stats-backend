@@ -29,7 +29,7 @@ export async function main(event) {
         ":destroyed1": data.destroyed1,
         ":destroyed2": data.destroyed2,
         ":resigned1": data.resigned1,
-        ":resigned2": data.resigned2,        
+        ":resigned2": data.resigned2,
         ":auth1": false,
         ":auth2": false,
         ":pointsLeft1": 0,
