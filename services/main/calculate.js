@@ -2,7 +2,7 @@ import * as dynamoDbLib from "../../libs/dynamodb-lib";
 import { success, failure } from "../../libs/response-lib";
 
 //calculates result from passed in vps
-const calculateGameResult = (vp1, vp2, destroyed1, destroyed2, pointsLeft1, pointsLeft2) => {
+const calculateGameResult = (vp1, vp2, destroyed1, destroyed2, pointsLeft1, pointsLeft2, resigned1, resigned2) => {
   var gameResult = "draw";
   var pointsDif = 0;
   console.log(pointsLeft1, pointsLeft2);
@@ -16,7 +16,7 @@ const calculateGameResult = (vp1, vp2, destroyed1, destroyed2, pointsLeft1, poin
     gameResult = "player 2 minor win";
   } else {
     const vpResult = vp1-vp2;
-    if ((vpResult > 4 && !destroyed2) || destroyed1) {
+    if ((vpResult > 4 && !destroyed2) || destroyed1 || resigned2) {
         gameResult = "player 1 crushing win";
     }
     if ((vpResult == 3 || vpResult == 4) && !destroyed1 && !destroyed2) {
@@ -25,7 +25,7 @@ const calculateGameResult = (vp1, vp2, destroyed1, destroyed2, pointsLeft1, poin
     if ((vpResult == 1 || vpResult == 2) && !destroyed1 && !destroyed2) {
         gameResult = "player 1 minor win";
     }
-    if ((vpResult < (-4) && !destroyed1) || destroyed2) {
+    if ((vpResult < (-4) && !destroyed1) || destroyed2 || resigned1) {
         gameResult = "player 2 crushing win";
     }
     if ((vpResult == -1 || vpResult == -2) && !destroyed1 && !destroyed2) {
@@ -210,7 +210,7 @@ export async function main(event) {
     const gameData = await dynamoDbLib.call("get", findGame(event.pathParameters.id)); //call game data
     console.log(gameData);
     if (gameData.Item.auth1 == true && gameData.Item.auth2 == true) {
-      const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2, gameData.Item.destroyed1, gameData.Item.destroyed2, gameData.Item.pointsLeft1, gameData.Item.pointsLeft2);
+      const gameResult = calculateGameResult(gameData.Item.vp1, gameData.Item.vp2, gameData.Item.destroyed1, gameData.Item.destroyed2, gameData.Item.pointsLeft1, gameData.Item.pointsLeft2, gameData.Item.resigned1, gameData.Item.resigned2);
       console.log(gameResult);
       if (gameData.Item.player1 == "#N/A") {
         player1Ranking = 1500;
