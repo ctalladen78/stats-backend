@@ -16,19 +16,32 @@ const calculateGameResult = (vp1, vp2, destroyed1, destroyed2, pointsLeft1, poin
     gameResult = "player 2 minor win";
   } else {
     const vpResult = vp1-vp2;
-    if ((vpResult > 4 && !destroyed2) || destroyed1 || resigned2) {
+    if ((vpResult > 4 && !destroyed2)) {
         gameResult = "player 1 crushing win";
-    } else if ((vpResult == 3 || vpResult == 4) && !destroyed1 && !destroyed2) {
+    }
+    if (vpResult == 3 || vpResult == 4) {
         gameResult = "player 1 major win";
-    } else if ((vpResult == 1 || vpResult == 2) && !destroyed1 && !destroyed2) {
+    }
+    if (vpResult == 1 || vpResult == 2) {
         gameResult = "player 1 minor win";
     }
-    if ((vpResult < (-4) && !destroyed1) || destroyed2 || resigned1) {
+    if (vpResult < (-4)) {
         gameResult = "player 2 crushing win";
-    } else if ((vpResult == -1 || vpResult == -2) && !destroyed1 && !destroyed2) {
+    }
+    if (vpResult == -1 || vpResult == -2) {
         gameResult = "player 2 minor win";
-    } else if ((vpResult == -3 || vpResult == -4) && !destroyed1 && !destroyed2) {
+    }
+    if (vpResult == -3 || vpResult == -4) {
         gameResult = "player 2 major win";
+    }
+    if (resigned1 || destroyed2) {
+      gameResult = "player 2 crushing win";
+    }
+    if (resigned2 || destroyed1) {
+      gameResult = "player 1 crushing win";
+    }
+    if (resigned1 && resigned2) {
+      gameResult = "draw";
     }
   }
 
