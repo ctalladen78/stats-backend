@@ -14,6 +14,8 @@ export async function main(event, context) {
         name: data.name,
         playerId: event.requestContext.identity.cognitoIdentityId,
         commander: data.commander,
+        units: data.units,
+        ncus: data.ncus,
         list: data.list,
         activations: data.activations,
         faction: data.faction,
