@@ -2,7 +2,7 @@ import * as dynamoDbLib from "../../libs/dynamodb-lib";
 import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
-    console.log(event.pathParameters.id)
+    console.log(event.pathParameters.id);
     const params = {
         TableName: process.env.savedLists,
         KeyConditionExpression: "playerId = :playerId",
