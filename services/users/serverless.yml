@@ -29,8 +29,8 @@ provider:
       'Fn::ImportValue': ${self:custom.stage}-PlayerTableName
     playerProfile: 
       'Fn::ImportValue': ${self:custom.stage}-PlayerProfileTableName
-    # savedLists: 
-    #   'Fn::ImportValue': ${self:custom.stage}-SavedListsTableName
+    savedLists: 
+      'Fn::ImportValue': ${self:custom.stage}-SavedListsTableName
 
   iamRoleStatements:
     - Effect: Allow
@@ -45,7 +45,7 @@ provider:
       Resource:
         - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerTableArn
-        # - 'Fn::ImportValue': ${self:custom.stage}-ExtSavedListsArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtSavedListsArn
 
 functions:
   createprofile:
@@ -93,11 +93,11 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  # savelist:
-  #   handler: savelist.main
-  #   events:
-  #     - http:
-  #         path: save-list
-  #         method: post
-  #         cors: true
-  #         authorizer: aws_iam
+  savelist:
+    handler: savelist.main
+    events:
+      - http:
+          path: save-list
+          method: post
+          cors: true
+          authorizer: aws_iam
