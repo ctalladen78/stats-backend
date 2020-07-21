@@ -8,20 +8,7 @@ plugins:
   - serverless-offline
 
 custom:
-  # Our stage is based on what is passed in when running serverless
-  # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
-  # Set the table name here so we can use it while testing locally
-#   tableHistory: ${self:custom.stage}-results-history
-#   tablePlayer: ${self:custom.stage}-player-results
-#   tableFaction: ${self:custom.stage}-faction-results
-#   tableCommander: ${self:custom.stage}-commander-results
-#   playerProfile: ${self:custom.stage}-ExtPlayerProfileArn
-#   factionProfile: ${self:custom.stage}-faction-profile
-#   commanderProfile: ${self:custom.stage}-commander-profile2
-#   tournamentInfo: ${self:custom.stage}-tournament-info
-#   tournamentPlayers: ${self:custom.stage}-tournament-players
-#   tournamentGames: ${self:custom.stage}-tournament-games
 
 provider:
   name: aws
@@ -42,8 +29,8 @@ provider:
       'Fn::ImportValue': ${self:custom.stage}-PlayerTableName
     playerProfile: 
       'Fn::ImportValue': ${self:custom.stage}-PlayerProfileTableName
-    savedLists: 
-      'Fn::ImportValue': ${self:custom.stage}-SavedListsTableName
+    # savedLists: 
+    #   'Fn::ImportValue': ${self:custom.stage}-SavedListsTableName
 
   iamRoleStatements:
     - Effect: Allow
@@ -58,7 +45,7 @@ provider:
       Resource:
         - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerTableArn
-        - 'Fn::ImportValue': ${self:custom.stage}-ExtSavedListsArn
+        # - 'Fn::ImportValue': ${self:custom.stage}-ExtSavedListsArn
 
 functions:
   createprofile:
@@ -106,11 +93,11 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  savelist:
-    handler: savelist.main
-    events:
-      - http:
-          path: save-list
-          method: post
-          cors: true
-          authorizer: aws_iam
+  # savelist:
+  #   handler: savelist.main
+  #   events:
+  #     - http:
+  #         path: save-list
+  #         method: post
+  #         cors: true
+  #         authorizer: aws_iam
