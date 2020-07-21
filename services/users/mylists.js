@@ -5,14 +5,14 @@ export async function main(event) {
     console.log(event.pathParameters.id);
     const params = {
         TableName: process.env.savedLists,
-        KeyConditionExpression: "playerId = :playerId",
+        FilterExpression: "playerId = :playerId",
         ExpressionAttributeValues: {
-        ":playerId": event.pathParameters.id
+            ":playerId": event.pathParameters.id
         },
     };
 
     try {
-        const result = await dynamoDbLib.call("query", params);
+        const result = await dynamoDbLib.call("scan", params);
         // Return the matching list of items in response body
         return success(result.Items);
     } catch (e) {
