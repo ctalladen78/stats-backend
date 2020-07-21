@@ -25,6 +25,7 @@ custom:
   tournamentGames: ${self:custom.stage}-tournament-games
   maestersChain: ${self:custom.stage}-maesters-chain
   tournamentWinners: ${self:custom.stage}-tournament-winners
+  savedLists: ${self:custom.stage}-saved-lists
 
 provider:
   name: aws
@@ -47,6 +48,7 @@ provider:
     tournamentGames: ${self:custom.tournamentGames} 
     maestersChain: ${self:custom.maestersChain}
     tournamentWinners: ${self:custom.tournamentWinners}
+    savedLists: ${self:custom.savedLists}
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
