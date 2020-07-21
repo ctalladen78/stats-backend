@@ -106,7 +106,7 @@ functions:
     handler: mylists.main
     events:
       - http:
-          path: get-my-lists
+          path: get-my-lists/{id}
           method: get
           cors: true
           authorizer: aws_iam
