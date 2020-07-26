@@ -10,12 +10,12 @@ export async function main(event) {
   console.log(data);
 
   const params = {
-      TableName: process.env.tableHistory,
-      Item: {
-      gameId: unique,
-      vp1: data.vp1,
-      vp2: data.vp2,
-      }
+    TableName: process.env.tableHistory,
+    Item: {
+    gameId: unique,
+    vp1: data.vp1,
+    vp2: data.vp2,
+    }
   };
 
   console.log(params);

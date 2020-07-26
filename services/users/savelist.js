@@ -7,6 +7,8 @@ export async function main(event, context) {
   const data = JSON.parse(event.body);
   const unique = uuid.v1();
 
+  console.log(data);
+
   const params = {
     TableName: process.env.savedLists,
     Item: {
@@ -20,7 +22,7 @@ export async function main(event, context) {
         activations: data.activations,
         faction: data.faction,
         points: data.points,
-        version: "1.5",
+        version: "1.5.1",
     }
   };
 
