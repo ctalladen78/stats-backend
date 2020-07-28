@@ -6,9 +6,11 @@ import { success, failure } from "../../libs/response-lib";
 export async function main(event) {
   console.log(event);
   console.log(event.body);
+  const decoded = decodeURI(event.body);
+  console.log(decoded);
 
   const unique = uuid.v1();
-  const data = JSON.parse(decodeURI(event.body));
+  const data = JSON.parse(decoded);
 
   console.log(data);
 
