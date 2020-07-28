@@ -7,6 +7,7 @@ export async function main(event) {
   const unique = uuid.v1();
   const data = JSON.parse(event.body);
 
+  console.log(event);
   console.log(data);
 
   const params = {
