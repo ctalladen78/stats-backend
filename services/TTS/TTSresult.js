@@ -8,7 +8,7 @@ export async function main(event) {
   console.log(event.body);
   const decoded = decodeURI(event.body);
   console.log(decoded);
-  const decodeReplace = decoded.replace("%3a", ":").replace("%3a", ":").replace("%2c", ",")
+  const decodeReplace = decoded.replace("%3a", ":").replace("%3a", ":").replace("%2c", ",");
   console.log(decodeReplace);
 
   const unique = uuid.v1();
