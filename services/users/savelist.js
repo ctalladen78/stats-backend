@@ -26,6 +26,7 @@ export async function main(event, context) {
         unreleased: data.unreleased,
         notFinal: data.notFinal,
         version: "1.5.1",
+        createdAt: Date.now(),
     }
   };
 
