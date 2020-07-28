@@ -50,11 +50,11 @@ functions:
           method: post
           cors: true
 
-functions:
-  ListGet:
-    handler: listget.main
-    events:
-      - http:
-          path: tts-list
-          method: get
-          cors: true
+# functions:
+#   ListGet:
+#     handler: listget.main
+#     events:
+#       - http:
+#           path: tts-list
+#           method: get
+#           cors: true
