@@ -22,6 +22,9 @@ export async function main(event, context) {
         activations: data.activations,
         faction: data.faction,
         points: data.points,
+        ks: data.ks,
+        unreleased: data.unreleased,
+        notFinal: data.notFinal,
         version: "1.5.1",
     }
   };
