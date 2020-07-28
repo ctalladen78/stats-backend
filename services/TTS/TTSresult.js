@@ -4,10 +4,11 @@ import { success, failure } from "../../libs/response-lib";
 
 
 export async function main(event) {
+  console.log(event);
+  console.log(event.body);
   const unique = uuid.v1();
   const data = JSON.parse(event.body);
 
-  console.log(event);
   console.log(data);
 
   const params = {
