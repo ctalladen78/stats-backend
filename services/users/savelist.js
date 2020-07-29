@@ -18,6 +18,7 @@ export async function main(event, context) {
         commander: data.commander,
         units: data.units,
         ncus: data.ncus,
+        enemy: data.enemy,
         list: data.list,
         activations: data.activations,
         faction: data.faction,
