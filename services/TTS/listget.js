@@ -3,11 +3,13 @@ import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
   console.log(event);
-  console.log(event.listId);
+  console.log(event.queryStringParameters);
+  console.log(event.queryStringParameters.listId);
+
   const params = {
     TableName: process.env.savedLists,
     Key: {
-      listId: event.listId
+      listId: event.queryStringParameters.listId
     }
   };
 
