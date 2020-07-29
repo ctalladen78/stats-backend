@@ -27,6 +27,8 @@ provider:
   environment:
     tableHistory:
       'Fn::ImportValue': ${self:custom.stage}-HistoryTableName
+    savedLists: 
+      'Fn::ImportValue': ${self:custom.stage}-SavedListsTableName
 
   iamRoleStatements:
     - Effect: Allow
@@ -40,6 +42,7 @@ provider:
         - dynamodb:DeleteItem
       Resource:
         - 'Fn::ImportValue': ${self:custom.stage}-ExtHistoryTableArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtSavedListsArn
 
 functions:
   TTSresult:
@@ -50,11 +53,11 @@ functions:
           method: post
           cors: true
 
-# functions:
-#   ListGet:
-#     handler: listget.main
-#     events:
-#       - http:
-#           path: tts-list
-#           method: get
-#           cors: true
+functions:
+  ListGet:
+    handler: listget.main
+    events:
+      - http:
+          path: tts-list
+          method: get
+          cors: true
