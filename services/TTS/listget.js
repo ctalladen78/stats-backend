@@ -2,14 +2,15 @@ import * as dynamoDbLib from "../../libs/dynamodb-lib";
 import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
-  console.log(event);
-  console.log(event.queryStringParameters);
-  console.log(event.queryStringParameters.listId);
+  const listIdWith = event.queryStringParameters.listId;
+  const listId = listIdWith.slice(0, -1).slice(0, 1);
+
+  console.log(listId);
 
   const params = {
     TableName: process.env.savedLists,
     Key: {
-      listId: event.queryStringParameters.listId
+      listId: listId
     }
   };
 
