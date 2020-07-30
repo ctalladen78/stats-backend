@@ -5,7 +5,7 @@ export async function main(event) {
   console.log(event);
   const fullstring = event.queryStringParameters.listId;
   const listId = fullstring.slice(0,36);
-  const playerId = fullstring.slice(36)
+  const playerId = fullstring.slice(36);
 
   console.log(listId, playerId);
 
