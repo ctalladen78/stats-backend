@@ -13,13 +13,16 @@ export async function main(event) {
     }
   };
 
+  console.log(params);
+
   try {
     const result = await dynamoDbLib.call("get", params);
     console.log(result);
     console.log(result.Item);
     console.log(result.Item.list);
-    return success(result.Item.list);
+    return success(result);
   } catch (e) {
+    console.log(e);
     return failure({ status: e });
   }
 }
