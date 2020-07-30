@@ -3,16 +3,17 @@ import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
   console.log(event);
-  const listIdWith = event.queryStringParameters.listId;
-  const listId = {listIdWith};
+  const fullstring = event.queryStringParameters.listId;
+  const listId = fullstring.slice(0,36);
+  const playerId = fullstring.slice(36)
 
-  console.log(listId);
+  console.log(listId, playerId);
 
   const params = {
     TableName: process.env.savedLists,
     Key: {
-      listId: listIdWith,
-      playerId: "test"
+      listId: listId,
+      playerId: playerId,
     }
   };
 
