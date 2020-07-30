@@ -3,7 +3,7 @@ import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
   const listIdWith = event.queryStringParameters.listId;
-  const listId = listIdWith.slice(1, 37);
+  const listId = {listIdWith};
 
   console.log(listId);
 
