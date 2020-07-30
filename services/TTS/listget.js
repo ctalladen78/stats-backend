@@ -10,7 +10,7 @@ export async function main(event) {
 
   const params = {
     TableName: process.env.savedLists,
-    Key: {
+    KeyConditionExpression: {
       listId: listIdWith
     }
   };
