@@ -215,3 +215,12 @@ functions:
           method: get
           cors: true
           # authorizer: aws_iam
+
+  updateplayer:
+    handler: updateplayer.main
+    events:
+      - http:
+          path: update-player
+          method: post
+          cors: true
+          authorizer: aws_iam
