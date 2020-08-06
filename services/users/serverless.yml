@@ -110,3 +110,12 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+
+  getlist:
+    handler: getlist.main
+    events:
+      - http:
+          path: get-a-list/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
