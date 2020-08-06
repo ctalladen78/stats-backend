@@ -24,7 +24,7 @@ export async function main(event, context) {
       Key: {
         tournamentId: data.tournamentId.tournamentId,
       },
-      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, maxPlayers = :maxPlayers, country = :country, #region = :newRegion, ttsTournament = :ttsTournament, pairing = :pairing",
+      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, points = :points, ks = :ks, unreleased = :unreleased, notFinal = :notFinal, maxPlayers = :maxPlayers, country = :country, #region = :newRegion, ttsTournament = :ttsTournament, pairing = :pairing",
       ExpressionAttributeValues: {
           ":tournamentName": data.tournamentName,
           ":newLocation": data.location,
@@ -32,6 +32,10 @@ export async function main(event, context) {
           ":newEnd": data.end,
           ":allowSignup": data.allowSignup,
           ":maxPlayers": data.maxPlayers,
+          ":points": data.points,
+          ":ks": data.ks,
+          ":unreleased": data.unreleased,
+          ":notFinal": data.notFinal,
           ":country": data.country,
           ":newRegion": data.region,
           ":ttsTournament": data.tts,
@@ -51,7 +55,7 @@ export async function main(event, context) {
       Key: {
         tournamentId: data.tournamentId.tournamentId,
       },
-      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, maxPlayers = :maxPlayers, country = :country, #region = :newRegion, info = :info, ttsTournament = :ttsTournament, pairing = :pairing",
+      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, maxPlayers = :maxPlayers, points = :points, ks = :ks, unreleased = :unreleased, notFinal = :notFinal, country = :country, #region = :newRegion, info = :info, ttsTournament = :ttsTournament, pairing = :pairing",
       ExpressionAttributeValues: {
           ":tournamentName": data.tournamentName,
           ":newLocation": data.location,
@@ -59,6 +63,10 @@ export async function main(event, context) {
           ":newEnd": data.end,
           ":allowSignup": data.allowSignup,
           ":maxPlayers": data.maxPlayers,
+          ":points": data.points,
+          ":ks": data.ks,
+          ":unreleased": data.unreleased,
+          ":notFinal": data.notFinal,
           ":country": data.country,
           ":newRegion": data.region,
           ":info": data.info,
