@@ -37,7 +37,7 @@ export async function main(event, context) {
           tournamentId: data.tournamentId,
           playerId: data.playerId,
         },
-        UpdateExpression: "SET faction = :faction, commander1 = :commander1, commander2 = :commander2, club = :club",
+        UpdateExpression: "SET faction = :faction, commander1 = :commander1, commander2 = :commander2, club = :club REMOVE list1, list2",
         ExpressionAttributeValues: {
             ":faction": data.faction,
             ":commander1": data.commander1,
