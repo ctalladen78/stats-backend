@@ -17,7 +17,7 @@ export async function main(event) {
         Item: {
             listId: data.listId,
             name: data.name,
-            playerId: "",
+            playerId: {},
             commander: data.commander,
             units: data.units,
             ncus: data.ncus,
