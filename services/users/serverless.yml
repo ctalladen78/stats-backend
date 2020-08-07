@@ -119,3 +119,12 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+
+  unlinklist:
+    handler: unlinklist.main
+    events:
+      - http:
+          path: unlink-list/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
