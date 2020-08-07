@@ -125,6 +125,6 @@ functions:
     events:
       - http:
           path: unlink-list/{id}
-          method: put
+          method: post
           cors: true
           authorizer: aws_iam
