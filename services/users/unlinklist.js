@@ -5,7 +5,8 @@ export async function main(event) {
     const params = {
         TableName: process.env.savedLists,
         Key: {
-            listId: event.pathParameters.id
+            listId: event.pathParameters.id,
+            playerId: event.requestContext.identity.cognitoIdentityId,
         },
         UpdateExpression: "REMOVE playerId",
     };
