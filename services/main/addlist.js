@@ -3,9 +3,11 @@ import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
     const data = JSON.parse(event.body);
+    const player = JSON.parse(event.body.player);
     console.log(data);
     console.log(data.player);
     console.log(data.list);
+    console.log(player);
 
     if (data.player === 1) {
         console.log("HERE");
