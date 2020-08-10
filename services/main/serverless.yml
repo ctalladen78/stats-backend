@@ -426,6 +426,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  addlist:
+    handler: submitlists.main
+    events:
+      - http:
+          path: add-list/{id}
+          method: post
+          cors: true
+          authorizer: aws_iam
+
 # Create our resources with separate CloudFormation templates
 resources:
   # API Gateway Errors
