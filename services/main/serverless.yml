@@ -427,7 +427,7 @@ functions:
           authorizer: aws_iam
 
   addlist:
-    handler: submitlists.main
+    handler: addlist.main
     events:
       - http:
           path: add-list/{id}
