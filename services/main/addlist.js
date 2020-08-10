@@ -3,9 +3,10 @@ import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
     const data = JSON.parse(event.body);
-    console.log(data);
+    console.log(data, data.player);
 
     if (data.player === 1) {
+        console.log("HERE");
         const params = {
         TableName: process.env.tableHistory,
         Key: {
