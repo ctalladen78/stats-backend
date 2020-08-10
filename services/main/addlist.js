@@ -3,13 +3,11 @@ import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
     const data = JSON.parse(event.body);
-    const player = JSON.parse(event.body.player);
     console.log(data);
     console.log(data.player);
     console.log(data.list);
-    console.log(player);
 
-    if (player === 1) {
+    // if (data.player === 1) {
         console.log("HERE");
         const params = {
         TableName: process.env.tableHistory,
@@ -30,26 +28,26 @@ export async function main(event) {
         console.log(e);
         return failure(e);
         }
-    }
+    // }
 
-    if (data.player === 2) {
-        const params = {
-        TableName: process.env.tableHistory,
-        Key: {
-            gameId: event.pathParameters.id,
-        },
-        UpdateExpression: "SET list2Location = :list2Location",
-        ExpressionAttributeValues: {
-            ":list2Location": data.list,
-        },
-        };
+    // if (data.player === 2) {
+    //     const params = {
+    //     TableName: process.env.tableHistory,
+    //     Key: {
+    //         gameId: event.pathParameters.id,
+    //     },
+    //     UpdateExpression: "SET list2Location = :list2Location",
+    //     ExpressionAttributeValues: {
+    //         ":list2Location": data.list,
+    //     },
+    //     };
 
-        try{
-        await dynamoDbLib.call("update", params);
-        return success(true);
-        } catch (e) {
-        console.log(e);
-        return failure(e);
-        }
-    }
+    //     try{
+    //     await dynamoDbLib.call("update", params);
+    //     return success(true);
+    //     } catch (e) {
+    //     console.log(e);
+    //     return failure(e);
+    //     }
+    // }
 }
