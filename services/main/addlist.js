@@ -9,7 +9,7 @@ export async function main(event) {
     console.log(data.list);
     console.log(player);
 
-    if (data.player === 1) {
+    if (player === 1) {
         console.log("HERE");
         const params = {
         TableName: process.env.tableHistory,
