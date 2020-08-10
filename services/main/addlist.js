@@ -16,6 +16,7 @@ export async function main(event) {
             ":list1Location": data.list,
         },
         };
+        console.log(params);
 
         try{
         await dynamoDbLib.call("update", params);
