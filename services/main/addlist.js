@@ -6,7 +6,6 @@ export async function main(event) {
     console.log(data);
 
     if (data.player === 1) {
-        console.log("HERE");
         const params = {
         TableName: process.env.tableHistory,
         Key: {
