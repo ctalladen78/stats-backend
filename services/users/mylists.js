@@ -10,8 +10,12 @@ export async function main(event) {
         },
     };
 
+    console.log(params);
+
     try {
         const result = await dynamoDbLib.call("scan", params);
+        console.log(result);
+        console.log(result.Items);
         return success(result.Items);
     } catch (e) {
         console.log(e);
