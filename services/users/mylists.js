@@ -12,22 +12,22 @@ var allResults = [];
         },
     };
 
-    const getAllData = async (params) => { 
+    const getAllData = async (params) => {
 
         console.log("Querying Table");
         let data = await dynamoDbLib.call("scan", params);
-    
+
         if(data['Items'].length > 0) {
             allResults = [...allResults, ...data['Items']];
         }
-    
+
         if (data.LastEvaluatedKey) {
             params.ExclusiveStartKey = data.LastEvaluatedKey;
             return await getAllData(params);
         } else {
             return data;
         }
-    }
+    };
 
     try {
         await getAllData(params);
