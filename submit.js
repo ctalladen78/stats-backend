@@ -32,7 +32,7 @@ export async function main(event, context) {
         auth2: data.auth2,
         gameMode: data.gameMode,
         ranked: "tournament",
-        version: "1.5",
+        version: "1.6",
         submittedBy: event.requestContext.identity.cognitoIdentityId,
         createdAt: Date.now(),
         tournamentId: data.tournamentId,
@@ -125,7 +125,7 @@ export async function main(event, context) {
         auth2: false,
         gameMode: data.gameMode,
         ranked: "ranked",
-        version: "1.5",
+        version: "1.6",
         submittedBy: event.requestContext.identity.cognitoIdentityId,
         createdAt: Date.now(),
       }

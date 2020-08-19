@@ -29,7 +29,7 @@ export async function main(event, context) {
         auth2: false,
         gameMode: data.gameMode,
         ranked: "Maesters Chain",
-        version: "1.5",
+        version: "1.6",
         submittedBy: event.requestContext.identity.cognitoIdentityId,
         tts: true,
         createdAt: Date.now(),
