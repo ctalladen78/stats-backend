@@ -262,12 +262,12 @@ export async function main(event) {
       if (gameData.Item.commander2 !== "#N/A") {
         var commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));  // call faction 2 data from table
       }
-      if (commander1Profile.Item.ranking !== undefined) {
+      if (commander1Profile !== undefined) {
         var commander1Ranking = commander1Profile.Item.ranking;
       } else {
         commander1Ranking = 0;
       }
-      if (commander2Profile.Item.ranking !== undefined) {
+      if (commander2Profile !== undefined) {
         var commander2Ranking = commander1Profile.Item.ranking;
       } else {
         commander2Ranking = 0;
