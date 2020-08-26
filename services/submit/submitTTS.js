@@ -125,7 +125,7 @@ export async function main(event, context) {
     if (data.rankedCheck == true) {
       data.ranked = "ranked";
     } else {
-      data.ranked = "unranked"
+      data.ranked = "unranked";
     }
     console.log("No Game Id");
     const params = {
