@@ -122,6 +122,11 @@ export async function main(event, context) {
     if (data.gameModeCheck == true) {
       data.gameMode = "#N/A";
     }
+    if (data.rankedCheck == true) {
+      data.ranked = "ranked";
+    } else {
+      data.ranked = "unranked"
+    }
     console.log("No Game Id");
     const params = {
       TableName: process.env.tableHistory,
@@ -144,7 +149,7 @@ export async function main(event, context) {
         resigned2: data.resigned2,
         auth2: false,
         gameMode: data.gameMode,
-        ranked: "ranked",
+        ranked: data.ranked,
         version: "1.6",
         submittedBy: event.requestContext.identity.cognitoIdentityId,
         tts: true,

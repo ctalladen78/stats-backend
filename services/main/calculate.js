@@ -49,14 +49,15 @@ const calculateGameResult = (vp1, vp2, destroyed1, destroyed2, pointsLeft1, poin
 };
 
 // calculate rankings changes and gives out an array
-const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1, factionRanking2, gameResult) => {
-    const ranking1 = Math.pow(10, (playerRanking1 + factionRanking1)/400);
-    const ranking2 = Math.pow(10, (playerRanking2 + factionRanking2)/400);
+const calculatePlayerRanking = (playerRanking1, playerRanking2, factionRanking1, factionRanking2, commander1Ranking, commander2Ranking, gameResult) => {
+  console.log(playerRanking1, playerRanking2, factionRanking1, factionRanking2, commander1Ranking, commander2Ranking, gameResult);
+    const ranking1 = Math.pow(10, (playerRanking1 + factionRanking1 + commander1Ranking)/400);
+    const ranking2 = Math.pow(10, (playerRanking2 + factionRanking2 + commander2Ranking)/400);
 
     const winChance = ranking1/(ranking1 + ranking2);
 
     const kFactor = 50;
-    const kFaction = 10;
+    const kFaction = 5;
     var rankingChange = 0;
     var factionChange = 0;
 
@@ -261,7 +262,17 @@ export async function main(event) {
       if (gameData.Item.commander2 !== "#N/A") {
         var commander2Profile = await dynamoDbLib.call("get", findCommanderRank(gameData.Item.commander2, gameData.Item.faction2));  // call faction 2 data from table
       }
-      const rankingChanges = calculatePlayerRanking(player1Ranking, player2Ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, gameResult);
+      if (commander1Profile.Item.ranking !== undefined) {
+        var commander1Ranking = commander1Profile.Item.ranking;
+      } else {
+        var commander1Ranking = 0;
+      }
+      if (commander2Profile.Item.ranking !== undefined) {
+        var commander2Ranking = commander1Profile.Item.ranking;
+      } else {
+        var commander2Ranking = 0;
+      }
+      const rankingChanges = calculatePlayerRanking(player1Ranking, player2Ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, commander1Ranking, commander2Ranking, gameResult);
       console.log(rankingChanges);
       // insert into databases
       const params = {
@@ -276,10 +287,10 @@ export async function main(event) {
           ReturnValues: "ALL_NEW"
         };
         await dynamoDbLib.call("update", params);
-        if (gameData.Item.player1 !== "#N/A") {
+        if (gameData.Item.player1 !== "#N/A" && gameData.Item.ranked !== "unranked") {
           await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Ranking + rankingChanges[0], gameData));
         }
-        if (gameData.Item.player2 !== "#N/A") {
+        if (gameData.Item.player2 !== "#N/A" && gameData.Item.ranked !== "unranked") {
           await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Ranking - rankingChanges[0], gameData));
         }
         if (gameData.Item.faction1 != gameData.Item.faction2){
