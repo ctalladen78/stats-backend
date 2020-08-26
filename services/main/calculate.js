@@ -265,12 +265,12 @@ export async function main(event) {
       if (commander1Profile.Item.ranking !== undefined) {
         var commander1Ranking = commander1Profile.Item.ranking;
       } else {
-        var commander1Ranking = 0;
+        commander1Ranking = 0;
       }
       if (commander2Profile.Item.ranking !== undefined) {
         var commander2Ranking = commander1Profile.Item.ranking;
       } else {
-        var commander2Ranking = 0;
+        commander2Ranking = 0;
       }
       const rankingChanges = calculatePlayerRanking(player1Ranking, player2Ranking, faction1Profile.Item.ranking, faction2Profile.Item.ranking, commander1Ranking, commander2Ranking, gameResult);
       console.log(rankingChanges);
