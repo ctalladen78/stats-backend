@@ -2,7 +2,7 @@ import * as dynamoDbLib from "../../libs/dynamodb-lib";
 import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
-    console.log(event);
+  console.log(event);
 
   const params = {
     TableName: process.env.savedLists,
@@ -19,7 +19,7 @@ export async function main(event) {
     console.log(result);
     return success(result.Items);
   } catch (e) {
-    console.log(e);
-    return failure({ status: e });
+    console.log(e, "Cannot Find List", event.pathParameters.id);
+    return failure({ status: event.pathParameters.id });
   }
 }
