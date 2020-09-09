@@ -1,6 +1,17 @@
 import * as dynamoDbLib from "../../libs/dynamodb-lib";
 import { success, failure } from "../../libs/response-lib";
 
+const findGame = (data) => {
+  const params = {
+    TableName: process.env.tournamentGames,
+    Key: {
+      gameId: data.gameId,
+      tournamentId: data.tournamentId,
+    },
+  };
+  return params;
+};
+
 export async function main(event) {
     console.log(event);
 
@@ -73,13 +84,19 @@ export async function main(event) {
       };
     }
 
-    try{
+  try{
+    await dynamoDbLib.call("get", findGame(data));
+    try {
       await dynamoDbLib.call("update", params);
       if (data.auth1 === true && data.auth2 === true) {
         await dynamoDbLib.call("update", params2);
         await dynamoDbLib.call("update", params3);
       }
-    return success(true);
+      return success(true);
+    } catch (e) {
+      console.log(e);
+      return failure(e);
+    }
   } catch (e) {
     console.log(e);
     return failure(e);

@@ -33,7 +33,7 @@ export async function main(event, context) {
         hadBye: false,
         retired: false,
         signUpAt: Date.now(),
-        waitingList: true,
+        waitingList: false,
       }
     };
 
@@ -67,7 +67,7 @@ export async function main(event, context) {
         hadBye: false,
         retired: false,
         signUpAt: Date.now(),
-        waitingList: true,
+        waitingList: false,
       }
     };
 
