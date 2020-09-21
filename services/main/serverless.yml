@@ -399,15 +399,6 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  submitplayeradmin:
-    handler: submitplayeradmin.main
-    events:
-      - http:
-          path: add-player-admin
-          method: post
-          cors: true
-          authorizer: aws_iam
-
   swissround:
     handler: swissround.main
     events:
