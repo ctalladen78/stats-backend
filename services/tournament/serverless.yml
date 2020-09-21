@@ -135,6 +135,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  tournamentplayers:
+    handler: mytournaments.main
+    events:
+      - http:
+          path: get-my-tournament/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   tournamentgames:
     handler: tournamentgames.main
     events:
