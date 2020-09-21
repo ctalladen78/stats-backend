@@ -381,20 +381,20 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  createtournament:
-    handler: createtournament.main
-    events:
-      - http:
-          path: createtournament
-          method: post
-          cors: true
-          authorizer: aws_iam
-
   submitplayer:
     handler: submitplayer.main
     events:
       - http:
           path: add-player
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  submitplayeradmin:
+    handler: submitplayeradmin.main
+    events:
+      - http:
+          path: add-player-admin
           method: post
           cors: true
           authorizer: aws_iam

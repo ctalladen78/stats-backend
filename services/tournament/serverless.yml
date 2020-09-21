@@ -72,6 +72,15 @@ provider:
         - 'Fn::ImportValue': ${self:custom.stage}-ExtTournamentWinnersArn
 
 functions:
+  createtournament:
+    handler: createtournament.main
+    events:
+      - http:
+          path: createtournament
+          method: post
+          cors: true
+          authorizer: aws_iam
+
   tournamentlock:
     handler: tournamentlock.main
     events:
@@ -135,7 +144,7 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  tournamentplayers:
+  mytournaments:
     handler: mytournaments.main
     events:
       - http:

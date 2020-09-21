@@ -13,7 +13,7 @@ export async function main(event, context) {
     },
     UpdateExpression: "SET waitingList = :waitingList",
     ExpressionAttributeValues: {
-      ":waitingList": falses,
+      ":waitingList": false,
     },
   };
 
