@@ -15,6 +15,7 @@ export async function main(event, context) {
       secondName: data.secondName,
       userName: userName,
       ranking: 1500,
+      unclaimed: true,
       newRegion: "N/A",
       country: "N/A",
       version: 2,
