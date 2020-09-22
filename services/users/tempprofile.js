@@ -5,7 +5,7 @@ import uuid from "uuid";
 export async function main(event, context) {
   const data = JSON.parse(event.body);
   const unique = uuid.v1();
-  const userName = data.firstName.concat(data.secondName)
+  const userName = data.firstName.concat(data.secondName);
 
   const params = {
     TableName: process.env.playerProfile,
