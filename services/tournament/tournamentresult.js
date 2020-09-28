@@ -1,5 +1,5 @@
 import * as dynamoDbLib from "../../libs/dynamodb-lib";
-import { success, failure } from "../../libs/response-lib";
+import { success, failure, buildResponse} from "../../libs/response-lib";
 
 const findGame = (data) => {
   const params = {
@@ -101,7 +101,7 @@ export async function main(event) {
         return failure(e);
       }
     } else {
-      return failure("Result Already Submitted");
+      return buildResponse(500, "Result Already Submitted");
     }
   } catch (e) {
     console.log(e);
