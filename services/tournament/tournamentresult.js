@@ -87,8 +87,8 @@ export async function main(event) {
   try{
     const result = await dynamoDbLib.call("get", findGame(data));
     console.log(result);
-    console.log(result.resultSubmitted);
-    if (result.resultSubmitted === false) {
+    console.log(result.Item.resultSubmitted);
+    if (result.Item.resultSubmitted === false) {
       try {
         await dynamoDbLib.call("update", params);
         if (data.auth1 === true && data.auth2 === true) {
