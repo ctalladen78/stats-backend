@@ -86,6 +86,8 @@ export async function main(event) {
 
   try{
     const result = await dynamoDbLib.call("get", findGame(data));
+    console.log(result);
+    console.log(result.resultSubmitted);
     if (result.resultSubmitted === false) {
       try {
         await dynamoDbLib.call("update", params);
