@@ -86,17 +86,20 @@ export async function main(event) {
 
   try{
     const result = await dynamoDbLib.call("get", findGame(data));
-    console.log(result);
-    try {
-      await dynamoDbLib.call("update", params);
-      if (data.auth1 === true && data.auth2 === true) {
-        await dynamoDbLib.call("update", params2);
-        await dynamoDbLib.call("update", params3);
+    if (result.resultSubmitted === false) {
+      try {
+        await dynamoDbLib.call("update", params);
+        if (data.auth1 === true && data.auth2 === true) {
+          await dynamoDbLib.call("update", params2);
+          await dynamoDbLib.call("update", params3);
+        }
+        return success(true);
+      } catch (e) {
+        console.log(e);
+        return failure(e);
       }
-      return success(true);
-    } catch (e) {
-      console.log(e);
-      return failure(e);
+    } else {
+      return failure("Result Already Submitted");
     }
   } catch (e) {
     console.log(e);
