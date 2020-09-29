@@ -101,8 +101,7 @@ export async function main(event) {
         return failure(e);
       }
     } else {
-      console.log("RETURN CUSTOM ERROR");
-      return buildResponse(500, "Result Already Submitted");
+      return failure("Result Already Submitted");
     }
   } catch (e) {
     console.log(e);
