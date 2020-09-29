@@ -1,5 +1,5 @@
 import * as dynamoDbLib from "../../libs/dynamodb-lib";
-import { success, failure, buildResponse} from "../../libs/response-lib";
+import { success, failure} from "../../libs/response-lib";
 
 const findGame = (data) => {
   const params = {
