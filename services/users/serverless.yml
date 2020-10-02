@@ -31,6 +31,8 @@ provider:
       'Fn::ImportValue': ${self:custom.stage}-PlayerProfileTableName
     savedLists: 
       'Fn::ImportValue': ${self:custom.stage}-SavedListsTableName
+    notifications: 
+      'Fn::ImportValue': ${self:custom.stage}-NotificationsTableName
 
   iamRoleStatements:
     - Effect: Allow
@@ -46,6 +48,7 @@ provider:
         - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerProfileArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtPlayerTableArn
         - 'Fn::ImportValue': ${self:custom.stage}-ExtSavedListsArn
+        - 'Fn::ImportValue': ${self:custom.stage}-ExtNotificationsArn
 
 functions:
   createprofile:
@@ -134,6 +137,24 @@ functions:
     events:
       - http:
           path: last-online
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  getnotifications:
+    handler: getnotifications.main
+    events:
+      - http:
+          path: get-notifications
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  makenotification:
+    handler: makenotification.main
+    events:
+      - http:
+          path: make-notification
           method: post
           cors: true
           authorizer: aws_iam
