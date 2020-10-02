@@ -200,6 +200,23 @@ Resources:
           KeyType: RANGE
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
+  Notifications:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      TableName: ${self:custom.notifications}
+      AttributeDefinitions:
+        - AttributeName: noteId
+          AttributeType: S
+        - AttributeName: type
+          AttributeType: S
+      KeySchema:
+        - AttributeName: noteId
+          KeyType: HASH
+        - AttributeName: type
+          KeyType: RANGE
+      # Set the capacity to auto-scale
+      BillingMode: PAY_PER_REQUEST
 
 Outputs:
   HistoryTable:
@@ -370,3 +387,16 @@ Outputs:
         - Arn
     Export:
       Name: ${self:custom.stage}-ExtSavedListsArn
+
+  Notifications:
+    Value:
+      Ref: Notifications
+    Export:
+      Name: ${self:custom.stage}-NotificationsTableName
+  NotificationsArn:
+    Value:
+      Fn::GetAtt:
+        - Notifications
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-ExtNotificationsArn
