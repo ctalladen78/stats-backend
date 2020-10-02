@@ -128,3 +128,12 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
+  lastonline:
+    handler: lastonline.main
+    events:
+      - http:
+          path: last-online
+          method: post
+          cors: true
+          authorizer: aws_iam
