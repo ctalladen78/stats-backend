@@ -6,6 +6,8 @@ export async function main(event, context) {
   const data = JSON.parse(event.body);
   const unique = uuid.v1();
 
+  console.log(data);
+
   const params = {
     TableName: process.env.tableHistory,
     Key: {
@@ -16,6 +18,8 @@ export async function main(event, context) {
         ":videoUrl": data.url,
     },
   };
+
+  console.log(params);
 
   const params2 = {
     TableName: process.env.notifications,
@@ -28,6 +32,8 @@ export async function main(event, context) {
         videoUrl: data.url,
     }
   };
+
+  console.log(params2);
 
   try {
     await dynamoDbLib.call("update", params);
