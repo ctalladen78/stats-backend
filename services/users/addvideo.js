@@ -11,9 +11,9 @@ export async function main(event, context) {
     Key: {
         gameId: data.gameId,
     },
-    UpdateExpression: "SET url = :url",
+    UpdateExpression: "SET videoUrl = :videoUrl",
     ExpressionAttributeValues: {
-        ":url": data.url,
+        ":videoUrl": data.url,
     },
   };
 
@@ -25,7 +25,7 @@ export async function main(event, context) {
         channel: data.channel,
         createdAt: Date.now(),
         link: data.gameId,
-        url: data.url,
+        videoUrl: data.url,
     }
   };
 
