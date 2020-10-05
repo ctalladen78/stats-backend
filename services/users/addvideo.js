@@ -8,10 +8,13 @@ export async function main(event, context) {
 
   const params = {
     TableName: process.env.tableHistory,
-    Item: {
+    Key: {
         gameId: data.gameId,
-        url: data.url,
-    }
+    },
+    UpdateExpression: "SET url = :url",
+    ExpressionAttributeValues: {
+        ":url": data.url,
+    },
   };
 
   const params2 = {
