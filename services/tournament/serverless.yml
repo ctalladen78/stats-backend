@@ -251,3 +251,12 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
+  unauthoriseplayer:
+    handler: unauthoriseplayer.main
+    events:
+      - http:
+          path: unauthorise-player
+          method: post
+          cors: true
+          authorizer: aws_iam
