@@ -94,3 +94,12 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
+  campaign:
+    handler: campaign.main
+    events:
+      - http:
+          path: submit-campaign
+          method: post
+          cors: true
+          authorizer: aws_iam

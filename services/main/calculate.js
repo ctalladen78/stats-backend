@@ -287,17 +287,17 @@ export async function main(event) {
           ReturnValues: "ALL_NEW"
         };
         await dynamoDbLib.call("update", params);
-        if (gameData.Item.player1 !== "#N/A" && gameData.Item.ranked !== "unranked") {
+        if (gameData.Item.player1 !== "#N/A" && gameData.Item.ranked !== ("unranked" || "campaign")) {
           await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Ranking + rankingChanges[0], gameData));
         }
-        if (gameData.Item.player2 !== "#N/A" && gameData.Item.ranked !== "unranked") {
+        if (gameData.Item.player2 !== "#N/A" && gameData.Item.ranked !== ("unranked" || "campaign")) {
           await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Ranking - rankingChanges[0], gameData));
         }
-        if (gameData.Item.faction1 != gameData.Item.faction2){
+        if ((gameData.Item.faction1 != gameData.Item.faction2) && (gameData.Item.ranked !== "campaign")){
           await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction1, faction1Profile.Item.ranking + rankingChanges[1]));
           await dynamoDbLib.call("update", updateFactionRanks(gameData.Item.faction2, faction2Profile.Item.ranking - rankingChanges[1]));
         }
-        if (gameData.Item.commander1 != gameData.Item.commander2){
+        if ((gameData.Item.commander1 != gameData.Item.commander2) && (gameData.Item.ranked !== "campaign")){
           if (gameData.Item.commander1 !== "#N/A") {
             await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander1, gameData.Item.faction1, commander1Profile.Item.ranking + rankingChanges[1]));
           }
@@ -305,7 +305,11 @@ export async function main(event) {
             await dynamoDbLib.call("update", updateCommanderRanks(gameData.Item.commander2, gameData.Item.faction2, commander2Profile.Item.ranking - rankingChanges[1]));
           }
         }
-        await dynamoDbLib.call("update", updateGameHistory(event.pathParameters.id, rankingChanges[0]));
+        if (gameData.Item.ranked !== "campaign") {
+          await dynamoDbLib.call("update", updateGameHistory(event.pathParameters.id, rankingChanges[0]));
+        } else {
+          await dynamoDbLib.call("update", updateGameHistory(event.pathParameters.id, 0));
+        }
     }
     return success(true);
   } catch (e) {
