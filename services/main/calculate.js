@@ -287,10 +287,10 @@ export async function main(event) {
           ReturnValues: "ALL_NEW"
         };
         await dynamoDbLib.call("update", params);
-        if (gameData.Item.player1 !== "#N/A" && gameData.Item.ranked !== ("unranked" || "campaign")) {
+        if (gameData.Item.player1 !== "#N/A" && (gameData.Item.ranked !== "unranked" && gameData.Item.ranked !== "campaign")) {
           await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player1, player1Ranking + rankingChanges[0], gameData));
         }
-        if (gameData.Item.player2 !== "#N/A" && gameData.Item.ranked !== ("unranked" || "campaign")) {
+        if (gameData.Item.player2 !== "#N/A" && (gameData.Item.ranked !== "unranked" && gameData.Item.ranked !== "campaign")) {
           await dynamoDbLib.call("update", updatePlayerRanks(gameData.Item.player2, player2Ranking - rankingChanges[0], gameData));
         }
         if ((gameData.Item.faction1 != gameData.Item.faction2) && (gameData.Item.ranked !== "campaign")){
