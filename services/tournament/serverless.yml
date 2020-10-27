@@ -262,10 +262,10 @@ functions:
           authorizer: aws_iam
 
   changecommander:
-    handler: changecommander.main
+    handler: changecommanders.main
     events:
       - http:
-          path: change-commander
+          path: change-commanders
           method: post
           cors: true
           authorizer: aws_iam
