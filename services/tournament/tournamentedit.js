@@ -43,7 +43,7 @@ export async function main(event, context) {
           ":changeLists": data.changeLists,
           ":changeCommanders": data.changeCommanders,
           ":changeFactions": data.changeFactions,
-          ":campaign": campaign,
+          ":campaign": data.campaign,
       },
       ExpressionAttributeNames: {
           "#loc": "location",
@@ -79,7 +79,7 @@ export async function main(event, context) {
           ":changeLists": data.changeLists,
           ":changeCommanders": data.changeCommanders,
           ":changeFactions": data.changeFactions,
-          ":campaign": campaign,
+          ":campaign": data.campaign,
       },
       ExpressionAttributeNames: {
           "#loc": "location",
