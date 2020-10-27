@@ -24,7 +24,7 @@ export async function main(event, context) {
       Key: {
         tournamentId: data.tournamentId.tournamentId,
       },
-      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, points = :points, ks = :ks, unreleased = :unreleased, notFinal = :notFinal, maxPlayers = :maxPlayers, country = :country, #region = :newRegion, ttsTournament = :ttsTournament, pairing = :pairing",
+      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, points = :points, ks = :ks, unreleased = :unreleased, notFinal = :notFinal, maxPlayers = :maxPlayers, country = :country, #region = :newRegion, ttsTournament = :ttsTournament, pairing = :pairing, changeLists = :changeLists, changeCommanders = :changeCommanders, changeFactions = :changeFactions, campaign = :campaign",
       ExpressionAttributeValues: {
           ":tournamentName": data.tournamentName,
           ":newLocation": data.location,
@@ -40,6 +40,10 @@ export async function main(event, context) {
           ":newRegion": data.region,
           ":ttsTournament": data.tts,
           ":pairing": data.pairing,
+          ":changeLists": data.changeLists,
+          ":changeCommanders": data.changeCommanders,
+          ":changeFactions": data.changeFactions,
+          ":campaign": campaign,
       },
       ExpressionAttributeNames: {
           "#loc": "location",
@@ -55,7 +59,7 @@ export async function main(event, context) {
       Key: {
         tournamentId: data.tournamentId.tournamentId,
       },
-      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, maxPlayers = :maxPlayers, points = :points, ks = :ks, unreleased = :unreleased, notFinal = :notFinal, country = :country, #region = :newRegion, info = :info, ttsTournament = :ttsTournament, pairing = :pairing",
+      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, maxPlayers = :maxPlayers, points = :points, ks = :ks, unreleased = :unreleased, notFinal = :notFinal, country = :country, #region = :newRegion, info = :info, ttsTournament = :ttsTournament, pairing = :pairing, changeLists = :changeLists, changeCommanders = :changeCommanders, changeFactions = :changeFactions, campaign = :campaign",
       ExpressionAttributeValues: {
           ":tournamentName": data.tournamentName,
           ":newLocation": data.location,
@@ -72,6 +76,10 @@ export async function main(event, context) {
           ":info": data.info,
           ":ttsTournament": data.tts,
           ":pairing": data.pairing,
+          ":changeLists": data.changeLists,
+          ":changeCommanders": data.changeCommanders,
+          ":changeFactions": data.changeFactions,
+          ":campaign": campaign,
       },
       ExpressionAttributeNames: {
           "#loc": "location",
