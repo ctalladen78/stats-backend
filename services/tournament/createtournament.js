@@ -21,9 +21,17 @@ export async function main(event, context) {
           end: data.end,
           allowSignup: data.allowSignup,
           maxPlayers: data.maxPlayers,
+          points: data.points,
+          ks: data.ks,
+          unreleased: data.unreleased,
+          notFinal: data.notFinal,
+          changeLists: data.changeLists,
+          changeCommanders: data.changeCommanders,
+          changeFactions: data.changeFactions,
           ttsTournament: true,
           pairing: data.pairing,
           banner: data.banner,
+          campaign: data.campaign,
         }
       };
 
@@ -47,10 +55,18 @@ export async function main(event, context) {
           end: data.end,
           allowSignup: data.allowSignup,
           maxPlayers: data.maxPlayers,
+          points: data.points,
+          ks: data.ks,
+          unreleased: data.unreleased,
+          notFinal: data.notFinal,
+          changeLists: data.changeLists,
+          changeCommanders: data.changeCommanders,
+          changeFactions: data.changeFactions,
           ttsTournament: true,
           info: data.info,
           pairing: data.pairing,
           banner: data.banner,
+          campaign: data.campaign,
         }
       };
 
@@ -77,11 +93,19 @@ export async function main(event, context) {
           end: data.end,
           allowSignup: data.allowSignup,
           maxPlayers: data.maxPlayers,
+          points: data.points,
+          ks: data.ks,
+          unreleased: data.unreleased,
+          notFinal: data.notFinal,
+          changeLists: data.changeLists,
+          changeCommanders: data.changeCommanders,
+          changeFactions: data.changeFactions,
           country: data.country,
           region: data.region,
           ttsTournament: false,
           pairing: data.pairing,
           banner: data.banner,
+          campaign: data.campaign,
         }
       };
 
@@ -110,12 +134,16 @@ export async function main(event, context) {
           ks: data.ks,
           unreleased: data.unreleased,
           notFinal: data.notFinal,
+          changeLists: data.changeLists,
+          changeCommanders: data.changeCommanders,
+          changeFactions: data.changeFactions,
           country: data.country,
           region: data.region,
           info: data.info,
           ttsTournament: false,
           pairing: data.pairing,
           banner: data.banner,
+          campaign: data.campaign,
         }
       };
 
