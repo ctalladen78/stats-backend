@@ -260,3 +260,21 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
+  changecommander:
+    handler: changecommander.main
+    events:
+      - http:
+          path: change-commander
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  changefaction:
+    handler: changefaction.main
+    events:
+      - http:
+          path: change-faction
+          method: post
+          cors: true
+          authorizer: aws_iam
