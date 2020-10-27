@@ -32,6 +32,7 @@ export async function main(event, context) {
           pairing: data.pairing,
           banner: data.banner,
           campaign: data.campaign,
+          elo: data.elo,
         }
       };
 
@@ -67,6 +68,7 @@ export async function main(event, context) {
           pairing: data.pairing,
           banner: data.banner,
           campaign: data.campaign,
+          elo: data.elo,
         }
       };
 
@@ -106,6 +108,7 @@ export async function main(event, context) {
           pairing: data.pairing,
           banner: data.banner,
           campaign: data.campaign,
+          elo: data.elo,
         }
       };
 
@@ -144,6 +147,7 @@ export async function main(event, context) {
           pairing: data.pairing,
           banner: data.banner,
           campaign: data.campaign,
+          elo: data.elo,
         }
       };
 
