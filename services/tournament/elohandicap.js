@@ -33,8 +33,6 @@ const findCommanderRank = (commander, faction) => {
   return params;
 };
 
-
-
 export async function main(event) {
     const data = JSON.parse(event.body);
     console.log(data);
