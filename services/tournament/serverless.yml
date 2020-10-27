@@ -284,6 +284,6 @@ functions:
     events:
       - http:
           path: elo-handicap
-          method: get
+          method: post
           cors: true
           authorizer: aws_iam
