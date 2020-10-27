@@ -9,7 +9,9 @@ const calculateRanking = (factionRanking1, factionRanking2, commander1Ranking, c
     const winChance = ranking1/(ranking1 + ranking2);
     console.log(winChance);
 
-    return (winChance);
+    const eloFactor = ((1-winChance)/winChance);
+
+    return (eloFactor);
 };
 
 const findFactionRank = (faction) => {
