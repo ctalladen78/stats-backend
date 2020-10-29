@@ -3,8 +3,8 @@ import { success, failure } from "../../libs/response-lib";
 
 const calculateRanking = (factionRanking1, factionRanking2, commander1Ranking, commander2Ranking) => {
     console.log(factionRanking1, factionRanking2, commander1Ranking, commander2Ranking);
-    const ranking1 = Math.pow(10, (1500 + factionRanking1 + commander1Ranking)/400);
-    const ranking2 = Math.pow(10, (1500 + factionRanking2 + commander2Ranking)/400);
+    const ranking1 = Math.pow(10, (1500 + factionRanking1 + commander1Ranking)/800);
+    const ranking2 = Math.pow(10, (1500 + factionRanking2 + commander2Ranking)/800);
 
     const winChance = ranking1/(ranking1 + ranking2);
     console.log(winChance);
