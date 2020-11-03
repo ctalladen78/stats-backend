@@ -2,6 +2,8 @@ import * as dynamoDbLib from "../../libs/dynamodb-lib";
 import { success, failure } from "../../libs/response-lib";
 
 export async function main(event) {
+  var allResults = [];
+
   event = event.pathParameters.id;
   const params = {
     TableName: process.env.tournamentPlayers,
