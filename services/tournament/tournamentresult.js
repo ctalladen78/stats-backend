@@ -47,8 +47,6 @@ export async function main(event) {
         ":auth2": data.auth2,
         ":pointsLeft1": data.pointsLeft1,
         ":pointsLeft2": data.pointsLeft2,
-        ":player1Rating": data.player1Rating,
-        ":player2Rating": data.player2Rating,
       },
     };
 
@@ -86,6 +84,34 @@ export async function main(event) {
       };
     }
 
+    if (data.player1Rating !== undefined) {
+      var params4 = {
+        TableName: process.env.tournamentGames,
+        Key: {
+          gameId: data.gameId,
+          tournamentId: data.tournamentId,
+        },
+        UpdateExpression: "SET player1Rating = :player1Rating",
+        ExpressionAttributeValues: {
+          ":player1Rating": data.player1Rating,
+        },  
+      };
+    }
+
+    if (data.player2Rating !== undefined) {
+      var params5 = {
+        TableName: process.env.tournamentGames,
+        Key: {
+          gameId: data.gameId,
+          tournamentId: data.tournamentId,
+        },
+        UpdateExpression: "SET player2Rating = :player2Rating",
+        ExpressionAttributeValues: {
+          ":player2Rating": data.player2Rating,
+        },  
+      };
+    }
+
   try{
     const result = await dynamoDbLib.call("get", findGame(data));
     console.log(result);
@@ -96,6 +122,12 @@ export async function main(event) {
         if (data.auth1 === true && data.auth2 === true) {
           await dynamoDbLib.call("update", params2);
           await dynamoDbLib.call("update", params3);
+        }
+        if (data.player1Rating !== undefined) {
+          await dynamoDbLib.call("update", params4);
+        }
+        if (data.player2Rating !== undefined) {
+          await dynamoDbLib.call("update", params5);
         }
         return success(true);
       } catch (e) {
