@@ -94,7 +94,7 @@ export async function main(event) {
         UpdateExpression: "SET player1Rating = :player1Rating",
         ExpressionAttributeValues: {
           ":player1Rating": data.player1Rating,
-        },  
+        },
       };
     }
 
@@ -108,7 +108,7 @@ export async function main(event) {
         UpdateExpression: "SET player2Rating = :player2Rating",
         ExpressionAttributeValues: {
           ":player2Rating": data.player2Rating,
-        },  
+        },
       };
     }
 
