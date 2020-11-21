@@ -60,7 +60,7 @@ export async function main(event, context) {
       Key: {
         tournamentId: data.tournamentId.tournamentId,
       },
-      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, maxPlayers = :maxPlayers, points = :points, ks = :ks, unreleased = :unreleased, notFinal = :notFinal, country = :country, #region = :newRegion, info = :info, ttsTournament = :ttsTournament, pairing = :pairing, changeLists = :changeLists, changeCommanders = :changeCommanders, changeFactions = :changeFactions, campaign = :campaign",
+      UpdateExpression: "SET tournamentName = :tournamentName, #loc = :newLocation, #date = :newDate, #end = :newEnd, allowSignup = :allowSignup, maxPlayers = :maxPlayers, points = :points, ks = :ks, unreleased = :unreleased, notFinal = :notFinal, country = :country, #region = :newRegion, info = :info, ttsTournament = :ttsTournament, pairing = :pairing, changeLists = :changeLists, changeCommanders = :changeCommanders, changeFactions = :changeFactions, campaign = :campaign, elo = :elo",
       ExpressionAttributeValues: {
           ":tournamentName": data.tournamentName,
           ":newLocation": data.location,
@@ -81,6 +81,7 @@ export async function main(event, context) {
           ":changeCommanders": data.changeCommanders,
           ":changeFactions": data.changeFactions,
           ":campaign": data.campaign,
+          ":elo": data.elo,
       },
       ExpressionAttributeNames: {
           "#loc": "location",
