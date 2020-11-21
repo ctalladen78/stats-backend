@@ -135,8 +135,8 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  tournamentresult:
-    handler: tournamentresult.main
+  tournamentfeedback:
+    handler: tournamentfeedback.main
     events:
       - http:
           path: tournament-feedback/{id}
