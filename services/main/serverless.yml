@@ -253,6 +253,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  getallgames:
+    handler: getallgames.main
+    events:
+      - http:
+          path: full-game-history
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   gettournament:
     handler: gettournament.main
     events:
